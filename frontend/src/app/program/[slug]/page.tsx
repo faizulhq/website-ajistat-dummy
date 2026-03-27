@@ -159,23 +159,21 @@ export default function ProgramDetailPage({ params }: Props) {
           <div className="lg:col-span-2 space-y-6">
 
             {/* Video Demo */}
-            {program.demo_video_url && (
-              <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-                <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-                  <Play className="w-4 h-4 text-[#2568B5]" />
-                  <h2 className="font-semibold text-gray-900">Video Preview Program</h2>
-                </div>
-                <div className="aspect-video">
-                  <iframe
-                    src={program.demo_video_url}
-                    title="Video Preview"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
-                </div>
+            <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+              <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <Play className="w-4 h-4 text-[#2568B5]" />
+                <h2 className="font-semibold text-gray-900">Video Preview Program</h2>
               </div>
-            )}
+              <div className="aspect-video">
+                <iframe
+                  src={program.demo_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
+                  title="Video Preview"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
 
             {/* Apa yang Akan Dipelajari — Grid */}
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">

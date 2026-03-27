@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { ShoppingCart, Menu, X, LogOut, User, BookOpen, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/auth-store';
 import { cartApi } from '@/lib/api';
@@ -24,6 +24,11 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, logout, isAuthenticated } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { data: cart } = useQuery({
     queryKey: ['cart'],
@@ -88,7 +93,7 @@ export function Navbar() {
               )}
             </Link>
 
-            {isAuthenticated() ? (
+            {mounted && isAuthenticated() ? (
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -117,7 +122,7 @@ export function Navbar() {
                   </div>
                 )}
               </div>
-            ) : (
+            ) : mounted ? (
               <div className="hidden sm:flex items-center gap-2">
                 <Link href="/login" className="text-white/80 hover:text-white text-sm px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
                   Masuk
@@ -126,7 +131,7 @@ export function Navbar() {
                   Daftar
                 </Link>
               </div>
-            )}
+            ) : null}
 
             {/* Mobile menu toggle */}
             <button
@@ -152,7 +157,7 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          {!isAuthenticated() && (
+          {mounted && !isAuthenticated() && (
             <div className="flex gap-2 pt-2">
               <Link href="/login" onClick={() => setMobileOpen(false)}
                 className="flex-1 text-center py-2 text-white/80 border border-white/20 rounded-lg text-sm">
