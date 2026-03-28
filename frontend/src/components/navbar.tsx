@@ -65,13 +65,13 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="bg-white rounded-lg px-2 py-1 flex items-center justify-center">
+            <div className="bg-white rounded-xl px-2.5 py-1.5 shadow-sm flex items-center justify-center">
               <Image
                 src="/logo.png"
                 alt="Aji Institute"
                 width={48}
                 height={34}
-                className="h-9 w-auto"
+                className="h-8 w-auto"
               />
             </div>
             <div className="hidden sm:block">
