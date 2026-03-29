@@ -1,15 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useParams, useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import {
-  Clock, Calendar, Users, CheckCircle, Star, ShoppingCart,
-  MessageCircle, ArrowLeft, BookOpen, Award, Video, ChevronDown, ChevronUp
+  Clock, Calendar, Users, CheckCircle, Star,
+  MessageCircle, ArrowLeft, BookOpen, Award, ChevronDown, ChevronUp
 } from 'lucide-react';
-import { programsApi, cartApi } from '@/lib/api';
-import { useAuthStore } from '@/lib/auth-store';
+import { programsApi } from '@/lib/api';
 import { formatPrice, STATUS_LABELS, STATUS_COLORS, cn } from '@/lib/utils';
 import { WA_LINK } from '@/lib/config';
 import type { Program } from '@/lib/types';
@@ -21,7 +20,7 @@ const TYPE_LABEL: Record<string, string> = {
 };
 
 const WHAT_YOU_GET = [
-  { icon: Video, label: 'Rekaman sesi seumur hidup' },
+  { icon: BookOpen, label: 'Rekaman video sesi seumur hidup' },
   { icon: BookOpen, label: 'Modul & materi tertulis' },
   { icon: Award, label: 'Sertifikat kelulusan resmi' },
   { icon: Users, label: 'Akses grup diskusi alumni' },
@@ -32,36 +31,14 @@ const WHAT_YOU_GET = [
 export default function ProgramDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
-  const qc = useQueryClient();
   const [showFullCurriculum, setShowFullCurriculum] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['program', slug],
     queryFn: () => programsApi.detail(slug).then((r) => r.data),
   });
 
-  const program: Program | undefined = data; // API detail mengembalikan object langsung, bukan {data: ...}
-
-  const cartMutation = useMutation({
-    mutationFn: () => cartApi.add(program!.id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['cart'] });
-      setAddedToCart(true);
-      setTimeout(() => setAddedToCart(false), 3000);
-    },
-    onError: () => alert('Gagal menambah ke keranjang. Coba lagi.'),
-  });
-
-  const handleAddToCart = () => {
-    if (!isAuthenticated()) {
-      router.push('/login');
-      return;
-    }
-    cartMutation.mutate();
-  };
+  const program: Program | undefined = data;
 
   if (isLoading) return (
     <div className="max-w-5xl mx-auto px-4 py-20 animate-pulse space-y-6">
@@ -154,22 +131,15 @@ export default function ProgramDetailPage() {
                     </div>
                   </div>
                 )}
-                {program.facilitator_name && (
-                  <div className="bg-white/8 border border-white/12 rounded-xl p-4 flex items-center gap-3">
-                    <Users className="w-5 h-5 text-[#4FA8D8] shrink-0" />
-                    <div>
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider">Fasilitator</p>
-                      <p className="text-white text-sm font-medium">{program.facilitator_name}</p>
-                    </div>
-                  </div>
-                )}
+
+
               </div>
             </div>
 
             {/* Right: Purchase Card (desktop) */}
             <div className="hidden lg:block">
               <div className="bg-white rounded-2xl p-6 shadow-2xl sticky top-20">
-                <div className="mb-4">
+                <div className="mb-5">
                   {program.original_price && (
                     <p className="text-gray-400 text-sm line-through">{formatPrice(program.original_price)}</p>
                   )}
@@ -181,24 +151,13 @@ export default function ProgramDetailPage() {
                   </div>
                 </div>
 
-                <button
-                  onClick={handleAddToCart}
-                  disabled={cartMutation.isPending || addedToCart}
-                  className={cn(
-                    'w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl transition-all mb-3 text-sm',
-                    addedToCart
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45]'
-                  )}
+                <a
+                  href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold py-3.5 rounded-xl transition-all mb-3 text-sm"
                 >
-                  {addedToCart ? (
-                    <><CheckCircle className="w-4 h-4" /> Ditambahkan!</>
-                  ) : cartMutation.isPending ? (
-                    'Menambahkan...'
-                  ) : (
-                    <><ShoppingCart className="w-4 h-4" /> Tambah ke Keranjang</>
-                  )}
-                </button>
+                  💬 Daftar Sekarang via WhatsApp
+                </a>
 
                 <a
                   href={WA_LINK(`Halo, saya tertarik dengan program: ${program.title}. Bisa info lebih lanjut?`)}
@@ -231,16 +190,13 @@ export default function ProgramDetailPage() {
         <a href={WA_LINK(`Halo, saya tertarik dengan: ${program.title}`)}
           target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 font-semibold px-4 py-2.5 rounded-xl text-sm">
-          <MessageCircle className="w-4 h-4" />WA
+          <MessageCircle className="w-4 h-4" /> Tanya
         </a>
-        <button
-          onClick={handleAddToCart}
-          disabled={cartMutation.isPending || addedToCart}
-          className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors"
-        >
-          <ShoppingCart className="w-4 h-4" />
-          {addedToCart ? 'Ditambahkan!' : 'Keranjang'}
-        </button>
+        <a href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
+          target="_blank" rel="noopener noreferrer"
+          className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
+          💬 Daftar
+        </a>
       </div>
 
       {/* ─── CONTENT ─── */}
@@ -248,35 +204,103 @@ export default function ProgramDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
 
-            {/* ─── Video Review ─── */}
-            {program.demo_video_url && (() => {
-              // Convert youtube.com/watch?v=ID atau youtu.be/ID → embed URL
-              let embedUrl = program.demo_video_url;
-              const watchMatch = embedUrl.match(/[?&]v=([^&]+)/);
-              const shortMatch = embedUrl.match(/youtu\.be\/([^?&]+)/);
-              const id = watchMatch?.[1] ?? shortMatch?.[1];
-              if (id) embedUrl = `https://www.youtube.com/embed/${id}`;
-
-              return (
-                <section>
-                  <h2 className="text-xl font-bold text-gray-900 mb-5">🎬 Video Preview Program</h2>
-                  <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-black aspect-video">
-                    <iframe
-                      src={embedUrl}
-                      title={`Preview: ${program.title}`}
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+            {/* ─── Video Preview (HTML5 upload-ready) ─── */}
+            {program.demo_video_url ? (
+              <section>
+                <h2 className="text-xl font-bold text-gray-900 mb-5">🎬 Video Preview Program</h2>
+                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-black aspect-video">
+                  <video
+                    src={program.demo_video_url}
+                    controls
+                    preload="metadata"
+                    poster=""
+                    className="w-full h-full object-cover"
+                  >
+                    Browser Anda tidak mendukung pemutaran video.
+                  </video>
+                </div>
+                <p className="text-gray-400 text-xs mt-2 text-center">
+                  👆 Tonton preview untuk gambaran lengkap program ini
+                </p>
+              </section>
+            ) : (
+              <section>
+                <h2 className="text-xl font-bold text-gray-900 mb-5">🎬 Video Preview Program</h2>
+                <div className="rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 aspect-video flex flex-col items-center justify-center gap-3">
+                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-3xl">🎥</span>
                   </div>
-                  <p className="text-gray-400 text-xs mt-2 text-center">
-                    👆 Tonton preview untuk gambaran lengkap program ini
-                  </p>
-                </section>
-              );
-            })()}
+                  <p className="text-gray-500 font-semibold">Video Preview Segera Tersedia</p>
+                  <p className="text-gray-400 text-sm">Video penjelasan program akan segera diupload</p>
+                  <a href={WA_LINK(`Halo, saya ingin tahu lebih lanjut tentang program: ${program.title}`)}
+                    target="_blank" rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center gap-2 bg-[#162660] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#2568B5] transition-colors">
+                    <MessageCircle className="w-4 h-4" /> Tanya via WhatsApp
+                  </a>
+                </div>
+              </section>
+            )}
 
-            {/* Yang akan dipelajari */}
+            {/* ─── Jadwal Harian ─── */}
+            <section>
+              <h2 className="text-xl font-bold text-gray-900 mb-5">📅 Jadwal Program</h2>
+              {program.schedule ? (
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-5">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="w-5 h-5 text-[#2568B5] mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold text-gray-800 text-sm mb-1">Jadwal Umum</p>
+                      <p className="text-gray-600 text-sm">{program.schedule}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+              {/* Jadwal harian default berdasarkan type program */}
+              <div className="border border-gray-100 rounded-2xl overflow-hidden">
+                <div className="bg-[#0C1A45] px-5 py-3">
+                  <p className="text-white font-semibold text-sm">📋 Rundown Harian</p>
+                </div>
+                {(program.type === 'bootcamp'
+                  ? [
+                      { day: 'Hari 1', time: '08.00 – 12.00', label: 'Sesi Pagi: Materi & Konsep Dasar', note: 'Onboarding + pengenalan tools dan software' },
+                      { day: 'Hari 1', time: '13.00 – 17.00', label: 'Sesi Siang: Hands-on Praktik', note: 'Input data, eksplorasi dataset nyata' },
+                      { day: 'Hari 2', time: '08.00 – 12.00', label: 'Sesi Pagi: Analisis Mendalam', note: 'Uji statistik, interpretasi output' },
+                      { day: 'Hari 2', time: '13.00 – 17.00', label: 'Sesi Siang: Studi Kasus', note: 'Praktik langsung dari dataset riset nyata' },
+                      { day: 'Hari 3', time: '08.00 – 12.00', label: 'Sesi Pagi: Topik Lanjutan', note: 'Materi advanced & Q\u0026A mendalam' },
+                      { day: 'Hari 3', time: '13.00 – 16.00', label: 'Sesi Siang: Review & Presentasi', note: 'Presentasi hasil + penutupan + sertifikat' },
+                    ]
+                  : program.type === 'short-class'
+                  ? [
+                      { day: 'Sesi 1', time: '08.00 – 10.00', label: 'Materi Inti & Teori', note: 'Konsep, tujuan, dan konteks penggunaan' },
+                      { day: 'Sesi 2', time: '10.15 – 12.00', label: 'Praktik Langsung', note: 'Hands-on dengan software & dataset' },
+                      { day: 'Sesi 3', time: '13.00 – 14.30', label: 'Studi Kasus & Q\u0026A', note: 'Diskusi, troubleshooting, tanya jawab' },
+                      { day: 'Penutup', time: '14.30 – 15.00', label: 'Evaluasi & Sertifikat', note: 'Ringkasan materi + pemberian sertifikat' },
+                    ]
+                  : [
+                      { day: 'Sesi Awal', time: 'Fleksibel', label: 'Konsultasi Kebutuhan', note: 'Identifikasi kebutuhan dan target belajar' },
+                      { day: 'Sesi 1–3', time: 'Disepakati', label: 'Pembelajaran Inti', note: 'Materi disesuaikan level & kebutuhan peserta' },
+                      { day: 'Sesi 4–6', time: 'Disepakati', label: 'Praktik & Pendalaman', note: 'Hands-on dengan data/kasus peserta sendiri' },
+                      { day: 'Sesi Akhir', time: 'Disepakati', label: 'Review & Follow-up', note: 'Evaluasi capaian + konsultasi lanjutan via WA' },
+                    ]
+                ).map((row, i) => (
+                  <div key={i} className={cn(
+                    'grid grid-cols-[80px_1fr] sm:grid-cols-[100px_140px_1fr] gap-3 px-5 py-4 items-start',
+                    i % 2 === 0 ? 'bg-white' : 'bg-gray-50',
+                    i > 0 && 'border-t border-gray-100'
+                  )}>
+                    <span className="text-xs font-bold text-[#2568B5] bg-blue-50 px-2 py-1 rounded-lg text-center whitespace-nowrap">{row.day}</span>
+                    <span className="text-xs text-gray-500 flex items-center gap-1"><Clock className="w-3 h-3" /> {row.time}</span>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">{row.label}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{row.note}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-gray-400 text-xs mt-3 text-center">
+                * Jadwal bersifat panduan, dapat disesuaikan. Info detail tanyakan via WhatsApp.
+              </p>
+            </section>
             {curriculum.length > 0 && (
               <section>
                 <h2 className="text-xl font-bold text-gray-900 mb-5">📚 Kurikulum Program</h2>
@@ -309,28 +333,7 @@ export default function ProgramDetailPage() {
               </section>
             )}
 
-            {/* Fasilitator */}
-            {program.facilitator_name && (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-5">👨‍🏫 Fasilitator</h2>
-                <div className="bg-white border border-gray-100 rounded-2xl p-6 flex gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#162660] to-[#2568B5] flex items-center justify-center text-white font-bold text-xl shrink-0">
-                    {program.facilitator_name.slice(0, 2).toUpperCase()}
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 text-lg">{program.facilitator_name}</p>
-                    {program.facilitator_title && (
-                      <p className="text-[#2568B5] text-sm font-medium mb-3">{program.facilitator_title}</p>
-                    )}
-                    {program.facilitator_bio && (
-                      <p className="text-gray-500 text-sm leading-relaxed">{program.facilitator_bio}</p>
-                    )}
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {/* Untuk siapa */}
+            {/* Yang akan dipelajari */}
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-5">🎯 Untuk Siapa Program Ini?</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

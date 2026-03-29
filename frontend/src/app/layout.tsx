@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from '@/components/providers';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import { BRAND } from '@/lib/config';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -14,18 +15,18 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aji Institute — Center for Research, Data & Professional Development',
-    template: '%s | Aji Institute',
+    default: `${BRAND.name} — ${BRAND.tagline}`,
+    template: `%s | ${BRAND.name}`,
   },
-  description: 'Platform pelatihan, pengembangan kompetensi, dan konsultasi profesional. AjiStat, Business Class, Public Speaking, Digital Skills, Language Class.',
+  description: 'Platform pelatihan, pengembangan kompetensi, dan konsultasi profesional. AjiStat, AjiBiz, AjiPR, AjiDigi, AjiLanguage.',
   keywords: [
     'aji institute', 'ajistat', 'statistika', 'analisis data', 'SPSS', 'SmartPLS',
-    'metodologi penelitian', 'skripsi', 'tesis', 'pelatihan profesional', 'konsultasi riset',
-    'bootcamp statistik', 'private class', 'olah data'
+    'pelatihan profesional', 'pengembangan kompetensi', 'AjiBiz', 'AjiPR', 'AjiDigi', 'AjiLanguage',
+    'metodologi penelitian', 'konsultasi riset', 'skripsi', 'tesis'
   ],
   openGraph: {
-    title: 'Aji Institute',
-    description: 'Center for Research, Data, and Professional Development',
+    title: BRAND.name,
+    description: BRAND.tagline,
     type: 'website',
     locale: 'id_ID',
   },

@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, Clock, MessageCircle, Share2, ExternalLink } from 'lucide-react';
-import { SUB_BRANDS, CONTACT, SITE, WA_LINK } from '@/lib/config';
+import { Phone, Mail, Clock, MessageCircle, Share2, ExternalLink, MapPin } from 'lucide-react';
+import { SUB_BRANDS, CONTACT, SITE, BRAND, WA_LINK } from '@/lib/config';
 
 export function Footer() {
   const layanan = [
@@ -29,7 +29,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <Image src="/logo.png" alt={SITE.name} width={44} height={31} className="h-8 w-auto" />
+              <Image src="/logo-v2.png" alt={SITE.name} width={44} height={31} className="h-8 w-auto" />
               <div>
                 <p className="text-white font-bold text-base">{SITE.name}</p>
                 <p className="text-[#4FA8D8] text-[10px]">{SITE.company}</p>
@@ -56,7 +56,7 @@ export function Footer() {
                 className="w-9 h-9 rounded-lg bg-green-600/30 hover:bg-green-600 flex items-center justify-center text-green-300 hover:text-white transition-colors">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a href="https://instagram.com/ajistat.id" target="_blank" rel="noopener noreferrer" title="Instagram"
+              <a href="https://instagram.com/ajiinstitute.id" target="_blank" rel="noopener noreferrer" title="Instagram"
                 className="w-9 h-9 rounded-lg bg-white/10 hover:bg-pink-600 flex items-center justify-center text-white/60 hover:text-white transition-colors">
                 <Share2 className="w-4 h-4" />
               </a>
@@ -132,6 +132,10 @@ export function Footer() {
                 <Clock className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
                 <span className="text-white/55 text-sm">{CONTACT.operationalHours}</span>
               </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
+                <span className="text-white/55 text-sm">{CONTACT.address}</span>
+              </li>
             </ul>
 
             <div className="mt-5">
@@ -147,7 +151,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-white/35 text-sm">© 2026 {SITE.name} — {SITE.company}. All rights reserved.</p>
+          <p className="text-white/35 text-sm">© 2026 {BRAND.footerLabel}. All rights reserved.</p>
           <p className="text-white/25 text-xs">Dibuat dengan ❤️ untuk kemajuan riset Indonesia</p>
         </div>
       </div>

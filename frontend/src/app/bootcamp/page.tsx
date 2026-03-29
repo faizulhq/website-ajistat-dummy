@@ -8,7 +8,7 @@ import { ProgramCard } from '@/components/program-card';
 import { ProgramCardSkeleton } from '@/components/program-card-skeleton';
 import type { Program } from '@/lib/types';
 
-const TAGS = ['SPSS', 'SmartPLS', 'R', 'Python', 'Metodologi', 'Scopus', 'Skripsi'];
+const TAGS = ['SPSS', 'SmartPLS', 'R', 'Python', 'Metodologi', 'Scopus', 'Skripsi', 'Bisnis', 'Digital Marketing', 'Public Speaking', 'Bahasa Inggris'];
 
 const STATS = [
   { icon: Users, value: '500+', label: 'Alumni Terlatih' },
