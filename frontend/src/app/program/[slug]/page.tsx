@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -55,7 +55,7 @@ export default function ProgramDetailPage() {
     <div className="text-center py-32">
       <p className="text-5xl mb-4">😕</p>
       <h2 className="font-bold text-xl text-gray-800 mb-2">Program tidak ditemukan</h2>
-      <Link href="/bootcamp" className="text-[#2568B5] text-sm hover:underline">← Lihat semua program</Link>
+      <Link href="/bootcamp" className="text-[#1AAEE0] text-sm hover:underline">← Lihat semua program</Link>
     </div>
   );
 
@@ -70,7 +70,7 @@ export default function ProgramDetailPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <div className="bg-[#0C1A45] relative overflow-hidden">
+      <div className="bg-[#054E7A] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
             style={{ backgroundColor: program.thumbnail_color }} />
@@ -92,7 +92,7 @@ export default function ProgramDetailPage() {
             {/* Left: Info */}
             <div className="lg:col-span-2">
               <div className="flex flex-wrap gap-2 mb-5">
-                <span className="text-xs font-bold bg-[#2568B5]/40 border border-[#2568B5]/50 text-white px-3 py-1 rounded-full">
+                <span className="text-xs font-bold bg-[#1AAEE0]/40 border border-[#1AAEE0]/50 text-white px-3 py-1 rounded-full">
                   {TYPE_LABEL[program.type]}
                 </span>
                 <span className={cn('text-xs font-semibold px-3 py-1 rounded-full', STATUS_COLORS[program.status])}>
@@ -115,7 +115,7 @@ export default function ProgramDetailPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {program.duration && (
                   <div className="bg-white/8 border border-white/12 rounded-xl p-4 flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-[#4FA8D8] shrink-0" />
+                    <Clock className="w-5 h-5 text-[#47C2EA] shrink-0" />
                     <div>
                       <p className="text-white/40 text-[10px] uppercase tracking-wider">Durasi</p>
                       <p className="text-white text-sm font-medium">{program.duration}</p>
@@ -124,7 +124,7 @@ export default function ProgramDetailPage() {
                 )}
                 {program.schedule && (
                   <div className="bg-white/8 border border-white/12 rounded-xl p-4 flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-[#4FA8D8] shrink-0" />
+                    <Calendar className="w-5 h-5 text-[#47C2EA] shrink-0" />
                     <div>
                       <p className="text-white/40 text-[10px] uppercase tracking-wider">Jadwal</p>
                       <p className="text-white text-sm font-medium">{program.schedule}</p>
@@ -144,7 +144,7 @@ export default function ProgramDetailPage() {
                     <p className="text-gray-400 text-sm line-through">{formatPrice(program.original_price)}</p>
                   )}
                   <div className="flex items-center gap-2">
-                    <p className="text-3xl font-bold text-[#162660]">{formatPrice(program.price)}</p>
+                    <p className="text-3xl font-bold text-[#0B7AB5]">{formatPrice(program.price)}</p>
                     {discount && (
                       <span className="bg-red-50 text-red-500 text-xs font-bold px-2 py-0.5 rounded">-{discount}%</span>
                     )}
@@ -154,7 +154,7 @@ export default function ProgramDetailPage() {
                 <a
                   href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold py-3.5 rounded-xl transition-all mb-3 text-sm"
+                  className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold py-3.5 rounded-xl transition-all mb-3 text-sm"
                 >
                   💬 Daftar Sekarang via WhatsApp
                 </a>
@@ -184,7 +184,7 @@ export default function ProgramDetailPage() {
       {/* ─── MOBILE PURCHASE BAR ─── */}
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-100 shadow-2xl px-4 py-3 flex items-center gap-3">
         <div className="flex-1">
-          <p className="text-[#162660] font-bold text-lg leading-none">{formatPrice(program.price)}</p>
+          <p className="text-[#0B7AB5] font-bold text-lg leading-none">{formatPrice(program.price)}</p>
           {discount && <p className="text-gray-400 text-xs line-through">{formatPrice(program.original_price!)}</p>}
         </div>
         <a href={WA_LINK(`Halo, saya tertarik dengan: ${program.title}`)}
@@ -194,7 +194,7 @@ export default function ProgramDetailPage() {
         </a>
         <a href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
           target="_blank" rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
+          className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
           💬 Daftar
         </a>
       </div>
@@ -234,7 +234,7 @@ export default function ProgramDetailPage() {
                   <p className="text-gray-400 text-sm">Video penjelasan program akan segera diupload</p>
                   <a href={WA_LINK(`Halo, saya ingin tahu lebih lanjut tentang program: ${program.title}`)}
                     target="_blank" rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-2 bg-[#162660] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#2568B5] transition-colors">
+                    className="mt-2 inline-flex items-center gap-2 bg-[#0B7AB5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#1AAEE0] transition-colors">
                     <MessageCircle className="w-4 h-4" /> Tanya via WhatsApp
                   </a>
                 </div>
@@ -247,7 +247,7 @@ export default function ProgramDetailPage() {
               {program.schedule ? (
                 <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-5">
                   <div className="flex items-start gap-3">
-                    <Calendar className="w-5 h-5 text-[#2568B5] mt-0.5 shrink-0" />
+                    <Calendar className="w-5 h-5 text-[#1AAEE0] mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold text-gray-800 text-sm mb-1">Jadwal Umum</p>
                       <p className="text-gray-600 text-sm">{program.schedule}</p>
@@ -257,7 +257,7 @@ export default function ProgramDetailPage() {
               ) : null}
               {/* Jadwal harian default berdasarkan type program */}
               <div className="border border-gray-100 rounded-2xl overflow-hidden">
-                <div className="bg-[#0C1A45] px-5 py-3">
+                <div className="bg-[#054E7A] px-5 py-3">
                   <p className="text-white font-semibold text-sm">📋 Rundown Harian</p>
                 </div>
                 {(program.type === 'bootcamp'
@@ -288,7 +288,7 @@ export default function ProgramDetailPage() {
                     i % 2 === 0 ? 'bg-white' : 'bg-gray-50',
                     i > 0 && 'border-t border-gray-100'
                   )}>
-                    <span className="text-xs font-bold text-[#2568B5] bg-blue-50 px-2 py-1 rounded-lg text-center whitespace-nowrap">{row.day}</span>
+                    <span className="text-xs font-bold text-[#1AAEE0] bg-blue-50 px-2 py-1 rounded-lg text-center whitespace-nowrap">{row.day}</span>
                     <span className="text-xs text-gray-500 flex items-center gap-1"><Clock className="w-3 h-3" /> {row.time}</span>
                     <div>
                       <p className="text-sm font-semibold text-gray-800">{row.label}</p>
@@ -311,7 +311,7 @@ export default function ProgramDetailPage() {
                       i % 2 === 0 ? 'bg-white' : 'bg-gray-50',
                       i > 0 && 'border-t border-gray-100'
                     )}>
-                      <div className="w-7 h-7 bg-[#162660] rounded-lg text-white text-xs font-bold flex items-center justify-center shrink-0">
+                      <div className="w-7 h-7 bg-[#0B7AB5] rounded-lg text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {i + 1}
                       </div>
                       <p className="text-gray-700 text-sm pt-1">{item}</p>
@@ -321,7 +321,7 @@ export default function ProgramDetailPage() {
                 {curriculum.length > 6 && (
                   <button
                     onClick={() => setShowFullCurriculum(!showFullCurriculum)}
-                    className="mt-4 flex items-center gap-1.5 text-[#2568B5] text-sm font-semibold hover:underline"
+                    className="mt-4 flex items-center gap-1.5 text-[#1AAEE0] text-sm font-semibold hover:underline"
                   >
                     {showFullCurriculum ? (
                       <><ChevronUp className="w-4 h-4" /> Tampilkan lebih sedikit</>
@@ -344,7 +344,7 @@ export default function ProgramDetailPage() {
                   'Pemula yang ingin mulai belajar statistik dan analisis data dari nol',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-xl p-4">
-                    <CheckCircle className="w-4 h-4 text-[#2568B5] shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-[#1AAEE0] shrink-0 mt-0.5" />
                     <p className="text-gray-700 text-sm">{item}</p>
                   </div>
                 ))}
@@ -365,7 +365,7 @@ export default function ProgramDetailPage() {
                       </div>
                       <p className="text-gray-600 text-sm italic mb-4">"{t.comment}"</p>
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#162660] to-[#2568B5] flex items-center justify-center text-white text-xs font-bold">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#0B7AB5] to-[#1AAEE0] flex items-center justify-center text-white text-xs font-bold">
                           {t.avatar || t.name.slice(0, 2).toUpperCase()}
                         </div>
                         <div>
@@ -399,7 +399,7 @@ export default function ProgramDetailPage() {
             {/* Back to listing */}
             <Link
               href={`/${program.type}`}
-              className="mt-4 flex items-center gap-2 text-gray-500 hover:text-[#2568B5] text-sm transition-colors"
+              className="mt-4 flex items-center gap-2 text-gray-500 hover:text-[#1AAEE0] text-sm transition-colors"
             >
               <ArrowLeft className="w-4 h-4" /> Kembali ke daftar program
             </Link>

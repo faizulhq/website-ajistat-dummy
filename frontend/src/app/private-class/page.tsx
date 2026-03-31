@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Clock, CheckCircle, Award, MessageSquare, Zap } from 'lucide-react';
 import { useState } from 'react';
@@ -78,7 +78,7 @@ export default function PrivateClassPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <div className="bg-linear-to-br from-[#0C1A45] via-[#162660] to-[#1e4fa0] relative overflow-hidden py-20">
+      <div className="bg-linear-to-br from-[#054E7A] via-[#0B7AB5] to-[#1090C8] relative overflow-hidden py-20">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
@@ -125,7 +125,7 @@ export default function PrivateClassPage() {
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-xs font-bold text-[#2568B5] uppercase tracking-widest mb-3 block">Kenapa Private Class?</span>
+            <span className="text-xs font-bold text-[#1AAEE0] uppercase tracking-widest mb-3 block">Kenapa Private Class?</span>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Belajar Sesuai Ritme & Kebutuhan Anda</h2>
             <ul className="space-y-3">
               {benefits.map((b) => (
@@ -144,7 +144,7 @@ export default function PrivateClassPage() {
               &ldquo;Private class AJI benar-benar game changer. Dalam 8 sesi saja saya sudah bisa analisis SEM sendiri dan tesis saya selesai tepat waktu. Fasilitatornya sabar dan sangat memahami kebutuhan saya.&rdquo;
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#162660] to-[#4FA8D8] flex items-center justify-center text-white font-bold text-sm">RA</div>
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#0B7AB5] to-[#47C2EA] flex items-center justify-center text-white font-bold text-sm">RA</div>
               <div>
                 <p className="text-sm font-semibold text-gray-800">Rina Andriani</p>
                 <p className="text-xs text-gray-500">Mahasiswa S2 Manajemen, UGM</p>
@@ -203,12 +203,12 @@ export default function PrivateClassPage() {
                 key={pkg.name}
                 className={`bg-white rounded-2xl border p-6 relative transition-all ${
                   pkg.popular
-                    ? 'border-[#2568B5] shadow-xl shadow-blue-100 scale-[1.02]'
+                    ? 'border-[#1AAEE0] shadow-xl shadow-blue-100 scale-[1.02]'
                     : 'border-gray-100 shadow-sm hover:shadow-md'
                 }`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#F0A500] text-[#0C1A45] text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#F0A500] text-[#054E7A] text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ Paling Populer
                   </div>
                 )}
@@ -218,7 +218,7 @@ export default function PrivateClassPage() {
                   <Clock className="w-3.5 h-3.5" />
                   {pkg.sessions} ({pkg.hours})
                 </p>
-                <p className="text-2xl font-bold text-[#2568B5] mb-2">
+                <p className="text-2xl font-bold text-[#1AAEE0] mb-2">
                   Rp {pkg.price.toLocaleString('id-ID')}
                 </p>
                 <p className="text-gray-500 text-sm mb-5 leading-relaxed">{pkg.desc}</p>
@@ -234,8 +234,8 @@ export default function PrivateClassPage() {
                   href="#konsultasi-form"
                   className={`block text-center py-3 rounded-xl font-semibold text-sm transition-colors ${
                     pkg.popular
-                      ? 'bg-[#162660] text-white hover:bg-[#2568B5]'
-                      : 'border border-gray-200 text-gray-700 hover:border-[#2568B5] hover:text-[#2568B5]'
+                      ? 'bg-[#0B7AB5] text-white hover:bg-[#1AAEE0]'
+                      : 'border border-gray-200 text-gray-700 hover:border-[#1AAEE0] hover:text-[#1AAEE0]'
                   }`}
                 >
                   Daftar Paket {pkg.name}
@@ -275,7 +275,7 @@ export default function PrivateClassPage() {
                     value={form[key as keyof typeof form]}
                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                     placeholder={placeholder}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2568B5] focus:ring-2 focus:ring-[#2568B5]/10 transition-all"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1AAEE0] focus:ring-2 focus:ring-[#1AAEE0]/10 transition-all"
                   />
                 </div>
               ))}
@@ -286,12 +286,12 @@ export default function PrivateClassPage() {
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   placeholder="Ceritakan kondisi penelitian Anda saat ini..."
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2568B5] focus:ring-2 focus:ring-[#2568B5]/10 resize-none transition-all"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1AAEE0] focus:ring-2 focus:ring-[#1AAEE0]/10 resize-none transition-all"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+                className="w-full bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
               >
                 <MessageSquare className="w-4 h-4" />
                 Kirim Pendaftaran
@@ -305,9 +305,9 @@ export default function PrivateClassPage() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="bg-[#0C1A45] py-14">
+      <section className="bg-[#054E7A] py-14">
         <div className="max-w-3xl mx-auto text-center px-4">
-          <p className="text-[#4FA8D8] text-sm font-semibold uppercase tracking-widest mb-3">Masih Ragu?</p>
+          <p className="text-[#47C2EA] text-sm font-semibold uppercase tracking-widest mb-3">Masih Ragu?</p>
           <h2 className="text-2xl font-bold text-white mb-4">Konsultasi Gratis Sebelum Mendaftar</h2>
           <p className="text-white/60 mb-8 leading-relaxed">
             Ceritakan kebutuhan belajar Anda dan tim AJI akan merekomendasikan paket yang paling tepat, tanpa tekanan untuk langsung mendaftar.
@@ -315,7 +315,7 @@ export default function PrivateClassPage() {
           <a
             href="https://wa.me/6285892605592?text=Halo%20Admin,%20saya%20ingin%20konsultasi%20sebelum%20daftar%20Private%20Class"
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-8 py-3.5 rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-8 py-3.5 rounded-xl transition-colors"
           >
             <Zap className="w-4 h-4" />
             Hubungi via WhatsApp

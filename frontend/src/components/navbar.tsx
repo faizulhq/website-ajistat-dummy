@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,18 +9,17 @@ import { cn } from '@/lib/utils';
 import { PROGRAMS, WA_LINK, BRAND } from '@/lib/config';
 
 const LAYANAN_LINKS = [
-  { icon: '🎓', label: 'Bootcamp', href: '/bootcamp' },
-  { icon: '👤', label: 'Private Class', href: '/private-class' },
-  { icon: '⚡', label: 'Short Class', href: '/short-class' },
-  { icon: '🔧', label: 'Workshop', href: '/workshop' },
-  { icon: '📊', label: 'Konsultasi AjiStat', href: '/konsultasi' },
-  { icon: '🏢', label: 'In-House Training', href: '/in-house-training' },
+  { label: 'Bootcamp', href: '/bootcamp' },
+  { label: 'Private Class', href: '/private-class' },
+  { label: 'Short Class', href: '/short-class' },
+  { label: 'Workshop', href: '/workshop' },
+  { label: 'Konsultasi AjiStat', href: '/konsultasi' },
+  { label: 'In-House Training', href: '/in-house-training' },
 ];
 
 const MAIN_LINKS = [
   { href: '/in-house-training', label: 'In-House Training' },
   { href: '/blog', label: 'Blog' },
-  { href: '/tentang', label: 'Tentang' },
 ];
 
 export function Navbar() {
@@ -51,8 +50,17 @@ export function Navbar() {
   const isProgActive = PROGRAMS.some((p) => pathname.startsWith(p.href));
   const isLayananActive = LAYANAN_LINKS.some((l) => pathname === l.href);
 
+  const handleTentangClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById('tentang');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMobileOpen(false);
+    }
+  };
+
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-[#0C1A45] border-b border-[#4FA8D8]/20">
+    <nav className="fixed top-0 inset-x-0 z-50 bg-[#054E7A] border-b border-[#47C2EA]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
@@ -61,7 +69,7 @@ export function Navbar() {
             <Image src="/logo-v2.png" alt="Aji Institute" width={48} height={34} className="h-10 w-auto" />
             <div className="hidden sm:block">
               <p className="text-white font-bold text-sm leading-tight">Aji Institute</p>
-              <p className="text-[#4FA8D8] text-[10px]">{BRAND.legalName}</p>
+              <p className="text-[#47C2EA] text-[10px]">{BRAND.legalName}</p>
             </div>
           </Link>
 
@@ -91,16 +99,15 @@ export function Navbar() {
                       className={cn(
                         'flex items-center gap-3 px-4 py-3 transition-colors group',
                         pathname.startsWith(prog.href)
-                          ? 'bg-white/10 text-[#4FA8D8]'
+                          ? 'bg-white/10 text-[#47C2EA]'
                           : 'text-white/70 hover:text-white hover:bg-white/8'
                       )}>
-                      <span className="text-xl">{prog.icon}</span>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm group-hover:text-[#4FA8D8] transition-colors">{prog.name}</p>
+                        <p className="font-semibold text-sm group-hover:text-[#47C2EA] transition-colors">{prog.name}</p>
                         <p className="text-white/40 text-[11px] truncate">{prog.desc}</p>
                       </div>
                       {prog.isFeatured && (
-                        <span className="text-[9px] bg-[#F0A500] text-[#0C1A45] font-bold px-1.5 py-0.5 rounded-full shrink-0">⭐</span>
+                        <span className="text-[9px] bg-[#F0A500] text-[#054E7A] font-bold px-1.5 py-0.5 rounded-full shrink-0">⭐</span>
                       )}
                     </Link>
                   ))}
@@ -123,8 +130,8 @@ export function Navbar() {
                     <Link key={item.href} href={item.href}
                       onClick={() => setLayananOpen(false)}
                       className={cn('flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
-                        pathname === item.href ? 'text-[#4FA8D8] bg-white/8' : 'text-white/65 hover:text-white hover:bg-white/8')}>
-                      <span>{item.icon}</span> {item.label}
+                        pathname === item.href ? 'text-[#47C2EA] bg-white/8' : 'text-white/65 hover:text-white hover:bg-white/8')}>
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -138,6 +145,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {/* Tentang — with scroll-if-on-home behavior */}
+            <Link href="/#tentang" onClick={handleTentangClick}
+              className="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white/75 hover:text-white hover:bg-white/8">
+              Tentang
+            </Link>
           </div>
 
           {/* Right — Konsultasi CTA only */}
@@ -148,8 +160,8 @@ export function Navbar() {
             </Link>
             <a href={WA_LINK('Halo Aji Institute, saya ingin mendaftar program')}
               target="_blank" rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
-              💬 Daftar Kelas
+              className="hidden sm:flex items-center gap-1.5 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
+              Daftar Kelas
             </a>
 
             {/* Mobile hamburger */}
@@ -179,8 +191,8 @@ export function Navbar() {
                   {PROGRAMS.map((prog) => (
                     <Link key={prog.code} href={prog.href} onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-3 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
-                      <span>{prog.icon}</span> {prog.name}
-                      {prog.isFeatured && <span className="text-[9px] bg-[#F0A500] text-[#0C1A45] font-bold px-1.5 py-0.5 rounded-full">⭐</span>}
+                      {prog.name}
+                      {prog.isFeatured && <span className="text-[9px] bg-[#F0A500] text-[#054E7A] font-bold px-1.5 py-0.5 rounded-full">Unggulan</span>}
                     </Link>
                   ))}
                 </div>
@@ -199,7 +211,7 @@ export function Navbar() {
                   {LAYANAN_LINKS.map((item) => (
                     <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-2 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
-                      {item.icon} {item.label}
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -212,6 +224,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {/* Tentang mobile — scroll if on home */}
+            <Link href="/#tentang" onClick={handleTentangClick}
+              className="block px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/8 rounded-lg text-sm">
+              Tentang
+            </Link>
 
             <div className="pt-3 border-t border-white/10 space-y-2">
               <Link href="/konsultasi" onClick={() => setMobileOpen(false)}
@@ -220,7 +237,7 @@ export function Navbar() {
               </Link>
               <a href={WA_LINK('Halo Aji Institute, saya ingin mendaftar program')}
                 target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 w-full bg-[#F0A500] text-[#0C1A45] font-bold py-2.5 rounded-xl text-sm">
+                className="flex items-center justify-center gap-2 w-full bg-[#F0A500] text-[#054E7A] font-bold py-2.5 rounded-xl text-sm">
                 💬 Daftar Kelas via WhatsApp
               </a>
             </div>

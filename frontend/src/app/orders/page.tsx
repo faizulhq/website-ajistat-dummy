@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
@@ -27,7 +27,7 @@ export default function OrdersPage() {
     return (
       <div className="flex flex-col items-center justify-center py-32 text-center px-4">
         <p className="text-5xl mb-4">🔒</p>
-        <Link href="/login" className="bg-[#162660] text-white px-6 py-3 rounded-xl font-semibold">Masuk</Link>
+        <Link href="/login" className="bg-[#0B7AB5] text-white px-6 py-3 rounded-xl font-semibold">Masuk</Link>
       </div>
     );
   }
@@ -37,7 +37,7 @@ export default function OrdersPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-[#162660] flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 rounded-xl bg-[#0B7AB5] flex items-center justify-center text-white font-bold">
             {user?.avatar}
           </div>
           <div>
@@ -53,7 +53,7 @@ export default function OrdersPage() {
             <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Belum ada pesanan</h3>
             <p className="text-gray-400 text-sm mb-6">Mulai belajar dengan mendaftar program pilihan Anda.</p>
-            <Link href="/bootcamp" className="bg-[#162660] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#2568B5] transition-colors">
+            <Link href="/bootcamp" className="bg-[#0B7AB5] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1AAEE0] transition-colors">
               Jelajahi Program
             </Link>
           </div>
@@ -82,7 +82,7 @@ export default function OrdersPage() {
                     ))}
                     <div className="flex justify-between items-center pt-3 mt-2 border-t border-gray-100">
                       <span className="text-sm font-semibold text-gray-700">Total</span>
-                      <span className="font-bold text-[#2568B5]">{formatPrice(order.total_price)}</span>
+                      <span className="font-bold text-[#1AAEE0]">{formatPrice(order.total_price)}</span>
                     </div>
                     {order.status === 'pending' && (
                       <div className="mt-4 bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 text-xs text-amber-700">

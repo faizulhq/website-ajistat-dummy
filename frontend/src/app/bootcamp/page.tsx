@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -40,11 +40,11 @@ export default function BootcampPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <div className="bg-[#0C1A45] relative overflow-hidden">
+      <div className="bg-[#054E7A] relative overflow-hidden">
         {/* Decorative background */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#4FA8D8] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2568B5] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#47C2EA] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1AAEE0] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -57,13 +57,13 @@ export default function BootcampPage() {
 
           <div className="max-w-3xl">
             {/* Badge */}
-            <span className="inline-flex items-center gap-2 bg-[#2568B5]/30 border border-[#2568B5]/50 text-[#4FA8D8] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+            <span className="inline-flex items-center gap-2 bg-[#1AAEE0]/30 border border-[#1AAEE0]/50 text-[#47C2EA] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
               🎓 AJI Learning — Program Unggulan
             </span>
 
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
               Bootcamp Intensif<br />
-              <span className="text-[#4FA8D8]">Berbasis Data Nyata</span>
+              <span className="text-[#47C2EA]">Berbasis Data Nyata</span>
             </h1>
 
             <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-2xl">
@@ -94,8 +94,8 @@ export default function BootcampPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/10">
               {STATS.map(({ icon: Icon, value, label }) => (
                 <div key={label} className="flex items-center gap-3 py-5 px-6">
-                  <div className="w-10 h-10 bg-[#2568B5]/30 rounded-xl flex items-center justify-center shrink-0">
-                    <Icon className="w-5 h-5 text-[#4FA8D8]" />
+                  <div className="w-10 h-10 bg-[#1AAEE0]/30 rounded-xl flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5 text-[#47C2EA]" />
                   </div>
                   <div>
                     <p className="text-white font-bold text-lg leading-none">{value}</p>
@@ -127,7 +127,7 @@ export default function BootcampPage() {
                 placeholder="Cari program bootcamp..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2568B5] focus:ring-2 focus:ring-[#2568B5]/10"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1AAEE0] focus:ring-2 focus:ring-[#1AAEE0]/10"
               />
             </div>
             <div className="flex flex-wrap gap-2">
@@ -137,8 +137,8 @@ export default function BootcampPage() {
                   onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                     activeTag === tag
-                      ? 'bg-[#162660] text-white border-[#162660]'
-                      : 'border-gray-200 text-gray-600 hover:border-[#2568B5] hover:text-[#2568B5]'
+                      ? 'bg-[#0B7AB5] text-white border-[#0B7AB5]'
+                      : 'border-gray-200 text-gray-600 hover:border-[#1AAEE0] hover:text-[#1AAEE0]'
                   }`}
                 >
                   {tag}
@@ -180,14 +180,14 @@ export default function BootcampPage() {
       </section>
 
       {/* ─── CTA KONSULTASI ─── */}
-      <section className="bg-[#162660] py-14">
+      <section className="bg-[#0B7AB5] py-14">
         <div className="max-w-3xl mx-auto text-center px-4">
-          <p className="text-[#4FA8D8] text-sm font-semibold uppercase tracking-widest mb-3">Butuh Bantuan Riset?</p>
+          <p className="text-[#47C2EA] text-sm font-semibold uppercase tracking-widest mb-3">Butuh Bantuan Riset?</p>
           <h2 className="text-2xl font-bold text-white mb-4">Konsultasi Olah Data & Skripsi</h2>
           <p className="text-white/60 mb-8">Tim ahli AjiStat siap membantu memperlancar penelitian dan analisis data Anda secara profesional.</p>
           <a
             href="/konsultasi"
-            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-8 py-3.5 rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-8 py-3.5 rounded-xl transition-colors"
           >
             💬 Konsultasi Data AjiStat
           </a>

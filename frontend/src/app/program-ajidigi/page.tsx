@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -45,7 +45,6 @@ export default function AjiDigiPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-6xl">💻</span>
               <div>
                 <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Aji Institute — Program Digital</span>
                 <h1 className="text-5xl sm:text-6xl font-black text-white">AjiDigi</h1>
@@ -61,8 +60,8 @@ export default function AjiDigiPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <a href={WA_LINK('Halo, saya ingin mendaftar program AjiDigi')} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-8 py-4 rounded-2xl transition-all hover:scale-105">
-                💬 Daftar via WhatsApp <ArrowRight className="w-5 h-5" />
+                className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl transition-all hover:scale-105">
+                Daftar via WhatsApp <ArrowRight className="w-5 h-5" />
               </a>
               
             </div>
@@ -89,7 +88,6 @@ export default function AjiDigiPage() {
             </div>
           ) : (
             <div className="text-center py-16 bg-gray-50 rounded-3xl border border-gray-100">
-              <span className="text-4xl mb-4 block">🚀</span>
               <p className="font-bold text-gray-800 text-lg mb-2">Program Segera Hadir!</p>
               <p className="text-gray-500 max-w-sm mx-auto text-sm">Tim AjiDigi sedang menyiapkan kelas terbaik untuk Anda. Silakan sampaikan minat Anda pada layanan Konsultasi.</p>
             </div>
@@ -128,8 +126,8 @@ export default function AjiDigiPage() {
           <p className="text-white/70 mb-8">Kuasai digital marketing dan jadilah yang terdepan di era digital.</p>
           <a href={WA_LINK('Halo, saya ingin mendaftar program AjiDigi. Bisa dibantu?')}
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
-            💬 Hubungi Kami via WhatsApp
+            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
+            Hubungi Kami via WhatsApp
           </a>
         </div>
       </section>

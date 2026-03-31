@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Clock, Tag } from 'lucide-react';
 
@@ -17,7 +17,7 @@ const ARTICLES = [
     readTime: '8 menit',
     date: '15 Maret 2025',
     tag: 'SmartPLS',
-    color: '#2568B5',
+    color: '#1AAEE0',
   },
   {
     id: 2,
@@ -60,14 +60,14 @@ export default function BlogPage() {
   return (
     <>
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0C1A45] to-[#1e4fa0] py-20">
+      <div className="bg-gradient-to-br from-[#054E7A] to-[#1090C8] py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="flex justify-center gap-2 text-white/40 text-sm mb-8">
             <Link href="/" className="hover:text-white transition-colors">Beranda</Link>
             <span>/</span>
             <span className="text-white/80">Blog</span>
           </nav>
-          <span className="inline-block bg-[#4FA8D8]/20 border border-[#4FA8D8]/30 text-[#4FA8D8] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-block bg-[#47C2EA]/20 border border-[#47C2EA]/30 text-[#47C2EA] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
             ✍️ Blog & Artikel
           </span>
           <h1 className="font-[family-name:var(--font-poppins)] text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -86,7 +86,7 @@ export default function BlogPage() {
           {CATEGORIES.map((cat) => (
             <button key={cat}
               className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                cat === 'Semua' ? 'bg-[#162660] text-white' : 'text-gray-600 hover:text-[#2568B5] border border-gray-200 hover:border-[#2568B5]'
+                cat === 'Semua' ? 'bg-[#0B7AB5] text-white' : 'text-gray-600 hover:text-[#1AAEE0] border border-gray-200 hover:border-[#1AAEE0]'
               }`}>
               {cat}
             </button>
@@ -100,12 +100,12 @@ export default function BlogPage() {
           {/* Featured Article */}
           <div className="mb-8">
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-5">
-              <div className="lg:col-span-2 bg-gradient-to-br from-[#162660] to-[#2568B5] flex items-center justify-center py-16 px-8">
+              <div className="lg:col-span-2 bg-gradient-to-br from-[#0B7AB5] to-[#1AAEE0] flex items-center justify-center py-16 px-8">
                 <p className="text-white/20 text-8xl font-black select-none">AJI</p>
               </div>
               <div className="lg:col-span-3 p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="bg-blue-50 text-[#2568B5] text-xs font-semibold px-2.5 py-1 rounded-full border border-blue-100">
+                  <span className="bg-blue-50 text-[#1AAEE0] text-xs font-semibold px-2.5 py-1 rounded-full border border-blue-100">
                     {ARTICLES[0].category}
                   </span>
                   <span className="text-gray-400 text-xs flex items-center gap-1">
@@ -118,7 +118,7 @@ export default function BlogPage() {
                 <p className="text-gray-500 text-sm leading-relaxed mb-5">{ARTICLES[0].excerpt}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-xs">{ARTICLES[0].date}</span>
-                  <span className="flex items-center gap-1.5 text-[#2568B5] text-sm font-semibold hover:gap-2.5 transition-all cursor-pointer">
+                  <span className="flex items-center gap-1.5 text-[#1AAEE0] text-sm font-semibold hover:gap-2.5 transition-all cursor-pointer">
                     Baca Selengkapnya <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
@@ -144,13 +144,13 @@ export default function BlogPage() {
                       <Clock className="w-3 h-3" /> {article.readTime}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-gray-900 text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#2568B5] transition-colors">
+                  <h3 className="font-semibold text-gray-900 text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#1AAEE0] transition-colors">
                     {article.title}
                   </h3>
                   <p className="text-gray-500 text-xs line-clamp-2 mb-4">{article.excerpt}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-400 text-xs">{article.date}</span>
-                    <span className="text-[#2568B5] text-xs font-semibold cursor-pointer">Baca →</span>
+                    <span className="text-[#1AAEE0] text-xs font-semibold cursor-pointer">Baca →</span>
                   </div>
                 </div>
               </div>

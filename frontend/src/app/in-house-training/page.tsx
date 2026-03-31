@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ArrowRight, Building2, CheckCircle, Presentation, Users, Briefcase, Handshake } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
@@ -23,9 +23,9 @@ export default function InHouseTrainingPage() {
   return (
     <>
       {/* HERO */}
-      <div className="bg-gradient-to-br from-[#0C1A45] via-[#162660] to-[#2568B5] py-20 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-[#054E7A] via-[#0B7AB5] to-[#1AAEE0] py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-        <div className="absolute right-0 top-0 translate-x-1/3 -translate-y-1/3 w-96 h-96 bg-[#4FA8D8] rounded-full blur-[120px] opacity-20 hidden lg:block"></div>
+        <div className="absolute right-0 top-0 translate-x-1/3 -translate-y-1/3 w-96 h-96 bg-[#47C2EA] rounded-full blur-[120px] opacity-20 hidden lg:block"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <span className="text-[#F0A500] text-sm font-bold uppercase tracking-widest mb-4 block">Aji Institute Corporate & Institutional</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
@@ -37,7 +37,7 @@ export default function InHouseTrainingPage() {
           <div className="flex justify-center">
             <a href={WA_LINK('Halo Tim Aji Institute, saya mewakili instansi saya dan ingin berdiskusi mengenai program In-House Training / Kerja Sama Institusional...')}
               target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-8 py-4 rounded-2xl text-lg transition-transform hover:scale-105 shadow-xl">
+              className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl text-lg transition-transform hover:scale-105 shadow-xl">
               <Briefcase className="w-5 h-5" /> Undang Kami Presentasi
             </a>
           </div>
@@ -49,7 +49,7 @@ export default function InHouseTrainingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-[#2568B5] text-sm font-bold uppercase tracking-widest mb-2">Nilai Ekosistem Aji</p>
+              <p className="text-[#1AAEE0] text-sm font-bold uppercase tracking-widest mb-2">Nilai Ekosistem Aji</p>
               <h2 className="text-3xl font-black text-gray-900 mb-6 leading-tight">Fleksibel, Komunikatif, dan Berorientasi pada Hasil</h2>
               <p className="text-gray-600 mb-8 leading-relaxed">
                 Kami memahami bahwa setiap organisasi memiliki tantangan kompetensi yang berbeda. Oleh karena itu, seluruh bentuk pelaksanaan, durasi, metode penyampaian, hingga sub-materi pelatihan <strong>dapat disesuaikan (customized)</strong> melalui diskusi tahap awal (Need Assessment) dengan tim akademisi kami.
@@ -62,7 +62,7 @@ export default function InHouseTrainingPage() {
                   'Diampu oleh akademisi, praktisi, dan profesional di bidangnya'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4 text-gray-800">
-                    <CheckCircle className="w-5 h-5 text-[#2568B5] mt-0.5 shrink-0" /> {item}
+                    <CheckCircle className="w-5 h-5 text-[#1AAEE0] mt-0.5 shrink-0" /> {item}
                   </li>
                 ))}
               </ul>
@@ -71,7 +71,7 @@ export default function InHouseTrainingPage() {
             <div className="grid grid-cols-2 gap-4">
               {['Statistik & Olah Data', 'Bisnis & Manajemen', 'Digital Marketing', 'Public Speaking', 'Keterampilan Bahasa', 'Pengembangan UMKM'].map((fokus, idx) => (
                 <div key={idx} className="bg-blue-50/50 outline outline-1 outline-blue-100 rounded-2xl p-6 text-center shadow-sm">
-                  <p className="font-bold text-[#0C1A45] text-sm">{fokus}</p>
+                  <p className="font-bold text-[#054E7A] text-sm">{fokus}</p>
                 </div>
               ))}
             </div>
@@ -93,7 +93,7 @@ export default function InHouseTrainingPage() {
             {KERJASAMA.map((k) => (
               <div key={k.title} className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
                 <div className="w-12 h-12 bg-blue-100/50 rounded-xl flex items-center justify-center mb-6">
-                  <k.icon className="w-6 h-6 text-[#2568B5]" />
+                  <k.icon className="w-6 h-6 text-[#1AAEE0]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{k.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{k.desc}</p>
@@ -104,7 +104,7 @@ export default function InHouseTrainingPage() {
       </section>
 
       {/* MITRA */}
-      <section className="py-16 bg-[#0C1A45]">
+      <section className="py-16 bg-[#054E7A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-8">Target Mitra & Klien Institusional</p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -126,7 +126,7 @@ export default function InHouseTrainingPage() {
           </p>
           <a href={WA_LINK('Halo Tim Kemintran Aji Institute, saya tertarik dengan layanan In-House Training...')}
              target="_blank" rel="noopener noreferrer"
-             className="inline-flex items-center gap-2 bg-[#2568B5] hover:bg-[#1e4fa0] text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all shadow-xl hover:shadow-[#2568B5]/50">
+             className="inline-flex items-center gap-2 bg-[#1AAEE0] hover:bg-[#1090C8] text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all shadow-xl hover:shadow-[#1AAEE0]/50">
             💬 Ajukan Pertemuan Bersama Tim
           </a>
         </div>

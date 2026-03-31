@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,14 +15,14 @@ export function Footer() {
   ];
 
   const perusahaan = [
-    { label: 'Tentang Kami', href: '/tentang' },
+    { label: 'Tentang Kami', href: '/#tentang' },
     { label: 'Blog & Artikel', href: '/blog' },
     { label: 'In-House Training', href: '/in-house-training' },
     { label: 'Layanan Utama', href: '/layanan' },
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#0C1A45] to-[#080f24] border-t-4 border-[#4FA8D8]">
+    <footer className="bg-gradient-to-b from-[#054E7A] to-[#03344F] border-t-4 border-[#47C2EA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
@@ -32,10 +32,10 @@ export function Footer() {
               <Image src="/logo-v2.png" alt={SITE.name} width={44} height={31} className="h-8 w-auto" />
               <div>
                 <p className="text-white font-bold text-base">{SITE.name}</p>
-                <p className="text-[#4FA8D8] text-[10px]">{SITE.company}</p>
+                <p className="text-[#47C2EA] text-[10px]">{SITE.company}</p>
               </div>
             </div>
-            <p className="text-[#4FA8D8] text-sm italic mb-3">"{SITE.tagline}"</p>
+            <p className="text-[#47C2EA] text-sm italic mb-3">"{SITE.tagline}"</p>
             <p className="text-white/55 text-sm leading-relaxed mb-5">
               Platform pelatihan, pengembangan kompetensi, dan konsultasi profesional — dari statistik, bisnis, hingga komunikasi.
             </p>
@@ -45,7 +45,7 @@ export function Footer() {
               {SUB_BRANDS.map((b) => (
                 <Link key={b.id} href={b.href}
                   className="text-[10px] bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-2.5 py-1 rounded-full transition-colors">
-                  {b.icon} {b.name}
+                  {b.name}
                 </Link>
               ))}
             </div>
@@ -73,7 +73,7 @@ export function Footer() {
             <ul className="space-y-2">
               {layanan.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-white/55 hover:text-[#4FA8D8] text-sm transition-colors">
+                  <Link href={l.href} className="text-white/55 hover:text-[#47C2EA] text-sm transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -87,27 +87,12 @@ export function Footer() {
             <ul className="space-y-2">
               {perusahaan.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-white/55 hover:text-[#4FA8D8] text-sm transition-colors">
+                  <Link href={l.href} className="text-white/55 hover:text-[#47C2EA] text-sm transition-colors">
                     {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 p-3 bg-white/5 border border-white/10 rounded-xl">
-              <p className="text-white/40 text-[10px] uppercase tracking-widest mb-2">Nilai Inti Perusahaan</p>
-              <div className="space-y-1">
-                {[
-                  { key: 'A', name: 'Amanah', desc: 'Integritas & Kepercayaan' },
-                  { key: 'J', name: 'Jana', desc: 'Ilmiah & Analitis' },
-                  { key: 'I', name: 'Insani', desc: 'Humanis & Empatik' },
-                ].map((v) => (
-                  <div key={v.key} className="flex items-center gap-2">
-                    <span className="w-5 h-5 bg-[#2568B5] rounded text-white text-[10px] font-bold flex items-center justify-center shrink-0">{v.key}</span>
-                    <span className="text-white/50 text-xs">{v.name} — {v.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Kontak */}
@@ -115,7 +100,7 @@ export function Footer() {
             <h5 className="text-white font-semibold mb-4">Kontak</h5>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-[#47C2EA] mt-0.5 shrink-0" />
                 <div>
                   <p className="text-white/55 text-sm">{CONTACT.whatsappDisplay}</p>
                   <a href={WA_LINK()} target="_blank" rel="noopener noreferrer"
@@ -125,15 +110,15 @@ export function Footer() {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
+                <Mail className="w-4 h-4 text-[#47C2EA] mt-0.5 shrink-0" />
                 <span className="text-white/55 text-sm">{CONTACT.email}</span>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
+                <Clock className="w-4 h-4 text-[#47C2EA] mt-0.5 shrink-0" />
                 <span className="text-white/55 text-sm">{CONTACT.operationalHours}</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#4FA8D8] mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#47C2EA] mt-0.5 shrink-0" />
                 <span className="text-white/55 text-sm">{CONTACT.address}</span>
               </li>
             </ul>

@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowRight, Users, BookOpen, Award, Briefcase, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ArrowRight, Users, BookOpen, Award, Briefcase, ChevronLeft, ChevronRight, X, BarChart3, Database, FileText, PieChart, Building2, ClipboardList } from 'lucide-react';
 import { useEffect, useState, useCallback } from 'react';
 import { programsApi } from '@/lib/api';
 import { ProgramCard } from '@/components/program-card';
@@ -16,41 +16,41 @@ import { cn } from '@/lib/utils';
 const SLIDES = [
   {
     image: '/images/slide1.png',
-    badge: '🎉 Terbatas — Daftar Sekarang',
-    badgeColor: 'bg-[#F0A500] text-[#0C1A45]',
+    badge: 'Terbatas — Daftar Sekarang',
+    badgeColor: 'bg-[#F0A500] text-[#054E7A]',
     headline: 'Ikuti Bootcamp\nGratis Pertamamu',
     subtext: 'Mulai perjalanan belajar Anda di Aji Institute — gratis, terstruktur, dan langsung praktik bersama mentor berpengalaman.',
     cta: 'Daftar Sekarang →',
     ctaHref: '/bootcamp',
-    cta2: '💬 Tanya via WhatsApp',
+    cta2: 'Tanya via WhatsApp',
     cta2Href: WA_LINK('Halo, saya ingin info Bootcamp Gratis Aji Institute'),
     chips: ['Gratis', 'Bersertifikat', 'Mentor Expert', 'Praktik Langsung'],
-    stats: [{ val: '500+', label: 'Alumni' }, { val: '4.9★', label: 'Rating' }],
-    overlay: 'from-[#0C1A45]/90 via-[#0C1A45]/70 to-transparent',
+    stats: [{ val: '500+', label: 'Alumni' }, { val: '4.9', label: 'Rating' }],
+    overlay: 'from-[#054E7A]/90 via-[#054E7A]/70 to-transparent',
   },
   {
     image: '/images/slide2.png',
-    badge: '⭐ Program Unggulan',
-    badgeColor: 'bg-[#162660] text-[#4FA8D8] border border-[#4FA8D8]/40',
+    badge: 'Program Unggulan',
+    badgeColor: 'bg-[#0B7AB5] text-[#47C2EA] border border-[#47C2EA]/40',
     headline: 'Kuasai Statistika\n& Riset dengan AjiStat',
     subtext: 'SPSS, SmartPLS, NVivo, R, Python, AMOS, EViews, STATA — semua ada di sini. Dibimbing langsung oleh pakar riset berpengalaman.',
     cta: 'Lihat Program AjiStat →',
     ctaHref: '/program-ajistat',
-    cta2: '💬 Konsultasi Gratis',
+    cta2: 'Konsultasi Gratis',
     cta2Href: WA_LINK('Halo, saya ingin info program AjiStat'),
     chips: ['SPSS', 'SmartPLS', 'NVivo', 'R', 'Python', 'AMOS'],
     stats: [{ val: '10+', label: 'Tools' }, { val: '5', label: 'Format Kelas' }],
-    overlay: 'from-[#0C1A45]/85 via-[#162660]/65 to-transparent',
+    overlay: 'from-[#054E7A]/85 via-[#0B7AB5]/65 to-transparent',
   },
   {
     image: '/images/slide3.png',
-    badge: '🚀 Kini Tersedia',
+    badge: 'Kini Tersedia',
     badgeColor: 'bg-purple-600/80 text-white backdrop-blur',
     headline: '5 Divisi Program\nAji Institute',
     subtext: 'AjiStat, AjiBiz, AjiPR, AjiDigi, AjiLanguage — satu platform untuk semua kebutuhan pengembangan kompetensi profesional Anda.',
     cta: 'Eksplorasi Semua Program →',
     ctaHref: '/program-ajibiz',
-    cta2: '💬 Diskusi Program',
+    cta2: 'Diskusi Program',
     cta2Href: WA_LINK('Halo, saya ingin tahu lebih lanjut tentang program Aji Institute'),
     chips: ['AjiStat', 'AjiBiz', 'AjiPR', 'AjiDigi', 'AjiLanguage'],
     stats: [{ val: '5', label: 'Divisi' }, { val: '30+', label: 'Kelas' }],
@@ -110,12 +110,26 @@ function HeroSlider() {
           </p>
 
           {/* Chips */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {slide.chips.map((c) => (
-              <span key={c} className="text-xs bg-white/20 backdrop-blur text-white px-3 py-1.5 rounded-full font-semibold border border-white/20">
-                {c}
-              </span>
-            ))}
+          <div className="flex flex-wrap gap-2 mb-8 items-center">
+            {slide.chips.map((c) => {
+              // Check if chip matches a tool (handle 'R' as alias for 'R / RStudio')
+              const toolMatch = TOOLS.find(t => t.name === c || (c === 'R' && t.name === 'R / RStudio'));
+              
+              if (toolMatch && toolMatch.logo) {
+                return (
+                  <div key={c} title={toolMatch.name}
+                    className="w-8 h-8 rounded-lg overflow-hidden bg-white/20 backdrop-blur hover:bg-white/30 border border-white/30 flex items-center justify-center transition-all hover:scale-110 cursor-default">
+                    <Image src={toolMatch.logo} alt={toolMatch.name} width={24} height={24} className="object-contain p-0.5" />
+                  </div>
+                );
+              }
+
+              return (
+                <span key={c} className="text-xs bg-white/20 backdrop-blur text-white px-3 py-1.5 rounded-full font-semibold border border-white/20">
+                  {c}
+                </span>
+              );
+            })}
           </div>
 
           {/* Stats inline */}
@@ -131,7 +145,7 @@ function HeroSlider() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href={slide.ctaHref}
-              className="inline-flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105 shadow-2xl">
+              className="inline-flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105 shadow-2xl">
               {slide.cta}
             </Link>
             <a href={slide.cta2Href} target="_blank" rel="noopener noreferrer"
@@ -184,13 +198,20 @@ function ToolModal({ tool, onClose }: { tool: ToolType; onClose: () => void }) {
           <X className="w-5 h-5" />
         </button>
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-lg"
-            style={{ backgroundColor: tool.color }}>
-            {tool.name.slice(0, 2)}
+          {/* Logo image or colored fallback */}
+          <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center shadow-lg bg-white border border-gray-100">
+            {tool.logo ? (
+              <Image src={tool.logo} alt={tool.name} width={48} height={48} className="object-contain p-1" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white font-black text-lg"
+                style={{ backgroundColor: tool.color }}>
+                {tool.name.slice(0, 2)}
+              </div>
+            )}
           </div>
           <div>
             <h3 className="text-xl font-black text-gray-900">{tool.name}</h3>
-            <span className="text-xs font-semibold bg-[#162660]/10 text-[#162660] px-2 py-0.5 rounded-full">
+            <span className="text-xs font-semibold bg-[#0B7AB5]/10 text-[#0B7AB5] px-2 py-0.5 rounded-full">
               Tersedia di AjiStat
             </span>
           </div>
@@ -202,8 +223,8 @@ function ToolModal({ tool, onClose }: { tool: ToolType; onClose: () => void }) {
         </div>
         <a href={WA_LINK(`Halo, saya ingin belajar ${tool.name} di AjiStat`)}
           target="_blank" rel="noopener noreferrer"
-          className="mt-4 w-full flex items-center justify-center gap-2 bg-[#162660] hover:bg-[#2568B5] text-white font-bold py-3 rounded-xl transition-colors text-sm">
-          💬 Tanya Kelas {tool.name}
+          className="mt-4 w-full flex items-center justify-center gap-2 bg-[#0B7AB5] hover:bg-[#1AAEE0] text-white font-bold py-3 rounded-xl transition-colors text-sm">
+          Tanya Kelas {tool.name}
         </a>
       </div>
     </div>
@@ -222,43 +243,39 @@ const AJI_PILLARS = [
   {
     letter: 'A',
     name: 'Amanah',
+    tagline: 'Integritas & Kepercayaan',
     desc: 'Integritas, kejujuran, dan tanggung jawab dalam setiap layanan kami. Kepercayaan Anda adalah amanah terbesar kami.',
-    gradient: 'from-[#0C1A45] to-[#162660]',
-    accent: '#4FA8D8',
-    icon: '🛡️',
+    gradient: 'from-[#054E7A] to-[#0B7AB5]',
+    accent: '#47C2EA',
   },
   {
     letter: 'J',
     name: 'Jana',
+    tagline: 'Ilmiah & Analitis',
     desc: 'Berpikir kritis, ilmiah, analitis, berbasis data dan kebenaran ilmiah. Kami percaya ilmu pengetahuan adalah fondasi kemajuan.',
-    gradient: 'from-[#162660] to-[#2568B5]',
+    gradient: 'from-[#0B7AB5] to-[#1AAEE0]',
     accent: '#F0A500',
-    icon: '🔬',
   },
   {
     letter: 'I',
     name: 'Insani',
+    tagline: 'Humanis & Empatik',
     desc: 'Humanis, empatik, dan pengembangan manusia seutuhnya. Setiap peserta adalah individu yang berhak tumbuh dan berkembang.',
-    gradient: 'from-[#2568B5] to-[#1e4fa0]',
+    gradient: 'from-[#1AAEE0] to-[#1090C8]',
     accent: '#4ade80',
-    icon: '❤️',
   },
 ];
 
 const KONSULTASI_LAYANAN = [
-  { icon: '📊', title: 'Analisis Data Kuantitatif' },
-  { icon: '🔍', title: 'Analisis Data Kualitatif (NVivo)' },
-  { icon: '💾', title: 'Olah & Pengolahan Data' },
-  { icon: '🎓', title: 'Pendampingan Skripsi / Tesis / Disertasi' },
-  { icon: '🏢', title: 'Riset & Konsultasi Bisnis' },
-  { icon: '📄', title: 'Penyusunan Laporan Hasil Analisis' },
+  { icon: BarChart3, title: 'Analisis Data Kuantitatif' },
+  { icon: FileText, title: 'Analisis Data Kualitatif (NVivo)' },
+  { icon: Database, title: 'Olah & Pengolahan Data' },
+  { icon: BookOpen, title: 'Pendampingan Skripsi / Tesis / Disertasi' },
+  { icon: Building2, title: 'Riset & Konsultasi Bisnis' },
+  { icon: ClipboardList, title: 'Penyusunan Laporan Hasil Analisis' },
 ];
 
-const TESTIMONIALS = [
-  { name: 'Rahma A.', role: 'Mahasiswa S2, UGM', program: 'Bootcamp SmartPLS', rating: 5, comment: 'Bootcamp SmartPLS AjiStat benar-benar mengubah cara saya memandang SEM. Dalam 3 hari saya sudah bisa menganalisis sendiri untuk tesis saya.' },
-  { name: 'Dr. Budi S.', role: 'Dosen, Universitas Indonesia', program: 'Bootcamp NVivo', rating: 5, comment: 'Materi NVivo-nya sangat mendalam dan aplikatif. Sekarang saya rutin merekomendasikan AjiStat ke mahasiswa bimbingan saya.' },
-  { name: 'Fira N.', role: 'Peneliti, LIPI', rating: 5, program: 'Private Class SPSS', comment: 'Private class-nya sangat personal dan fleksibel. Fasilitatornya sabar sekali menjelaskan analisis yang kompleks sekalipun.' },
-];
+
 
 export default function HomePage() {
   const [activeTool, setActiveTool] = useState<ToolType | null>(null);
@@ -295,13 +312,13 @@ export default function HomePage() {
       <HeroSlider />
 
       {/* Stats strip */}
-      <div className="bg-[#0C1A45] border-b border-[#4FA8D8]/20">
+      <div className="bg-[#054E7A] border-b border-[#47C2EA]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {STATS.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
-                <div className="w-10 h-10 bg-[#4FA8D8]/20 rounded-xl flex items-center justify-center mb-1">
-                  <Icon className="w-5 h-5 text-[#4FA8D8]" />
+                <div className="w-10 h-10 bg-[#47C2EA]/20 rounded-xl flex items-center justify-center mb-1">
+                  <Icon className="w-5 h-5 text-[#47C2EA]" />
                 </div>
                 <p className="text-2xl font-black text-white">{value}</p>
                 <p className="text-white/50 text-xs">{label}</p>
@@ -313,7 +330,7 @@ export default function HomePage() {
 
       {/* 2. AJISTAT SPOTLIGHT — Dedicated showcase */}
       <section className="py-0 overflow-hidden">
-        <div className="bg-gradient-to-br from-[#0C1A45] via-[#162660] to-[#2568B5] relative">
+        <div className="bg-gradient-to-br from-[#054E7A] via-[#0B7AB5] to-[#1AAEE0] relative">
           <div className="absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
@@ -321,32 +338,39 @@ export default function HomePage() {
               {/* Left */}
               <div>
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="text-5xl">📊</span>
                   <div>
-                    <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">⭐ Program Unggulan</span>
+                    <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Program Unggulan</span>
                     <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">AjiStat</h2>
                   </div>
                 </div>
                 <p className="text-white/70 text-lg leading-relaxed mb-6">
                   Pusat pelatihan statistik, metodologi penelitian, dan analisis data terlengkap di Indonesia. Cocok untuk mahasiswa, peneliti, dosen, dan profesional.
                 </p>
-                {/* Tool chips */}
+                {/* Tool logos */}
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {['SPSS', 'SmartPLS', 'NVivo', 'R', 'Python', 'AMOS', 'EViews', 'STATA'].map((t) => (
-                    <span key={t} className="text-xs bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-full font-semibold border border-white/20 transition-colors">
-                      {t}
-                    </span>
+                  {TOOLS.filter(t => ['SPSS', 'SmartPLS', 'NVivo', 'R / RStudio', 'Python', 'AMOS', 'EViews', 'STATA'].includes(t.name)).map((t) => (
+                    <div key={t.name} title={t.name}
+                      className="w-9 h-9 rounded-lg overflow-hidden bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all hover:scale-110 cursor-default">
+                      {t.logo ? (
+                        <Image src={t.logo} alt={t.name} width={28} height={28} className="object-contain p-0.5" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-white font-black text-[9px]"
+                          style={{ backgroundColor: t.color }}>
+                          {t.name.slice(0, 2)}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link href="/program-ajistat"
-                    className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-7 py-3.5 rounded-xl transition-all hover:scale-105">
+                    className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-7 py-3.5 rounded-xl transition-all hover:scale-105">
                     Lihat Semua Program AjiStat <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href={WA_LINK('Halo, saya ingin konsultasi program AjiStat')}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:bg-white/10">
-                    💬 Konsultasi Gratis
+                    Konsultasi Gratis
                   </a>
                 </div>
               </div>
@@ -356,15 +380,15 @@ export default function HomePage() {
                 <p className="text-white/50 text-xs font-semibold uppercase tracking-widest mb-4">Format Belajar Tersedia</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
-                    { fmt: 'Bootcamp', icon: '🎓', desc: 'Intensif 3–5 hari, materi mendalam', href: '/bootcamp' },
-                    { fmt: 'Private Class', icon: '👤', desc: 'Jadwal fleksibel, 1-on-1 mentor', href: '/private-class' },
-                    { fmt: 'Short Class', icon: '⚡', desc: 'Topik spesifik, 2–4 jam per sesi', href: '/short-class' },
-                    { fmt: 'Workshop', icon: '🔧', desc: 'Hands-on praktik dengan dataset nyata', href: '/workshop' },
-                    { fmt: 'Konsultasi', icon: '💬', desc: 'Pendampingan riset personal', href: '/konsultasi' },
+                    { fmt: 'Bootcamp', desc: 'Intensif 3–5 hari, materi mendalam', href: '/bootcamp' },
+                    { fmt: 'Private Class', desc: 'Jadwal fleksibel, 1-on-1 mentor', href: '/private-class' },
+                    { fmt: 'Short Class', desc: 'Topik spesifik, 2–4 jam per sesi', href: '/short-class' },
+                    { fmt: 'Workshop', desc: 'Hands-on praktik dengan dataset nyata', href: '/workshop' },
+                    { fmt: 'Konsultasi', desc: 'Pendampingan riset personal', href: '/konsultasi' },
                   ].map((item) => (
                     <Link key={item.fmt} href={item.href}
                       className="flex items-start gap-3 bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl p-4 transition-all group">
-                      <span className="text-2xl">{item.icon}</span>
+                      <span className="w-2 h-2 rounded-full bg-[#47C2EA] mt-1.5 shrink-0" />
                       <div>
                         <p className="text-white font-bold text-sm group-hover:text-[#F0A500] transition-colors">{item.fmt}</p>
                         <p className="text-white/50 text-xs">{item.desc}</p>
@@ -373,7 +397,7 @@ export default function HomePage() {
                   ))}
                   {/* Stats card */}
                   <div className="flex items-center justify-around bg-[#F0A500]/20 border border-[#F0A500]/30 rounded-xl p-4">
-                    {[{ val: '500+', label: 'Alumni' }, { val: '4.9★', label: 'Rating' }, { val: '10+', label: 'Tools' }].map((s) => (
+                    {[{ val: '500+', label: 'Alumni' }, { val: '4.9', label: 'Rating' }, { val: '10+', label: 'Tools' }].map((s) => (
                       <div key={s.label} className="text-center">
                         <p className="text-[#F0A500] font-black text-lg">{s.val}</p>
                         <p className="text-white/50 text-xs">{s.label}</p>
@@ -387,33 +411,78 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. SECTION AJI — 3 PILAR */}
-      <section className="py-20 bg-gray-50">
+      {/* 3. SECTION AJI — 2 Kolom: Kiri = A/J/I vertikal, Kanan = konten menarik */}
+      <section id="tentang" className="py-20 bg-gray-50 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Nilai Inti Kami</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Nilai Inti Kami</p>
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900">
               Makna di Balik{' '}
-              <span className="bg-gradient-to-r from-[#162660] to-[#2568B5] bg-clip-text text-transparent">AJI</span>
+              <span className="bg-gradient-to-r from-[#0B7AB5] to-[#1AAEE0] bg-clip-text text-transparent">AJI</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {AJI_PILLARS.map((pillar) => (
-              <div key={pillar.letter}
-                className={cn('relative rounded-3xl p-10 overflow-hidden text-white bg-gradient-to-br shadow-2xl', pillar.gradient)}>
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[160px] font-black text-white/[0.06] select-none leading-none pointer-events-none">
-                  {pillar.letter}
-                </span>
-                <div className="relative z-10">
-                  <div className="text-5xl mb-5">{pillar.icon}</div>
-                  <div className="flex items-end gap-3 mb-4">
-                    <span className="text-8xl font-black leading-none" style={{ color: pillar.accent }}>{pillar.letter}</span>
-                    <span className="text-2xl font-bold pb-3 text-white">{pillar.name}</span>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl">
+            {/* KIRI — A / J / I vertikal */}
+            <div className="bg-gradient-to-b from-[#054E7A] via-[#0B7AB5] to-[#1090C8] flex flex-col">
+              {AJI_PILLARS.map((pillar, idx) => (
+                <div key={pillar.letter}
+                  className={cn(
+                    'flex items-center gap-6 p-8 md:p-10',
+                    idx < AJI_PILLARS.length - 1 && 'border-b border-white/10'
+                  )}>
+                  {/* Huruf besar */}
+                  <span
+                    className="text-8xl md:text-9xl font-black leading-none w-24 shrink-0 text-center"
+                    style={{ color: pillar.accent }}>
+                    {pillar.letter}
+                  </span>
+                  {/* Teks singkat */}
+                  <div>
+                    <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-1">{pillar.tagline}</p>
+                    <h3 className="text-2xl font-black text-white">{pillar.name}</h3>
+                    <p className="text-white/60 text-sm mt-2 leading-relaxed">{pillar.desc}</p>
                   </div>
-                  <p className="text-white/70 leading-relaxed text-sm">{pillar.desc}</p>
                 </div>
+              ))}
+            </div>
+
+            {/* KANAN — Why AJI? Statistik & Pencapaian */}
+            <div className="bg-white flex flex-col justify-between p-8 md:p-12">
+              <div>
+                <p className="text-[#1AAEE0] text-xs font-bold uppercase tracking-widest mb-3">Mengapa Aji Institute?</p>
+                <h3 className="text-3xl font-black text-gray-900 mb-6 leading-snug">
+                  Lebih dari Sekadar<br />
+                  <span className="text-[#1AAEE0]">Tempat Belajar</span>
+                </h3>
+                <p className="text-gray-500 leading-relaxed mb-8">
+                  Aji Institute berdiri di atas komitmen untuk mencetak individu yang tidak hanya kompeten secara teknis, tetapi juga berintegritas, kritis, dan siap berkontribusi nyata bagi masyarakat.
+                </p>
               </div>
-            ))}
+
+              {/* Key Metrics */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { val: '500+', label: 'Alumni Terlatih', sub: 'Dari seluruh Indonesia' },
+                  { val: '10+', label: 'Fasilitator Ahli', sub: 'Praktisi berpengalaman' },
+                  { val: '5', label: 'Divisi Program', sub: 'Statistik, Bisnis, Digital, PR, Bahasa' },
+                  { val: '30+', label: 'Kelas Tersedia', sub: 'Bootcamp, Private, Short Class' },
+                ].map((stat) => (
+                  <div key={stat.label} className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                    <p className="text-2xl font-black text-[#0B7AB5]">{stat.val}</p>
+                    <p className="text-gray-800 font-semibold text-sm">{stat.label}</p>
+                    <p className="text-gray-400 text-xs mt-0.5">{stat.sub}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <a href={WA_LINK('Halo, saya ingin tahu lebih lanjut tentang Aji Institute')}
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full bg-[#0B7AB5] hover:bg-[#1AAEE0] text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+                Hubungi Kami Sekarang
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -422,7 +491,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">5 Divisi Program</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">5 Divisi Program</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900">Pilih Jalur Pengembangan Anda</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
@@ -435,10 +504,9 @@ export default function HomePage() {
                 style={{ background: `linear-gradient(135deg, ${prog.color} 0%, ${prog.color}cc 100%)` }}
               >
                 {prog.isFeatured && (
-                  <span className="absolute top-3 right-3 text-[10px] bg-[#F0A500] text-[#0C1A45] font-bold px-2 py-0.5 rounded-full">⭐ Unggulan</span>
+                  <span className="absolute top-3 right-3 text-[10px] bg-[#F0A500] text-[#054E7A] font-bold px-2 py-0.5 rounded-full">Unggulan</span>
                 )}
-                <div className="text-4xl mb-4">{prog.icon}</div>
-                <p className="font-black text-xl mb-1">{prog.name}</p>
+                <p className="font-black text-xl mb-1 mt-2">{prog.name}</p>
                 <p className="text-white/70 text-xs mb-4 leading-relaxed">{prog.desc}</p>
                 <div className="flex flex-wrap gap-1">
                   {prog.topics.slice(0, 3).map((t) => (
@@ -450,23 +518,24 @@ export default function HomePage() {
                 </div>
                 <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                   <ArrowRight className="w-5 h-5" />
-                </div>
-              </Link>
-            ))}
+              </div>
+            </Link>
+          ))}
           </div>
         </div>
       </section>
+
 
       {/* 5. FEATURED PROGRAMS DARI API (diverse: 1 bootcamp + 1 private + 1 short) */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-2">Program Pilihan</p>
+              <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-2">Program Pilihan</p>
               <h2 className="text-3xl font-black text-gray-900">Program Unggulan</h2>
               <p className="text-gray-500 text-sm mt-1">Satu dari setiap format — Bootcamp, Private Class, Short Class</p>
             </div>
-            <Link href="/bootcamp" className="hidden sm:flex items-center gap-1.5 text-[#2568B5] font-semibold hover:underline text-sm">
+            <Link href="/bootcamp" className="hidden sm:flex items-center gap-1.5 text-[#1AAEE0] font-semibold hover:underline text-sm">
               Lihat Semua <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -483,29 +552,31 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Layanan Kami</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Layanan Kami</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900">Apa yang Bisa Kami Bantu?</h2>
             <p className="text-gray-500 mt-3 max-w-lg mx-auto">Dari analisis data hingga pendampingan riset — tim ahli kami siap mendampingi Anda.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             {KONSULTASI_LAYANAN.map((item) => (
               <div key={item.title}
-                className="flex items-center gap-4 p-5 bg-gray-50 hover:bg-blue-50 border border-gray-100 hover:border-[#2568B5]/20 rounded-2xl transition-all cursor-default">
-                <div className="text-3xl shrink-0">{item.icon}</div>
+                className="flex items-center gap-4 p-5 bg-gray-50 hover:bg-blue-50 border border-gray-100 hover:border-[#1AAEE0]/20 rounded-2xl transition-all cursor-default">
+                <div className="w-10 h-10 bg-[#EBF4FF] rounded-xl flex items-center justify-center shrink-0">
+                  <item.icon className="w-5 h-5 text-[#1AAEE0]" />
+                </div>
                 <p className="font-semibold text-gray-800 text-sm">{item.title}</p>
               </div>
             ))}
           </div>
           <div className="text-center">
-            <Link href="/layanan" className="inline-flex items-center gap-2 text-[#2568B5] font-semibold hover:underline">
+            <Link href="/layanan" className="inline-flex items-center gap-2 text-[#1AAEE0] font-semibold hover:underline">
               Lihat Semua Layanan <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 7. TOOLS & SOFTWARE — Logo cards with modal */}
-      <section className="py-16 bg-gray-50 border-y border-gray-100">
+      {/* 7. TOOLS & SOFTWARE — Logo images with modal */}
+      <section id="blog" className="py-16 bg-gray-50 border-y border-gray-100 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-2">
@@ -521,12 +592,17 @@ export default function HomePage() {
                 className="group flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
                 title={`Klik untuk info tentang ${tool.name}`}
               >
-                {/* Logo card */}
+                {/* Logo image or colored text badge */}
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-md group-hover:scale-110 transition-all"
-                  style={{ backgroundColor: tool.color }}
+                  className="w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center shadow-md group-hover:scale-110 transition-all bg-white border border-gray-100"
                 >
-                  {tool.name.length <= 4 ? tool.name : tool.name.slice(0, 3)}
+                  {tool.logo ? (
+                    <Image src={tool.logo} alt={tool.name} width={48} height={48} className="object-contain p-1" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white font-black text-sm" style={{ backgroundColor: tool.color }}>
+                      {tool.name.length <= 4 ? tool.name : tool.name.slice(0, 3)}
+                    </div>
+                  )}
                 </div>
                 <span className="text-xs text-gray-500 group-hover:text-gray-800 font-medium transition-colors">{tool.name}</span>
               </button>
@@ -538,33 +614,10 @@ export default function HomePage() {
       {/* Tool Modal */}
       {activeTool && <ToolModal tool={activeTool} onClose={() => setActiveTool(null)} />}
 
-      {/* 8. TESTIMONIALS */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Kata Mereka</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-900">Testimoni Alumni</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="bg-gray-50 border border-gray-100 rounded-2xl p-6 flex flex-col gap-4">
-                <div className="flex gap-0.5 text-[#F0A500] text-lg">{'★'.repeat(t.rating)}</div>
-                <p className="text-gray-700 text-sm leading-relaxed flex-1">"{t.comment}"</p>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm">{t.name}</p>
-                  <p className="text-gray-400 text-xs">{t.role}</p>
-                  <p className="text-[#2568B5] text-xs mt-0.5">{t.program}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 9. CTA KERJA SAMA */}
-      <section className="py-20 bg-gradient-to-br from-[#0C1A45] via-[#162660] to-[#1e4fa0]">
+      <section className="py-20 bg-gradient-to-br from-[#054E7A] via-[#0B7AB5] to-[#1090C8]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#4FA8D8] text-sm font-semibold uppercase tracking-widest mb-4">Kolaborasi Institusional</p>
+          <p className="text-[#47C2EA] text-sm font-semibold uppercase tracking-widest mb-4">Kolaborasi Institusional</p>
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
             Ingin Berkolaborasi dengan Aji Institute?
           </h2>
@@ -572,14 +625,14 @@ export default function HomePage() {
             Kami terbuka untuk kemitraan dengan universitas, lembaga riset, dan perusahaan dalam penyelenggaraan pelatihan dan pengembangan kompetensi.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/kerja-sama"
-              className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-black px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
+            <Link href="/in-house-training"
+              className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
               Ajukan Kerja Sama <ArrowRight className="w-5 h-5" />
             </Link>
             <a href={WA_LINK('Halo Aji Institute, saya tertarik untuk berkolaborasi')}
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl text-lg transition-all hover:bg-white/10">
-              💬 Diskusi via WhatsApp
+              Diskusi via WhatsApp
             </a>
           </div>
         </div>

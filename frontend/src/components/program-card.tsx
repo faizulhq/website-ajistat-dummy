@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { Clock, Calendar, ArrowRight, Users } from 'lucide-react';
@@ -8,9 +8,9 @@ import type { Program } from '@/lib/types';
 interface Props { program: Program; }
 
 const TYPE_CONFIG = {
-  'bootcamp': { label: 'Bootcamp Intensif', color: 'bg-[#162660] text-white', icon: '🎓' },
-  'short-class': { label: 'Short Class', color: 'bg-[#F0A500] text-[#0C1A45]', icon: '⚡' },
-  'private-class': { label: 'Private Class', color: 'bg-purple-700 text-white', icon: '🎯' },
+  'bootcamp': { label: 'Bootcamp Intensif', color: 'bg-[#0B7AB5] text-white' },
+  'short-class': { label: 'Short Class', color: 'bg-[#F0A500] text-[#054E7A]' },
+  'private-class': { label: 'Private Class', color: 'bg-purple-700 text-white' },
 };
 
 export function ProgramCard({ program }: Props) {
@@ -27,7 +27,7 @@ export function ProgramCard({ program }: Props) {
       {/* Color Banner */}
       <div
         className="relative h-36 flex items-end justify-between px-5 pb-4"
-        style={{ background: `linear-gradient(135deg, ${program.thumbnail_color} 0%, ${program.thumbnail_color}bb 60%, #1e4fa0 100%)` }}
+        style={{ background: `linear-gradient(135deg, ${program.thumbnail_color} 0%, ${program.thumbnail_color}bb 60%, #1090C8 100%)` }}
       >
         {/* Decorative AJI watermark */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -36,7 +36,7 @@ export function ProgramCard({ program }: Props) {
 
         <div className="relative flex items-center gap-2">
           <span className={cn('text-xs font-bold px-2.5 py-1 rounded-full', typeConf.color)}>
-            {typeConf.icon} {typeConf.label}
+            {typeConf.label}
           </span>
         </div>
 
@@ -52,14 +52,14 @@ export function ProgramCard({ program }: Props) {
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5 mb-3">
           {program.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="text-xs bg-blue-50 text-[#2568B5] font-medium px-2 py-0.5 rounded-full border border-blue-100">
+            <span key={tag} className="text-xs bg-blue-50 text-[#1AAEE0] font-medium px-2 py-0.5 rounded-full border border-blue-100">
               {tag}
             </span>
           ))}
         </div>
 
         {/* Title */}
-        <h3 className="font-semibold text-gray-900 text-base leading-snug mb-2 line-clamp-2 group-hover:text-[#2568B5] transition-colors">
+        <h3 className="font-semibold text-gray-900 text-base leading-snug mb-2 line-clamp-2 group-hover:text-[#1AAEE0] transition-colors">
           {program.title}
         </h3>
 
@@ -74,19 +74,19 @@ export function ProgramCard({ program }: Props) {
         <div className="flex flex-col gap-1.5 mb-4 mt-auto">
           {program.duration && (
             <div className="flex items-center gap-2 text-xs text-gray-500">
-              <Clock className="w-3.5 h-3.5 text-[#2568B5] shrink-0" />
+              <Clock className="w-3.5 h-3.5 text-[#1AAEE0] shrink-0" />
               <span>{program.duration}</span>
             </div>
           )}
           {program.schedule && (
             <div className="flex items-center gap-2 text-xs text-gray-500">
-              <Calendar className="w-3.5 h-3.5 text-[#2568B5] shrink-0" />
+              <Calendar className="w-3.5 h-3.5 text-[#1AAEE0] shrink-0" />
               <span>{program.schedule}</span>
             </div>
           )}
           {program.facilitator_name && (
             <div className="flex items-center gap-2 text-xs text-gray-500">
-              <Users className="w-3.5 h-3.5 text-[#2568B5] shrink-0" />
+              <Users className="w-3.5 h-3.5 text-[#1AAEE0] shrink-0" />
               <span>{program.facilitator_name}</span>
             </div>
           )}
@@ -99,13 +99,13 @@ export function ProgramCard({ program }: Props) {
               <p className="text-xs text-gray-400 line-through">{formatPrice(program.original_price)}</p>
             )}
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-[#162660]">{formatPrice(program.price)}</span>
+              <span className="text-lg font-bold text-[#0B7AB5]">{formatPrice(program.price)}</span>
               {discount && (
                 <span className="bg-red-50 text-red-500 text-[10px] font-bold px-1.5 py-0.5 rounded">-{discount}%</span>
               )}
             </div>
           </div>
-          <div className="flex items-center gap-1 text-sm font-semibold text-[#2568B5] group-hover:gap-2 transition-all">
+          <div className="flex items-center gap-1 text-sm font-semibold text-[#1AAEE0] group-hover:gap-2 transition-all">
             Lihat <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>

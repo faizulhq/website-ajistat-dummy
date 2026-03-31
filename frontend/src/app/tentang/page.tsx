@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle, Target, Eye, Heart, MessageCircle } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
@@ -27,14 +27,14 @@ export default function TentangPage() {
   return (
     <>
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0C1A45] to-[#1e4fa0] py-20">
+      <div className="bg-gradient-to-br from-[#054E7A] to-[#1090C8] py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="flex justify-center gap-2 text-white/40 text-sm mb-8">
             <Link href="/" className="hover:text-white transition-colors">Beranda</Link>
             <span>/</span>
             <span className="text-white/80">Tentang Kami</span>
           </nav>
-          <span className="inline-block bg-[#4FA8D8]/20 border border-[#4FA8D8]/30 text-[#4FA8D8] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-block bg-[#47C2EA]/20 border border-[#47C2EA]/30 text-[#47C2EA] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
             🏛️ PT. Amanah Jana Insani
           </span>
           <h1 className="font-[family-name:var(--font-poppins)] text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -50,7 +50,7 @@ export default function TentangPage() {
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div>
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Profil Perusahaan</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Profil Perusahaan</p>
             <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-gray-900 mb-5">
               Mitra Terpercaya untuk Riset dan Kompetensi Anda
             </h2>
@@ -90,8 +90,8 @@ export default function TentangPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
-              <div className="w-12 h-12 bg-[#2568B5]/10 rounded-xl flex items-center justify-center mb-5">
-                <Eye className="w-6 h-6 text-[#2568B5]" />
+              <div className="w-12 h-12 bg-[#1AAEE0]/10 rounded-xl flex items-center justify-center mb-5">
+                <Eye className="w-6 h-6 text-[#1AAEE0]" />
               </div>
               <h3 className="font-bold text-gray-900 text-xl mb-4">Visi</h3>
               <p className="text-gray-600 leading-relaxed">
@@ -122,10 +122,10 @@ export default function TentangPage() {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-[#0C1A45]">
+      <section className="py-20 bg-[#054E7A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-[#4FA8D8] text-sm font-semibold uppercase tracking-widest mb-3">Nilai Inti</p>
+            <p className="text-[#47C2EA] text-sm font-semibold uppercase tracking-widest mb-3">Nilai Inti</p>
             <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-white">
               AJI — Tiga Pilar yang Menopang Kami
             </h2>
@@ -152,17 +152,17 @@ export default function TentangPage() {
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Tim Kami</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Tim Kami</p>
             <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-gray-900">Fasilitator Berpengalaman</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TEAM.map((member) => (
               <div key={member.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#162660] to-[#2568B5] flex items-center justify-center text-white font-bold text-xl mb-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0B7AB5] to-[#1AAEE0] flex items-center justify-center text-white font-bold text-xl mb-5">
                   {member.initials}
                 </div>
                 <h3 className="font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-[#2568B5] text-sm font-medium mb-3">{member.role}</p>
+                <p className="text-[#1AAEE0] text-sm font-medium mb-3">{member.role}</p>
                 <p className="text-gray-500 text-sm leading-relaxed">{member.desc}</p>
               </div>
             ))}
@@ -174,7 +174,7 @@ export default function TentangPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-[#2568B5] text-sm font-semibold uppercase tracking-widest mb-3">Perjalanan Kami</p>
+            <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Perjalanan Kami</p>
             <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-gray-900">Milestone Aji Institute</h2>
           </div>
           <div className="relative">
@@ -182,7 +182,7 @@ export default function TentangPage() {
             <div className="space-y-8">
               {MILESTONES.map((m) => (
                 <div key={m.year} className="flex gap-6 relative">
-                  <div className="w-12 h-12 bg-[#162660] rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0 z-10">
+                  <div className="w-12 h-12 bg-[#0B7AB5] rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0 z-10">
                     {m.year}
                   </div>
                   <div className="pt-2">
@@ -197,7 +197,7 @@ export default function TentangPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#162660]">
+      <section className="py-16 bg-[#0B7AB5]">
         <div className="max-w-3xl mx-auto text-center px-4">
           <h2 className="font-[family-name:var(--font-poppins)] text-2xl font-bold text-white mb-4">
             Siap Bergabung dengan Komunitas Aji Institute?
@@ -205,7 +205,7 @@ export default function TentangPage() {
           <p className="text-white/60 mb-8">Hubungi tim kami untuk informasi program yang paling sesuai dengan kebutuhan Anda.</p>
           <a href={WA_LINK('Halo Aji Institute, saya ingin tahu lebih lanjut tentang program yang tersedia')}
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-8 py-3.5 rounded-xl transition-colors">
+            className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-8 py-3.5 rounded-xl transition-colors">
             <MessageCircle className="w-4 h-4" /> Hubungi Kami Sekarang
           </a>
         </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -40,10 +40,10 @@ export default function ShortClassPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <div className="bg-[#0C1A45] relative overflow-hidden">
+      <div className="bg-[#054E7A] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2568B5] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1AAEE0] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -128,7 +128,7 @@ export default function ShortClassPage() {
                   onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                     activeTag === tag
-                      ? 'bg-[#F0A500] text-[#0C1A45] border-[#F0A500]'
+                      ? 'bg-[#F0A500] text-[#054E7A] border-[#F0A500]'
                       : 'border-gray-200 text-gray-600 hover:border-[#F0A500] hover:text-[#C8870A]'
                   }`}
                 >
@@ -173,12 +173,12 @@ export default function ShortClassPage() {
       {/* ─── CTA ─── */}
       <section className="bg-[#F0A500] py-12">
         <div className="max-w-3xl mx-auto text-center px-4">
-          <h2 className="text-2xl font-bold text-[#0C1A45] mb-3">Ada topik yang belum tersedia?</h2>
-          <p className="text-[#0C1A45]/70 mb-6">Kami menerima permintaan topik khusus. Hubungi tim Aji Institute dan kami akan merancangkan kelas sesuai kebutuhan Anda.</p>
+          <h2 className="text-2xl font-bold text-[#054E7A] mb-3">Ada topik yang belum tersedia?</h2>
+          <p className="text-[#054E7A]/70 mb-6">Kami menerima permintaan topik khusus. Hubungi tim Aji Institute dan kami akan merancangkan kelas sesuai kebutuhan Anda.</p>
           <a
             href="https://wa.me/6285892605592?text=Halo%20Admin,%20saya%20ingin%20request%20topik%20Short%20Class%20baru"
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#0C1A45] hover:bg-[#162660] text-white font-bold px-8 py-3.5 rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 bg-[#054E7A] hover:bg-[#0B7AB5] text-white font-bold px-8 py-3.5 rounded-xl transition-colors"
           >
             💬 Request Topik via WhatsApp
           </a>

@@ -1,4 +1,4 @@
-// Konstanta global untuk seluruh aplikasi Aji Institute
+﻿// Konstanta global untuk seluruh aplikasi Aji Institute
 export const BRAND = {
   name: 'Aji Institute',
   legalName: 'PT. Amanah Jana Insani',
@@ -20,8 +20,8 @@ export const PROGRAMS = [
   {
     code: 'AjiStat',
     name: 'AjiStat',
-    icon: '📊',
-    color: '#162660',
+    icon: 'STAT',
+    color: '#0B7AB5',
     desc: 'Statistik, metodologi penelitian, dan analisis data',
     topics: ['SPSS', 'SmartPLS', 'NVivo', 'R', 'Python', 'AMOS', 'EViews', 'STATA'],
     isFeatured: true,
@@ -32,8 +32,8 @@ export const PROGRAMS = [
   {
     code: 'AjiBiz',
     name: 'AjiBiz',
-    icon: '💼',
-    color: '#2568B5',
+    icon: 'BIZ',
+    color: '#1AAEE0',
     desc: 'Bisnis, manajemen, dan pengembangan usaha',
     topics: ['Business Planning', 'Entrepreneurship', 'Manajemen', 'Strategi Usaha', 'UMKM'],
     isFeatured: false,
@@ -44,7 +44,7 @@ export const PROGRAMS = [
   {
     code: 'AjiPR',
     name: 'AjiPR',
-    icon: '🎤',
+    icon: 'PR',
     color: '#7C3AED',
     desc: 'Public relation, komunikasi, dan personal branding',
     topics: ['Public Relation', 'Media Relation', 'Personal Branding', 'Presentasi', 'Komunikasi Publik'],
@@ -56,7 +56,7 @@ export const PROGRAMS = [
   {
     code: 'AjiDigi',
     name: 'AjiDigi',
-    icon: '💻',
+    icon: 'DIGI',
     color: '#059669',
     desc: 'Digital marketing dan keterampilan digital',
     topics: ['Digital Marketing', 'Social Media Strategy', 'Content Planning', 'Branding Digital', 'Tools Produktivitas'],
@@ -68,7 +68,7 @@ export const PROGRAMS = [
   {
     code: 'AjiLanguage',
     name: 'AjiLanguage',
-    icon: '🌐',
+    icon: 'LANG',
     color: '#B45309',
     desc: 'Bahasa akademik, profesional, dan komunikasi global',
     topics: ['Bahasa Inggris', 'Speaking Practice', 'Workplace Communication', 'Bahasa Akademik'],
@@ -82,65 +82,76 @@ export const PROGRAMS = [
 export const TOOLS = [
   {
     name: 'SPSS',
-    color: '#003087',
+    color: '#BE1425',
+    logo: '/logos/spss.png',
     desc: 'Statistical Package for the Social Sciences. Software analisis statistik paling populer untuk riset akademik.',
     useFor: 'Uji asumsi, regresi, ANOVA, uji beda, korelasi, crosstab.',
   },
   {
     name: 'SmartPLS',
     color: '#E8A020',
+    logo: '/logos/pls.jpg',
     desc: 'Software Structural Equation Modeling berbasis Partial Least Squares. Ideal untuk penelitian bisnis dan sosial.',
     useFor: 'SEM-PLS, CFA, path analysis, mediasi, moderasi.',
   },
   {
     name: 'AMOS',
-    color: '#0066CC',
+    color: '#CC2222',
+    logo: '/logos/amos.png',
     desc: 'Analysis of Moment Structures. Software SEM berbasis covariance untuk model pengukuran yang kompleks.',
     useFor: 'SEM-CB, CFA, path diagram, goodness of fit.',
   },
   {
     name: 'R / RStudio',
     color: '#2266B8',
+    logo: '/logos/r-studio.png',
     desc: 'Bahasa pemrograman statistik open-source yang sangat powerful dan fleksibel.',
     useFor: 'Analisis data, visualisasi, machine learning, big data.',
   },
   {
     name: 'Python',
     color: '#3776AB',
+    logo: '/logos/python.png',
     desc: 'Bahasa pemrograman serbaguna yang kuat untuk data science dan analisis statistik.',
     useFor: 'Data wrangling, visualisasi, ML, NLP, otomasi analisis.',
   },
   {
     name: 'NVivo',
     color: '#8B0000',
+    logo: '/logos/nvivi.png',
     desc: 'Software analisis data kualitatif (QDA) terkemuka di dunia.',
     useFor: 'Coding tema, analisis wawancara, FGD, konten media.',
   },
   {
     name: 'EViews',
     color: '#005A9C',
+    logo: '/logos/eviews.png',
     desc: 'Software ekonometri untuk analisis data time series dan cross-section.',
     useFor: 'Regresi panel data, ARIMA, VAR, VECM, uji stasioneritas.',
   },
   {
     name: 'STATA',
     color: '#1A5276',
+    logo: '/logos/stata.png',
     desc: 'Software statistik profesional yang banyak digunakan di bidang ekonomi dan kesehatan.',
     useFor: 'Regresi, panel data, survival analysis, survei data.',
   },
   {
     name: 'LISREL',
     color: '#444444',
+    logo: '/logos/lisrel.jpg',
     desc: 'Pioneer software SEM berbasis covariance yang banyak dipakai di riset psikologi dan sosial.',
     useFor: 'CFA, SEM-CB, path analysis, multitrait-multimethod.',
   },
   {
     name: 'Excel',
     color: '#217346',
+    logo: '/logos/excel-logo.png',
     desc: 'Microsoft Excel — spreadsheet paling banyak digunakan untuk analisis data dasar dan visualisasi.',
     useFor: 'Tabulasi data, pivot table, chart, statistik deskriptif.',
   },
 ]
+
 
 export const WA_LINK = (message?: string) =>
   `https://wa.me/${CONTACT.whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ''}`

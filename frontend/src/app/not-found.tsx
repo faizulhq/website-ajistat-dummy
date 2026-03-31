@@ -1,8 +1,8 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#0C1A45] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#054E7A] flex items-center justify-center px-4">
       <div className="text-center max-w-lg">
         {/* Logo-like badge */}
         <div className="w-24 h-24 bg-white/10 border border-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8">
@@ -19,7 +19,7 @@ export default function NotFound() {
 
         <div className="flex flex-wrap justify-center gap-3">
           <Link href="/"
-            className="bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-6 py-3 rounded-xl transition-colors">
+            className="bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-6 py-3 rounded-xl transition-colors">
             🏠 Kembali ke Beranda
           </Link>
           <Link href="/bootcamp"
@@ -36,7 +36,7 @@ export default function NotFound() {
             { label: 'Tentang Kami', href: '/tentang' },
           ].map((link) => (
             <Link key={link.href} href={link.href}
-              className="text-white/40 hover:text-[#4FA8D8] transition-colors">
+              className="text-white/40 hover:text-[#47C2EA] transition-colors">
               {link.label}
             </Link>
           ))}

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { MessageCircle, CheckCircle, ArrowLeft } from 'lucide-react';
@@ -25,7 +25,7 @@ export function ComingSoonPage({ brand }: ComingSoonPageProps) {
     <>
       {/* Hero */}
       <div className="min-h-[70vh] flex items-center justify-center relative overflow-hidden"
-        style={{ background: `linear-gradient(135deg, #0C1A45 0%, #162660 60%, ${brand.color}33 100%)` }}>
+        style={{ background: `linear-gradient(135deg, #054E7A 0%, #0B7AB5 60%, ${brand.color}33 100%)` }}>
         <div className="absolute inset-0 opacity-[0.03]"
           style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
@@ -72,7 +72,7 @@ export function ComingSoonPage({ brand }: ComingSoonPageProps) {
                 />
                 <button
                   onClick={() => email && setSent(true)}
-                  className="bg-[#F0A500] hover:bg-[#C8870A] text-[#0C1A45] font-bold px-5 py-3 rounded-xl text-sm transition-colors"
+                  className="bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-bold px-5 py-3 rounded-xl text-sm transition-colors"
                 >
                   Daftar
                 </button>

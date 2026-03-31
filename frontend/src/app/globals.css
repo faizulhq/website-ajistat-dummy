@@ -1,10 +1,10 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
-  --primary: #162660;
-  --primary-mid: #2568B5;
-  --primary-light: #4FA8D8;
-  --navy: #0C1A45;
+  --primary: #0B7AB5;
+  --primary-mid: #1AAEE0;
+  --primary-light: #47C2EA;
+  --navy: #054E7A;
   --gold: #F0A500;
   --font-heading: var(--font-poppins);
   --font-sans: var(--font-inter);
