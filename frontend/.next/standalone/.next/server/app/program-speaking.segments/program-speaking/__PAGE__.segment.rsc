@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[89621,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js","/_next/static/chunks/0vyiyy6pa0~.w.js"],"ComingSoonPage"]
-3:I[97367,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"brand":{"icon":"🎤","name":"Public Speaking","label":"Komunikasi & Presentasi","description":"Kelas public speaking, presentasi profesional, dan pengembangan komunikasi efektif untuk mahasiswa, dosen, hingga eksekutif perusahaan.","color":"#DC2626","benefit":"Dari bicara di depan kelas hingga presentasi di hadapan ribuan orang — kami siapkan Anda.","topics":["Dasar-dasar Public Speaking & Kepercayaan Diri","Teknik Bernapas & Kontrol Suara","Storytelling untuk Presentasi","Desain Slide Presentasi yang Efektif","Presentasi Akademik (Seminar & Sidang)","MC & Moderator Profesional","Debat & Argumentasi","Body Language & Komunikasi Non-Verbal"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0vyiyy6pa0~.w.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Zr_-26cWRxApg7UFXrrc9"}
-5:null

@@ -15,11 +15,9 @@
 
 # next.js
 /.next/
-!/.next/standalone/
-!/.next/standalone/**
-!/.next/static/
-!/.next/static/**
 /out/
+*.zip
+*.tar.gz
 
 # production
 /build

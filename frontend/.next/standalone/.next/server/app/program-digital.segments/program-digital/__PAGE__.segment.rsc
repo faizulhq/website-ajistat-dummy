@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[89621,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js","/_next/static/chunks/0vyiyy6pa0~.w.js"],"ComingSoonPage"]
-3:I[97367,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"brand":{"icon":"💻","name":"Digital Skills","label":"Digital & Teknologi","description":"Kuasai keterampilan digital yang paling dicari di era ini — dari digital marketing, tools AI, hingga data visualization. Untuk mahasiswa dan profesional yang ingin relevan.","color":"#7C3AED","benefit":"Teknologi terus berkembang. Pastikan kompetensi digital Anda selalu up-to-date.","topics":["Digital Marketing & Social Media Strategy","Pembuatan Konten & Copywriting","Canva & Desain Grafis Digital","Google Analytics & Data Tracking","SEO & Content Marketing","AI Tools untuk Produktivitas","Membuat Website Dasar (No-Code)","Email Marketing & Automation"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0vyiyy6pa0~.w.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Zr_-26cWRxApg7UFXrrc9"}
-5:null

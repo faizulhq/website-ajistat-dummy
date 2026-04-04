@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[89621,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js","/_next/static/chunks/0vyiyy6pa0~.w.js"],"ComingSoonPage"]
-3:I[97367,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"brand":{"icon":"🌐","name":"Language Class","label":"Bahasa & Komunikasi Global","description":"Kelas bahasa Inggris akademik, bahasa Arab, dan komunikasi internasional yang dirancang untuk mahasiswa dan profesional Indonesia yang ingin bersaing di level global.","color":"#B45309","benefit":"Bahasa adalah pintu gerbang menuju peluang global yang tak terbatas.","topics":["English for Academic Purposes (EAP)","IELTS & TOEFL Preparation","English for Research & Publication","Bahasa Arab Percakapan Dasar","Business English","Academic Writing dalam Bahasa Inggris","Presentasi Ilmiah dalam Bahasa Inggris","Communication for International Conference"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0vyiyy6pa0~.w.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Zr_-26cWRxApg7UFXrrc9"}
-5:null

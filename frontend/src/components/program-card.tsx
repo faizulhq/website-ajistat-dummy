@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { Clock, Calendar, ArrowRight, Users } from 'lucide-react';
@@ -20,7 +20,7 @@ export function ProgramCard({ program }: Props) {
     : null;
 
   return (
-    <Link
+    <a
       href={`/program/${program.slug}`}
       className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
     >
@@ -110,6 +110,6 @@ export function ProgramCard({ program }: Props) {
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }

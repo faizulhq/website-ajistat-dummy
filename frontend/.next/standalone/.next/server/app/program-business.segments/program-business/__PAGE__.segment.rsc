@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[89621,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js","/_next/static/chunks/0vyiyy6pa0~.w.js"],"ComingSoonPage"]
-3:I[97367,["/_next/static/chunks/047riuy--ov-5.js","/_next/static/chunks/0d3shmwh5_nmn.js","/_next/static/chunks/0upvwy9k4am-w.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"brand":{"icon":"💼","name":"Business Class","label":"Bisnis & Manajemen","description":"Program pengembangan kompetensi bisnis, kewirausahaan, dan manajemen profesional. Dirancang untuk wirausahawan, manajer, dan profesional yang ingin naik level.","color":"#16A34A","benefit":"Program akan mencakup topik-topik bisnis terapan yang relevan dengan kebutuhan pasar.","topics":["Business Plan & Analisis Kelayakan Usaha","Manajemen Keuangan Bisnis dasar","Digital Marketing untuk UMKM","Leadership & Manajemen Tim","Negosiasi & Komunikasi Bisnis","Strategi Pemasaran & Branding","Analisis Kompetitor & Pasar","Manajemen Risiko Bisnis"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/0vyiyy6pa0~.w.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Zr_-26cWRxApg7UFXrrc9"}
-5:null

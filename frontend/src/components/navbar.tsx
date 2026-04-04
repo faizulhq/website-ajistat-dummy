@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -49,15 +49,6 @@ export function Navbar() {
 
   const isProgActive = PROGRAMS.some((p) => pathname.startsWith(p.href));
   const isLayananActive = LAYANAN_LINKS.some((l) => pathname === l.href);
-
-  const handleTentangClick = (e: React.MouseEvent) => {
-    if (pathname === '/') {
-      e.preventDefault();
-      const el = document.getElementById('tentang');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setMobileOpen(false);
-    }
-  };
 
   return (
     <nav className="fixed top-0 inset-x-0 z-50 bg-[#054E7A] border-b border-[#47C2EA]/20">
@@ -145,9 +136,9 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {/* Tentang — with scroll-if-on-home behavior */}
-            <Link href="/#tentang" onClick={handleTentangClick}
-              className="px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white/75 hover:text-white hover:bg-white/8">
+            <Link href="/tentang"
+              className={cn('px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                pathname === '/tentang' ? 'bg-white/10 text-white' : 'text-white/75 hover:text-white hover:bg-white/8')}>
               Tentang
             </Link>
           </div>
@@ -224,9 +215,9 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {/* Tentang mobile — scroll if on home */}
-            <Link href="/#tentang" onClick={handleTentangClick}
-              className="block px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/8 rounded-lg text-sm">
+            <Link href="/tentang" onClick={() => setMobileOpen(false)}
+              className={cn("block px-3 py-2.5 rounded-lg text-sm transition-colors", 
+                pathname === '/tentang' ? 'bg-white/10 text-white' : 'text-white/80 hover:text-white hover:bg-white/8')}>
               Tentang
             </Link>
 

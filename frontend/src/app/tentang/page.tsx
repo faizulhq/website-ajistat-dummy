@@ -18,9 +18,11 @@ const MILESTONES = [
 ];
 
 const TEAM = [
-  { name: 'Tim Fasilitator AjiStat', role: 'Konsultan Statistik & Peneliti', initials: 'AS', desc: 'Berpengalaman dalam analisis data SPSS, SmartPLS, AMOS, R, dan Python untuk riset akademik dan industri.' },
-  { name: 'Tim Fasilitator Business', role: 'Business & Management Trainer', initials: 'BZ', desc: 'Praktisi bisnis dan manajemen dengan latar belakang MBA dan pengalaman korporat lebih dari 10 tahun.' },
-  { name: 'Tim Fasilitator Speaking', role: 'Public Speaking Coach', initials: 'SP', desc: 'Trainer komunikasi bersertifikat dengan keahlian presentasi, negosiasi, dan kepemimpinan.' },
+  { name: 'Tim Fasilitator AjiStat', role: 'Konsultan Statistik & Peneliti', initials: 'ST', desc: 'Berpengalaman dalam analisis data SPSS, SmartPLS, AMOS, R, dan Python untuk riset akademik dan industri.' },
+  { name: 'Tim Fasilitator AjiBiz', role: 'Business & Management Trainer', initials: 'BZ', desc: 'Praktisi bisnis dan manajemen dengan latar belakang MBA dan pengalaman korporat lebih dari 10 tahun.' },
+  { name: 'Tim Fasilitator AjiPR', role: 'PR & Communication Expert', initials: 'PR', desc: 'Trainer komunikasi publik, media relation, dan personal branding bersertifikat dengan jam terbang tinggi.' },
+  { name: 'Tim Fasilitator AjiDigi', role: 'Digital Marketing & Developer', initials: 'DG', desc: 'Expert praktisi industri dalam pengembangan strategi digital, konten kreatif, dan teknologi komputasi modern.' },
+  { name: 'Tim Fasilitator AjiLanguage', role: 'English & Academic Instructor', initials: 'LG', desc: 'Pengajar bahasa Inggris setingkat ahli dengan spesialisasi persiapan tes akademik dan komunikasi bisnis global.' },
 ];
 
 export default function TentangPage() {
@@ -121,32 +123,7 @@ export default function TentangPage() {
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-20 bg-[#054E7A]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#47C2EA] text-sm font-semibold uppercase tracking-widest mb-3">Nilai Inti</p>
-            <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-white">
-              AJI — Tiga Pilar yang Menopang Kami
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { letter: 'A', name: 'Amanah', icon: Heart, color: 'from-blue-500 to-blue-700', desc: 'Menjunjung tinggi integritas, kejujuran, dan tanggung jawab dalam setiap layanan yang kami berikan. Kepercayaan Anda adalah amanah terbesar kami.' },
-              { letter: 'J', name: 'Jñāna', icon: Target, color: 'from-amber-500 to-amber-700', desc: 'Berpikir kritis, analitis, berbasis data, dan berorientasi pada kebenaran ilmiah. Setiap keputusan kami didukung oleh bukti dan pengetahuan yang sahih.' },
-              { letter: 'I', name: 'Insani', icon: Heart, color: 'from-green-500 to-green-700', desc: 'Mengutamakan pendekatan humanis, empatik, dan pengembangan manusia seutuhnya. Setiap peserta adalah individu unik yang berhak mendapat perhatian penuh.' },
-            ].map((val) => (
-              <div key={val.letter} className="bg-white/8 border border-white/15 rounded-2xl p-8">
-                <div className={`w-14 h-14 bg-gradient-to-br ${val.color} rounded-2xl flex items-center justify-center text-white font-black text-2xl mb-5`}>
-                  {val.letter}
-                </div>
-                <h3 className="text-white font-bold text-xl mb-3">{val.name}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">{val.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Tim */}
       <section className="py-20 bg-white">
@@ -155,9 +132,9 @@ export default function TentangPage() {
             <p className="text-[#1AAEE0] text-sm font-semibold uppercase tracking-widest mb-3">Tim Kami</p>
             <h2 className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-gray-900">Fasilitator Berpengalaman</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {TEAM.map((member) => (
-              <div key={member.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+              <div key={member.name} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-gray-50 rounded-2xl p-6 border border-gray-100">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0B7AB5] to-[#1AAEE0] flex items-center justify-center text-white font-bold text-xl mb-5">
                   {member.initials}
                 </div>

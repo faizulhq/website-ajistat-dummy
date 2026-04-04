@@ -41,3 +41,5 @@ frontend/build/
 cloudflared.exe
 temp/
 tmp/
+*.zip
+*.tar.gz

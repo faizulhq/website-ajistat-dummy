@@ -144,10 +144,10 @@ function HeroSlider() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href={slide.ctaHref}
+            <a href={slide.ctaHref}
               className="inline-flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105 shadow-2xl">
               {slide.cta}
-            </Link>
+            </a>
             <a href={slide.cta2Href} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/40 hover:border-white text-white font-semibold px-7 py-4 rounded-2xl text-base transition-all hover:bg-white/10 backdrop-blur">
               {slide.cta2}
@@ -363,10 +363,10 @@ export default function HomePage() {
                   ))}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Link href="/program-ajistat"
+                  <a href="/program-ajistat"
                     className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-7 py-3.5 rounded-xl transition-all hover:scale-105">
                     Lihat Semua Program AjiStat <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </a>
                   <a href={WA_LINK('Halo, saya ingin konsultasi program AjiStat')}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:bg-white/10">
@@ -535,9 +535,9 @@ export default function HomePage() {
               <h2 className="text-3xl font-black text-gray-900">Program Unggulan</h2>
               <p className="text-gray-500 text-sm mt-1">Satu dari setiap format — Bootcamp, Private Class, Short Class</p>
             </div>
-            <Link href="/bootcamp" className="hidden sm:flex items-center gap-1.5 text-[#1AAEE0] font-semibold hover:underline text-sm">
+            <a href="/bootcamp" className="hidden sm:flex items-center gap-1.5 text-[#1AAEE0] font-semibold hover:underline text-sm">
               Lihat Semua <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {isLoading
@@ -625,10 +625,10 @@ export default function HomePage() {
             Kami terbuka untuk kemitraan dengan universitas, lembaga riset, dan perusahaan dalam penyelenggaraan pelatihan dan pengembangan kompetensi.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/in-house-training"
+            <a href="/in-house-training"
               className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#054E7A] font-black px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
               Ajukan Kerja Sama <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
             <a href={WA_LINK('Halo Aji Institute, saya tertarik untuk berkolaborasi')}
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl text-lg transition-all hover:bg-white/10">
