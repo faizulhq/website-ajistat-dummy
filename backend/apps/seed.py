@@ -4,6 +4,7 @@ Run: python manage.py shell < apps/seed.py
 """
 import os, sys, django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+django.setup()
 
 from apps.programs.models import Program, Testimonial
 
