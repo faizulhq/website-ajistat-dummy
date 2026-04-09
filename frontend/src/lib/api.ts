@@ -11,7 +11,7 @@ function getApiBase(): string {
   // Ini menghindari bug "ERR_TOO_MANY_REDIRECTS" dari Vercel saat Next.js dan Django
   // bertabrakan soal masalah garis miring (trailing slashes).
   // Karena CORS sudah diset True di backend, request silang domain ini aman.
-  return 'https://api.aji-institute.com/api';
+  return 'http://localhost:8000/api';
 }
 
 const api = axios.create({

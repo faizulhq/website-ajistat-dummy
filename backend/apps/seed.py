@@ -41,7 +41,7 @@ programs = [
         "facilitator_title": "Dosen Statistika, Peneliti Kuantitatif",
         "facilitator_bio": "10+ tahun pengalaman mengajar statistika. Penulis 30+ artikel terindeks Scopus.",
         "facilitator_avatar": "AF",
-        "demo_video_url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "demo_video_url": "/videos/video-preview-pelatihan-spss.mp4",
         "thumbnail_color": "#162660",
         "duration": "4 Hari (8 Sesi Live Zoom)",
         "schedule": "10 April 2026",

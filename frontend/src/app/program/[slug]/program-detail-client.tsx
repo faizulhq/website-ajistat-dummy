@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -111,6 +111,26 @@ export default function ProgramDetailPage() {
                 <p className="text-white/70 text-base leading-relaxed mb-7">{program.description}</p>
               )}
 
+              {/* Video Mentah (Native HTML5) */}
+              {program.demo_video_url && (
+                <div className="mb-10 mt-2 bg-black/40 rounded-2xl overflow-hidden border border-white/15 shadow-2xl relative group">
+                  <div className="absolute top-0 left-0 w-full p-4 bg-linear-to-b from-black/60 to-transparent pointer-events-none z-10 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <p className="text-white/90 text-xs font-semibold tracking-wide uppercase">Cuplikan Program</p>
+                  </div>
+                  <video 
+                    src={program.demo_video_url} 
+                    controls 
+                    playsInline 
+                    className="w-full aspect-video object-cover"
+                    preload="metadata"
+                    controlsList="nodownload"
+                  >
+                    Mata pelatihan ini berisi video, tetapi browser Anda tidak mendukung pemutar video HTML5.
+                  </video>
+                </div>
+              )}
+
               {/* Meta */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {program.duration && (
@@ -204,42 +224,7 @@ export default function ProgramDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
 
-            {/* ─── Video Preview (HTML5 upload-ready) ─── */}
-            {program.demo_video_url ? (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-5">🎬 Video Preview Program</h2>
-                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-black aspect-video">
-                  <video
-                    src={program.demo_video_url}
-                    controls
-                    preload="metadata"
-                    poster=""
-                    className="w-full h-full object-cover"
-                  >
-                    Browser Anda tidak mendukung pemutaran video.
-                  </video>
-                </div>
-                <p className="text-gray-400 text-xs mt-2 text-center">
-                  👆 Tonton preview untuk gambaran lengkap program ini
-                </p>
-              </section>
-            ) : (
-              <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-5">🎬 Video Preview Program</h2>
-                <div className="rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 aspect-video flex flex-col items-center justify-center gap-3">
-                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-3xl">🎥</span>
-                  </div>
-                  <p className="text-gray-500 font-semibold">Video Preview Segera Tersedia</p>
-                  <p className="text-gray-400 text-sm">Video penjelasan program akan segera diupload</p>
-                  <a href={WA_LINK(`Halo, saya ingin tahu lebih lanjut tentang program: ${program.title}`)}
-                    target="_blank" rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-2 bg-[#1B3A8C] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#2348A8] transition-colors">
-                    <MessageCircle className="w-4 h-4" /> Tanya via WhatsApp
-                  </a>
-                </div>
-              </section>
-            )}
+            {/* ─── Video Preview (Removed, moved to Hero) ─── */}
 
             {/* ─── Jadwal Harian ─── */}
             <section>
