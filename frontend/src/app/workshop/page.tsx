@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -34,29 +34,43 @@ export default function WorkshopPage() {
 
   return (
     <>
-      {/* HERO */}
+      {/* ─── HERO (Bootcamp-consistent) ─── */}
       <div className="bg-[#162058] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#2348A8]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#4A72D4]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Aji Institute</span>
-            <h1 className="text-4xl sm:text-5xl font-black text-white mt-2 mb-4">Workshop Intensif</h1>
-            <p className="text-white/70 text-lg mb-6">
-              Hands-on workshop dari semua program Aji Institute — AjiStat, AjiBiz, AjiPR, dan lebih banyak lagi. Praktik langsung, langsung berdampak.
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2348A8] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <nav className="flex gap-2 text-white/40 text-sm mb-8">
+            <a href="/" className="hover:text-white transition-colors">Beranda</a>
+            <span>/</span>
+            <span className="text-white/80">Workshop</span>
+          </nav>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 bg-[#F0A500]/20 border border-[#F0A500]/40 text-[#F0A500] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+              AJI Learning — Workshop Intensif & Tematik
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              Workshop —<br />
+              <span className="text-[#F0A500]">Hands-on,</span>{' '}
+              <span className="text-white/80">Langsung Berdampak</span>
+            </h1>
+            <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-2xl">
+              Hands-on workshop dari semua program Aji Institute — AjiStat, AjiBiz, AjiPR, dan lebih banyak lagi.
+              Praktik langsung, langsung berdampak.
             </p>
-            {/* Stats */}
+            {/* Stats cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
               {STATS.map(({ icon: Icon, value, label }) => (
-                <div key={label} className="bg-white/8 border border-white/12 rounded-2xl p-4">
-                  <Icon className="w-5 h-5 text-[#4A72D4] mx-auto mb-2" />
+                <div key={label} className="bg-white/10 border border-white/15 rounded-xl p-4">
+                  <Icon className="w-5 h-5 text-[#F0A500] mb-2" />
                   <p className="text-2xl font-black text-white">{value}</p>
                   <p className="text-white/50 text-xs">{label}</p>
                 </div>
               ))}
             </div>
             {/* Search */}
-            <div className="relative max-w-md mx-auto">
+            <div className="relative max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
               <input
                 type="text" placeholder="Cari workshop..."
@@ -66,7 +80,20 @@ export default function WorkshopPage() {
             </div>
           </div>
         </div>
+        <div className="relative border-t border-white/10 bg-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-white/60">
+              {['200+ Peserta Workshop', '15+ Topik Tersedia', 'Bersertifikat Resmi AJI'].map((text) => (
+                <span key={text} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F0A500]" />
+                  {text}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+
 
       {/* Workshop dari semua program */}
       <section className="py-16 bg-gray-50">

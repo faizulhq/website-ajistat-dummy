@@ -2,18 +2,15 @@
 
 /**
  * Halaman Beranda — src/app/page.tsx
- *
- * AjiStatSpotlight & MaknaAji dihapus dari beranda:
- * - AjiStatSpotlight: Digabung ke halaman /program-ajistat
- * - MaknaAji: Dipindahkan ke halaman /tentang
  */
 
-import { HeroSlider }        from './_sections/HeroSlider';
-import { AjiMeaningStrip }   from './_sections/AjiMeaningStrip';
-import { StatsStrip }        from './_sections/StatsStrip';
+import { HeroSlider }            from './_sections/HeroSlider';
+import { AjiMeaningStrip }       from './_sections/AjiMeaningStrip';
+import { StatsStrip }            from './_sections/StatsStrip';
 import { ProgramGridSection, FeaturedPrograms } from './_sections/FeaturedPrograms';
 import { KonsultasiPreview, CtaKerjaSama }      from './_sections/KonsultasiPreview';
-import { ToolsGrid }         from './_sections/ToolsGrid';
+import { ToolsGrid }             from './_sections/ToolsGrid';
+import { VideoPreviewSection }   from './_sections/VideoPreviewSection';
 
 export default function HomePage() {
   return (
@@ -23,6 +20,7 @@ export default function HomePage() {
       <StatsStrip />
       <ProgramGridSection />
       <FeaturedPrograms />
+      <VideoPreviewSection />
       <KonsultasiPreview />
       <ToolsGrid />
       <CtaKerjaSama />

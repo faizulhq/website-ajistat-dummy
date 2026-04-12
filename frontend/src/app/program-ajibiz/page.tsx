@@ -2,13 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle } from 'lucide-react';
-import { WA_LINK } from '@/lib/config';
+import { ArrowRight, CheckCircle, X, TrendingUp, Users, Award, BookOpen } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { programsApi } from '@/lib/api';
-import { ProgramCard } from '@/components/program-card';
-import { ProgramCardSkeleton } from '@/components/program-card-skeleton';
 import { TagProgramModal } from '@/components/TagProgramModal';
+import { ProgramTabsByFormat } from '@/components/ProgramTabs';
+import { WA_LINK } from '@/lib/config';
 import type { Program } from '@/lib/types';
 
 const TOPICS = [
@@ -20,25 +19,43 @@ const TOPICS = [
 ];
 
 const KEUNGGULAN = [
-  'Kurikulum berbasis kebutuhan praktis dunia bisnis Indonesia',
-  'Dibimbing wirausahawan dan manajer berpengalaman',
-  'Studi kasus nyata dari UMKM dan perusahaan nasional',
-  'Sertifikat kelulusan untuk CV/portofolio profesional',
-  'Komunitas alumni & networking bisnis aktif',
-  'Follow-up konsultasi via WhatsApp setelah program',
+  { icon: TrendingUp, text: 'Kurikulum berbasis kebutuhan praktis dunia bisnis Indonesia', detail: 'Materi dirancang bersama praktisi bisnis aktif dan disesuaikan dengan kondisi pasar Indonesia terkini.', badge: 'Relevan & Up-to-date' },
+  { icon: Users, text: 'Dibimbing wirausahawan dan manajer berpengalaman', detail: 'Semua fasilitator adalah pelaku bisnis aktif dengan pengalaman nyata, bukan sekadar akademisi.', badge: 'Praktisi Nyata' },
+  { icon: BookOpen, text: 'Studi kasus nyata dari UMKM dan perusahaan nasional', detail: 'Setiap sesi menggunakan studi kasus nyata dari perusahaan Indonesia yang relevan dengan konteks Anda.', badge: 'Studi Kasus Real' },
+  { icon: Award, text: 'Sertifikat kelulusan untuk CV/portofolio profesional', detail: 'Sertifikat resmi Aji Institute yang dapat dilampirkan dalam CV, LinkedIn, atau portofolio profesional Anda.', badge: 'Sertifikat Resmi' },
+  { icon: Users, text: 'Komunitas alumni & networking bisnis aktif', detail: 'Bergabung dengan komunitas alumni AjiBiz yang aktif untuk networking, sharing, dan kolaborasi bisnis.', badge: 'Komunitas Aktif' },
+  { icon: CheckCircle, text: 'Follow-up konsultasi via WhatsApp setelah program', detail: 'Akses dukungan konsultasi pasca kelas melalui grup WhatsApp yang dimoderasi oleh fasilitator.', badge: 'Support Pasca Kelas' },
 ];
+
+function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-7 z-10" onClick={(e) => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100"><X className="w-5 h-5" /></button>
+        <div className="w-12 h-12 rounded-2xl bg-[#EBF4FF] flex items-center justify-center mb-4"><item.icon className="w-6 h-6 text-[#2348A8]" /></div>
+        <span className="text-xs font-bold text-[#2348A8] bg-[#EBF4FF] px-3 py-1 rounded-full">{item.badge}</span>
+        <h3 className="text-xl font-black text-gray-900 mt-3 mb-3">{item.text}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed mb-6">{item.detail}</p>
+        <a href={WA_LINK('Halo, saya ingin tanya lebih lanjut tentang program AjiBiz')} target="_blank" rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 bg-[#1B3A8C] hover:bg-[#2348A8] text-white font-bold py-3 rounded-xl transition-colors text-sm">
+          💬 Tanya via WhatsApp
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function AjiBizPage() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['programs', 'ajibiz-all'], // changed key so we don't conflict with filtered cache if any, though it fetches all
+  const { data } = useQuery({
+    queryKey: ['programs', 'ajibiz-all'],
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const programs: Program[] = (data?.data ?? []).filter((p: Program) =>
-    p.tags.some((t) => t.toLowerCase() === 'ajibiz')
-  );
+  const ajiBizFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajibiz');
 
   return (
     <>
@@ -70,36 +87,24 @@ export default function AjiBizPage() {
                 className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105">
                 Daftar via WhatsApp <ArrowRight className="w-5 h-5" />
               </a>
-              
+              <Link href="/konsultasi"
+                className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl text-base transition-all hover:bg-white/10">
+                Konsultasi Gratis
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
-      {/* PROGRAM TERSEDIA */}
-      <section className="py-20 bg-white min-h-[50vh]">
+      {/* PROGRAM TABS — by Format */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Tersedia Saat Ini</p>
-            <h2 className="text-3xl font-black text-gray-900 border-b-2 border-dashed border-gray-200 pb-6 inline-block">Program AjiBiz Tersedia</h2>
+          <div className="mb-10">
+            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-2">Kelas & Program Tersedia</p>
+            <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiBiz</h2>
+            <p className="text-gray-500 text-sm mt-2">Klik tab untuk melihat kelas yang tersedia per format. Klik kartu untuk mendaftar.</p>
           </div>
-          
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(3)].map((_, i) => <ProgramCardSkeleton key={i} />)}
-            </div>
-          ) : programs.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {programs.map((program) => (
-                <ProgramCard key={program.id} program={program} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16 bg-gray-50 rounded-3xl border border-gray-100">
-              <p className="font-bold text-gray-800 text-lg mb-2">Program Segera Hadir!</p>
-              <p className="text-gray-500 max-w-sm mx-auto text-sm">Tim AjiBiz sedang menyiapkan kelas terbaik untuk Anda. Silakan sampaikan minat Anda pada layanan Konsultasi.</p>
-            </div>
-          )}
+          <ProgramTabsByFormat programFilter={ajiBizFilter} queryKey="programs-ajibiz-tabs" />
         </div>
       </section>
 
@@ -123,16 +128,22 @@ export default function AjiBizPage() {
 
       {/* KEUNGGULAN */}
       <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-gray-900">Kenapa AjiBiz?</h2>
+            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Kenapa AjiBiz?</p>
+            <h2 className="text-3xl font-black text-gray-900">Keunggulan Program</h2>
+            <p className="text-gray-500 text-sm mt-2">Klik kartu untuk detail informasi</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {KEUNGGULAN.map((k, i) => (
-              <div key={i} className="flex items-start gap-3 bg-gray-50 rounded-2xl border border-gray-100 p-5">
-                <CheckCircle className="w-5 h-5 text-[#2348A8] mt-0.5 shrink-0" />
-                <p className="text-gray-700 text-sm">{k}</p>
-              </div>
+              <button key={i} onClick={() => setActiveKeunggulan(k)}
+                className="group flex items-start gap-3 bg-white hover:bg-[#162058] rounded-2xl border border-gray-100 hover:border-[#162058] p-5 text-left transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer">
+                <k.icon className="w-5 h-5 text-[#2348A8] group-hover:text-[#F0A500] mt-0.5 shrink-0 transition-colors" />
+                <div>
+                  <p className="text-gray-700 group-hover:text-white text-sm transition-colors">{k.text}</p>
+                  <p className="text-[#2348A8] group-hover:text-white/60 text-xs mt-1 opacity-0 group-hover:opacity-100 transition-all">Klik untuk selengkapnya →</p>
+                </div>
+              </button>
             ))}
           </div>
         </div>
@@ -151,11 +162,8 @@ export default function AjiBizPage() {
         </div>
       </section>
 
-      <TagProgramModal
-        tag={activeTag}
-        programs={data?.data ?? []}
-        onClose={() => setActiveTag(null)}
-      />
+      <TagProgramModal tag={activeTag} programs={data?.data ?? []} onClose={() => setActiveTag(null)} />
+      {activeKeunggulan && <KeunggulanModal item={activeKeunggulan} onClose={() => setActiveKeunggulan(null)} />}
     </>
   );
 }

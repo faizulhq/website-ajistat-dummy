@@ -9,11 +9,12 @@ export const metadata: Metadata = {
 };
 
 const MILESTONES = [
-  { year: '2015', title: 'Berdiri', desc: 'Aji Institute lahir sebagai konsultan statistik dan riset personal.' },
+  { year: '2015', title: 'Berdiri', desc: 'Aji Institute lahir sebagai konsultan statistik dan riset personal untuk membantu mahasiswa dan peneliti.' },
   { year: '2022', title: 'Ekspansi Digital', desc: 'Kelas mulai diselenggarakan sepenuhnya via Zoom & online, menjangkau seluruh Indonesia.' },
-  { year: '2023', title: '10.000+ Alumni', desc: 'Mencapai 10.000+ alumni dari berbagai universitas dan instansi di seluruh Indonesia.' },
-  { year: '2024', title: 'Multi-Program', desc: 'Ekspansi ke 5 program: AjiStat, AjiBiz, AjiPR, AjiDigi, AjiLangua.' },
-  { year: '2025', title: 'Rebranding', desc: 'Resmi menjadi Aji Institute dengan identitas korporat yang kuat di bawah PT. Amanah Jñāna Insani.' },
+  { year: '2023', title: 'Pertumbuhan Pesat', desc: 'Jumlah klien dan peserta pelatihan meningkat signifikan. Program AjiStat menjadi layanan konsultasi statistik yang paling diminati.' },
+  { year: '2025', title: '5.000+ Klien Terbantu', desc: 'Ribuan klien dari berbagai universitas dan institusi berhasil terbantu melalui layanan konsultasi olah data, skripsi, tesis, dan riset institusional tim AjiStat.' },
+  { year: '2025', title: 'Rebranding & Ekosistem Baru', desc: 'Akhir 2025 — logo, identitas visual, dan website baru diluncurkan. Multi-divisi (AjiStat, AjiBiz, AjiPR, AjiDigi, AjiLangua) mulai dioperasikan secara penuh.' },
+  { year: '2026', title: 'Resmi PT. Amanah Jñāna Insani', desc: 'Aji Institute resmi beroperasi di bawah PT. Amanah Jñāna Insani dengan struktur korporat, multi-program terintegrasi, dan ekosistem layanan profesional yang lengkap.' },
 ];
 
 const TEAM = [
@@ -94,10 +95,10 @@ export default function TentangPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { value: '10.000+', label: 'Alumni Terlatih', color: 'bg-blue-50 border-blue-100' },
-              { value: '30+', label: 'Layanan Aktif', color: 'bg-amber-50 border-amber-100' },
-              { value: '10+', label: 'Fasilitator Expert', color: 'bg-green-50 border-green-100' },
-              { value: '5', label: 'Program Unggulan', color: 'bg-purple-50 border-purple-100' },
+              { value: '10.000+', label: '🤝 Klien Terbantu dari Konsultasi', color: 'bg-blue-50 border-blue-100' },
+              { value: '30+', label: '📚 Layanan Aktif', color: 'bg-amber-50 border-amber-100' },
+              { value: '10+', label: '🎓 Fasilitator Expert', color: 'bg-green-50 border-green-100' },
+              { value: '5', label: '🏛️ Program Unggulan', color: 'bg-purple-50 border-purple-100' },
             ].map((stat) => (
               <div key={stat.label} className={`${stat.color} border rounded-2xl p-6 text-center`}>
                 <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { CheckCircle, MessageSquare, BarChart3, Database, FileText, PieChart, Users, Building, Laptop, Target } from 'lucide-react';
@@ -42,37 +42,47 @@ Detail / Topik Riset: ${form.desc}`;
 
   return (
     <>
-      <div className="bg-gradient-to-br from-[#162058] via-[#1B3A8C] to-[#2348A8] border-b-4 border-[#F0A500] py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span className="text-[#F0A500] text-sm font-bold uppercase tracking-widest mb-3 block">Layanan AjiStat by Aji Institute</span>
-          <h1 className="text-4xl sm:text-5xl font-black text-white mb-6">
-            Konsultasi Statistik & Olah Data Profesional
-          </h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-lg leading-relaxed">
-            AjiStat adalah mitra profesional Anda yang membantu memperoleh hasil analisis yang akurat, sistematis, terpercaya, dan mudah dipahami, baik untuk kebutuhan akademik, institusi, maupun bisnis.
-          </p>
+      {/* ─── HERO (Bootcamp-consistent) ─── */}
+      <div className="bg-[#162058] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2348A8] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <nav className="flex gap-2 text-white/40 text-sm mb-8">
+            <a href="/" className="hover:text-white transition-colors">Beranda</a>
+            <span>/</span>
+            <span className="text-white/80">Konsultasi</span>
+          </nav>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 bg-[#F0A500]/20 border border-[#F0A500]/40 text-[#F0A500] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+              Layanan AjiStat by Aji Institute
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              Konsultasi —<br />
+              <span className="text-[#F0A500]">Statistik &amp; Olah Data</span>{' '}
+              <span className="text-white/80">Profesional</span>
+            </h1>
+            <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
+              AjiStat adalah mitra profesional Anda yang membantu memperoleh hasil analisis yang akurat,
+              sistematis, terpercaya, dan mudah dipahami — untuk kebutuhan akademik, institusi, maupun bisnis.
+            </p>
+          </div>
+        </div>
+        <div className="relative border-t border-white/10 bg-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-white/60">
+              {['5.000+ Klien Terbantu', 'Respons dalam 24 Jam', '100% Kerahasiaan Data'].map((text) => (
+                <span key={text} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F0A500]" />
+                  {text}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* KEUNGGULAN SECTION */}
-      <section className="py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-gray-100">
-            {[
-              { label: 'Terpercaya', desc: 'Profesional & Berpengalaman' },
-              { label: 'Akurat', desc: 'Sesuai Kaidah Metodologi' },
-              { label: 'Sistematis', desc: 'Mudah Dipahami' },
-              { label: 'Rahasia', desc: 'Keamanan Data Transparan' }
-            ].map((k, i) => (
-              <div key={i} className="px-4">
-                <h4 className="font-bold text-[#2348A8] text-lg">{k.label}</h4>
-                <p className="text-gray-500 text-sm mt-1">{k.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* LAYANAN DETAIL */}
       <section className="py-20 bg-gray-50">

@@ -84,12 +84,10 @@ export function ProgramCard({ program }: Props) {
               <span>{program.schedule}</span>
             </div>
           )}
-          {program.facilitator_name && (
-            <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div className="flex items-center gap-2 text-xs text-gray-500">
               <Users className="w-3.5 h-3.5 text-[#2348A8] shrink-0" />
-              <span>{program.facilitator_name}</span>
+              <span>Aji Pamoso, S.Si, M.T</span>
             </div>
-          )}
         </div>
 
         {/* Price + CTA */}

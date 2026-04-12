@@ -1,164 +1,147 @@
 'use client';
 
-import { CheckCircle, Clock, MessageSquare, Zap } from 'lucide-react';
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { programsApi } from '@/lib/api';
-import { ProgramCard } from '@/components/program-card';
-import { ProgramCardSkeleton } from '@/components/program-card-skeleton';
-import type { Program } from '@/lib/types';
+import { Calendar, MessageSquare, Star, X } from 'lucide-react';
+import { ProgramTabsByProgram } from '@/components/ProgramTabs';
+import { WA_LINK } from '@/lib/config';
 
-const WA_LINK_PRIVATE = `https://wa.me/6285892605592?text=${encodeURIComponent('Halo Kak, saya ingin berkonsultasi mengenai layanan Private Class.')}`;
-
-const benefits = [
-  'Jadwal 100% fleksibel sesuai waktu Anda',
-  'Kurikulum disesuaikan dengan kebutuhan spesifik',
-  '1-on-1 langsung dengan instruktur berpengalaman',
-  'Rekaman setiap sesi untuk review ulang kapan saja',
-  'Konsultasi tambahan via chat selama program berjalan',
-  'Sertifikat resmi AJI setelah menyelesaikan program',
+const KEUNGGULAN = [
+  {
+    icon: Calendar,
+    title: 'Jadwal Fleksibel',
+    desc: 'Jadwal 100% menyesuaikan waktu Anda, termasuk malam & weekend',
+    detail: 'Waktu belajar ditentukan bersama berdasarkan kesepakatan Anda dan fasilitator. Tersedia sesi pagi, sore, malam hingga weekend — tidak ada jadwal yang kaku.',
+  },
+  {
+    icon: Star,
+    title: 'Kurikulum Personal',
+    desc: 'Materi 100% disesuaikan dengan kebutuhan dan progress riset Anda',
+    detail: 'Tidak ada materi yang "satu untuk semua". Setiap sesi dirancang khusus berdasarkan kondisi, data riset, dan target yang ingin Anda capai. Lebih efisien dan tepat sasaran.',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Support Langsung',
+    desc: 'Konsultasi tambahan via chat selama program berjalan',
+    detail: 'Di luar jam sesi, Anda tetap bisa bertanya melalui WhatsApp langsung kepada fasilitator. Tidak ada pertanyaan yang dibiarkan menggantung.',
+  },
 ];
 
+function KeunggulanModal({ item, onClose }: {
+  item: typeof KEUNGGULAN[0] | null;
+  onClose: () => void;
+}) {
+  if (!item) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}>
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-7 z-10"
+        onClick={(e) => e.stopPropagation()}>
+        <button onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors">
+          <X className="w-4 h-4" />
+        </button>
+        <div className="w-12 h-12 bg-[#F0A500]/15 rounded-2xl flex items-center justify-center mb-4">
+          <item.icon className="w-6 h-6 text-[#F0A500]" />
+        </div>
+        <h3 className="text-xl font-black text-gray-900 mb-3">{item.title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed mb-6">{item.detail}</p>
+        <a href={WA_LINK('Halo Kak, saya ingin berkonsultasi mengenai layanan Private Class.')}
+          target="_blank" rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 bg-[#162058] hover:bg-[#1B3A8C] text-white font-bold py-3 rounded-xl transition-colors text-sm">
+          Konsultasikan via WhatsApp
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function PrivateClassPage() {
-  const { data, isLoading } = useQuery({
-    queryKey: ['programs', 'private-class'],
-    queryFn: () => programsApi.list({ type: 'private-class' }).then((r) => r.data),
-  });
-
-  const programs: Program[] = data?.data ?? [];
-
-  const groupedPrograms = [
-    { title: 'AjiStat — Statistik & Riset', items: programs.filter(p => !p.tags.some(t => ['ajibiz', 'ajipr', 'ajidigi', 'ajilangua'].includes(t.toLowerCase()))) },
-    { title: 'AjiBiz — Bisnis & Manajemen', items: programs.filter(p => p.tags.some(t => t.toLowerCase() === 'ajibiz')) },
-    { title: 'AjiPR — Public Relation & Komunikasi', items: programs.filter(p => p.tags.some(t => t.toLowerCase() === 'ajipr')) },
-    { title: 'AjiDigi — Digital Marketing & IT', items: programs.filter(p => p.tags.some(t => t.toLowerCase() === 'ajidigi')) },
-    { title: 'AjiLangua — Bahasa Asing & Akademik', items: programs.filter(p => p.tags.some(t => t.toLowerCase() === 'ajilangua')) },
-  ];
+  const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
 
   return (
     <>
       {/* ─── HERO ─── */}
-      <div className="bg-[#162058] relative overflow-hidden py-20">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+      <div className="bg-[#162058] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <nav className="flex justify-center gap-2 text-white/40 text-sm mb-8">
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <nav className="flex gap-2 text-white/40 text-sm mb-8">
             <a href="/" className="hover:text-white transition-colors">Beranda</a>
             <span>/</span>
             <span className="text-white/80">Private Class</span>
           </nav>
 
-          <span className="inline-flex items-center gap-2 bg-[#F0A500]/20 border border-[#F0A500]/40 text-[#F0A500] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
-            🎯 AJI Private Class — Mentoring Personal
-          </span>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 bg-[#F0A500]/20 border border-[#F0A500]/40 text-[#F0A500] text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+              AJI Learning — Belajar Privat 1-on-1
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              Private Class —<br />
+              <span className="text-[#F0A500]">Personal,</span>{' '}
+              <span className="text-white/80">Efisien &amp; Tepat Sasaran</span>
+            </h1>
+            <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-2xl">
+              Sesi belajar privat 1-on-1 langsung dengan fasilitator. Materi 100% disesuaikan dengan kebutuhan
+              dan progres riset Anda. Jadwal malam dan weekend tersedia.
+            </p>
+            {/* Clickable keunggulan cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {KEUNGGULAN.map((item) => (
+                <button key={item.title}
+                  onClick={() => setActiveKeunggulan(item)}
+                  className="bg-white/10 border border-white/15 rounded-xl p-4 text-left hover:bg-white/20 hover:border-white/30 transition-all hover:-translate-y-0.5 cursor-pointer group">
+                  <item.icon className="w-6 h-6 text-[#F0A500] mb-2 group-hover:scale-110 transition-transform" />
+                  <p className="text-white font-semibold text-sm mb-1">{item.title}</p>
+                  <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-            Belajar Lebih Cepat dengan<br />
-            <span className="text-[#F0A500]">Bimbingan 1-on-1</span> yang Personal
-          </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Program mentoring personal langsung bersama instruktur ahli AJI.
-            Kurikulum, jadwal, dan kecepatan belajar disesuaikan sepenuhnya dengan kebutuhan Anda.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { icon: '🗓️', text: 'Jadwal 100% Fleksibel' },
-              { icon: '📋', text: 'Kurikulum Custom' },
-              { icon: '🔴', text: 'Sesi Live via Zoom' },
-            ].map((item) => (
-              <div key={item.text} className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-4 py-2.5">
-                <span>{item.icon}</span>
-                <span className="text-white/80 text-sm font-medium">{item.text}</span>
-              </div>
-            ))}
+        <div className="relative border-t border-white/10 bg-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-white/60">
+              {['Mulai dari Rp 150.000 / sesi', 'Jadwal menyesuaikan Anda', 'Konsultasi + Rekaman Sesi'].map((text) => (
+                <span key={text} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F0A500]" />
+                  {text}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ─── LAYANAN LIST ─── */}
-      <section className="py-14 bg-gray-50 border-y border-gray-100 min-h-[50vh]">
+      {/* ─── TABS PER PROGRAM ─── */}
+      <section className="py-14 bg-gray-50 min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Pilih Topik Private Class</h2>
-            <p className="text-gray-500 text-sm">Pilih layanan bimbingan 1-on-1 sesuai kebutuhan dan bidang Anda.</p>
+          <div className="mb-10">
+            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-2">Pilih Program Divisi</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-1">Private Class per Divisi Program</h2>
+            <p className="text-gray-500 text-sm">Klik tab untuk melihat kelas privat yang tersedia. Klik kartu untuk mendaftar.</p>
           </div>
-
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(3)].map((_, i) => <ProgramCardSkeleton key={i} />)}
-            </div>
-          ) : programs.length > 0 ? (
-            <div className="flex flex-col gap-12">
-              {groupedPrograms.map((group) => group.items.length > 0 && (
-                <div key={group.title}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-xl font-bold text-gray-900">{group.title}</h3>
-                    <div className="h-px bg-gray-200 flex-1"></div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {group.items.map((p) => <ProgramCard key={p.id} program={p} />)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-24 text-gray-400">
-              <p className="text-5xl mb-4">🔍</p>
-              <p className="font-medium text-gray-500 mb-1">Belum ada kelas private yang tersedia</p>
-              <p className="text-sm">Silakan hubungi kami untuk request topik khusus.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ─── KENAPA PRIVATE CLASS (dipindah ke bawah) ─── */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-xs font-bold text-[#2348A8] uppercase tracking-widest mb-3 block">Kenapa Private Class?</span>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Belajar Sesuai Ritme &amp; Kebutuhan Anda</h2>
-            <ul className="space-y-3">
-              {benefits.map((b) => (
-                <li key={b} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span className="text-gray-600 text-sm leading-relaxed">{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
-            <p className="text-gray-700 text-sm leading-relaxed italic mb-5">
-              &ldquo;Private class AJI benar-benar game changer. Dalam 8 sesi saja saya sudah bisa analisis SEM sendiri dan tesis saya selesai tepat waktu. Fasilitatornya sabar dan sangat memahami kebutuhan saya.&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1B3A8C] to-[#4A72D4] flex items-center justify-center text-white font-bold text-sm">RA</div>
-              <div>
-                <p className="text-sm font-semibold text-gray-800">Rina Andriani</p>
-                <p className="text-xs text-gray-500">Mahasiswa S2 Manajemen, UGM</p>
-              </div>
-            </div>
-          </div>
+          <ProgramTabsByProgram formatFilter="private-class" queryKey="private-class-by-program" />
         </div>
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="bg-[#162058] py-14">
-        <div className="max-w-3xl mx-auto text-center px-4">
-          <p className="text-[#4A72D4] text-sm font-semibold uppercase tracking-widest mb-3">Masih Ragu?</p>
-          <h2 className="text-2xl font-bold text-white mb-4">Konsultasi Gratis Sebelum Mendaftar</h2>
-          <p className="text-white/60 mb-8 leading-relaxed">
-            Ceritakan kebutuhan belajar Anda dan tim AJI akan merekomendasikan layanan yang paling tepat.
-          </p>
-          <a href={WA_LINK_PRIVATE} target="_blank" rel="noopener noreferrer"
+      <section className="py-12 bg-[#162058]">
+        <div className="max-w-2xl mx-auto text-center px-4">
+          <h2 className="text-2xl font-bold text-white mb-3">Tidak menemukan format yang Anda cari?</h2>
+          <p className="text-white/60 mb-6">Diskusikan kebutuhan privat Anda langsung dengan tim kami — kami siap merancang sesi 100% sesuai kebutuhan spesifik Anda.</p>
+          <a href={WA_LINK('Halo Kak, saya ingin berkonsultasi mengenai layanan Private Class.')}
+            target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold px-8 py-3.5 rounded-xl transition-colors">
-            <Zap className="w-4 h-4" />
-            Hubungi via WhatsApp
+            Diskusi Private Class Sekarang
           </a>
         </div>
       </section>
+
+      <KeunggulanModal item={activeKeunggulan} onClose={() => setActiveKeunggulan(null)} />
     </>
   );
 }

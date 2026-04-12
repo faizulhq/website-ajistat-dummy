@@ -3,7 +3,7 @@ export interface Program {
   id: number;
   title: string;
   slug: string;
-  type: 'bootcamp' | 'short-class' | 'private-class';
+  type: 'bootcamp' | 'short-class' | 'private-class' | 'in-house-training';
   status: 'upcoming' | 'ongoing' | 'recorded';
   price: number;
   original_price: number | null;

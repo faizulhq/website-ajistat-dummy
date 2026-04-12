@@ -13,8 +13,6 @@ import type { Program } from '@/lib/types';
 const SLIDES = [
   {
     image: '/images/slide1.jpeg',
-    badge: 'Program Unggulan',
-    badgeColor: 'bg-[#1B3A8C]/90 text-white border border-white/30',
     headline: 'Kuasai Statistika\n& Riset dengan AjiStat',
     subtext: 'SPSS, SmartPLS, NVivo, R, Python, AMOS, EViews, STATA — semua ada di sini. Dipandu langsung oleh pakar riset berpengalaman.',
     cta: 'Lihat Program AjiStat →',
@@ -27,8 +25,6 @@ const SLIDES = [
   },
   {
     image: '/images/slide-programs.jpg',
-    badge: 'Kini Tersedia',
-    badgeColor: 'bg-[#162058]/90 text-white border border-white/30',
     headline: '5 Program\nAji Institute',
     subtext: 'AjiStat, AjiBiz, AjiPR, AjiDigi, AjiLangua — satu platform untuk semua kebutuhan pengembangan kompetensi profesional Anda.',
     cta: 'Eksplorasi Semua Program →',
@@ -41,8 +37,6 @@ const SLIDES = [
   },
   {
     image: '/images/programs/bootcamp-slide.jpeg',
-    badge: 'Terbatas — Daftar Sekarang',
-    badgeColor: 'bg-[#F0A500] text-[#162058]',
     headline: 'Ikuti Bootcamp\nGratis Pertamamu',
     subtext: 'Mulai perjalanan belajar Anda di Aji Institute — gratis, terstruktur, dan langsung praktik bersama mentor berpengalaman.',
     cta: 'Daftar Sekarang →',
@@ -98,10 +92,6 @@ export function HeroSlider() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
         <div className="max-w-2xl">
-          <span className={cn('inline-block text-xs font-bold px-4 py-2 rounded-full mb-6', slide.badgeColor)}>
-            {slide.badge}
-          </span>
-
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 whitespace-pre-line">
             {slide.headline}
           </h1>

@@ -110,11 +110,9 @@ export function TagProgramModal({ tag, programs, onClose }: Props) {
                           <Clock className="w-3 h-3" /> {p.duration}
                         </span>
                       )}
-                      {p.facilitator_name && (
                         <span className="flex items-center gap-1 text-xs text-gray-400">
-                          <Users className="w-3 h-3" /> {p.facilitator_name}
+                          <Users className="w-3 h-3" /> Aji Pamoso, S.Si, M.T
                         </span>
-                      )}
                     </div>
                   </div>
                   <div className="shrink-0 text-right">
