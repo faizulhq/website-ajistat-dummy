@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Clock, Tag } from 'lucide-react';
 
@@ -8,6 +8,19 @@ export const metadata: Metadata = {
 };
 
 const ARTICLES = [
+  {
+    id: 99,
+    slug: 'https://deskjabar.pikiran-rakyat.com/jabar/pr-1139475242/pelatihan-jurnalistik-mahasiswa-dituntut-mampu-menulis-populer-yang-menjangkau-audien-di-luar-akademisi',
+    title: 'Liputan Media: Mahasiswa Dituntut Mampu Menulis Populer yang Menjangkau Audien di Luar Akademisi',
+    excerpt: 'Pelatihan Jurnalistik memberikan wawasan bahwa karya tulis di luar konteks akademik membutuhkan teknik berbeda agar bisa diterima oleh audiens populer yang lebih luas...',
+    category: 'Liputan Media',
+    readTime: 'Pikiran Rakyat',
+    date: '10 April 2025',
+    tag: 'Jurnalistik',
+    color: '#E11D48', // PR Redish
+    isExternal: true,
+    image: '/images/bootcamp-slide.jpeg',
+  },
   {
     id: 1,
     slug: 'mengenal-sem-smartpls',
@@ -99,40 +112,56 @@ export default function BlogPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Featured Article */}
           <div className="mb-8">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-5">
-              <div className="lg:col-span-2 bg-gradient-to-br from-[#1B3A8C] to-[#2348A8] flex items-center justify-center py-16 px-8">
-                <p className="text-white/20 text-8xl font-black select-none">AJI</p>
-              </div>
-              <div className="lg:col-span-3 p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="bg-blue-50 text-[#2348A8] text-xs font-semibold px-2.5 py-1 rounded-full border border-blue-100">
-                    {ARTICLES[0].category}
-                  </span>
-                  <span className="text-gray-400 text-xs flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> {ARTICLES[0].readTime} baca
-                  </span>
+            <Link 
+              href={ARTICLES[0].isExternal ? ARTICLES[0].slug : `/blog/${ARTICLES[0].slug}`}
+              target={ARTICLES[0].isExternal ? "_blank" : "_self"}
+              className="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-5 h-full">
+                <div className="lg:col-span-2 bg-gradient-to-br from-[#1B3A8C] to-[#2348A8] flex items-center justify-center py-16 px-8 relative overflow-hidden">
+                  {ARTICLES[0].image ? (
+                    <img src={ARTICLES[0].image} alt="Artikel Utama" className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <p className="text-white/20 text-8xl font-black select-none z-10">AJI</p>
+                  )}
                 </div>
-                <h2 className="font-[family-name:var(--font-poppins)] text-xl font-bold text-gray-900 mb-3 leading-snug">
-                  {ARTICLES[0].title}
-                </h2>
-                <p className="text-gray-500 text-sm leading-relaxed mb-5">{ARTICLES[0].excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400 text-xs">{ARTICLES[0].date}</span>
-                  <span className="flex items-center gap-1.5 text-[#2348A8] text-sm font-semibold hover:gap-2.5 transition-all cursor-pointer">
-                    Baca Selengkapnya <ArrowRight className="w-4 h-4" />
-                  </span>
+                <div className="lg:col-span-3 p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="bg-blue-50 text-[#2348A8] text-xs font-semibold px-2.5 py-1 rounded-full border border-blue-100">
+                      {ARTICLES[0].category}
+                    </span>
+                    <span className="text-gray-400 text-xs flex items-center gap-1">
+                      <Clock className="w-3 h-3" /> {ARTICLES[0].readTime}
+                    </span>
+                  </div>
+                  <h2 className="font-[family-name:var(--font-poppins)] text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-[#2348A8] transition-colors">
+                    {ARTICLES[0].title}
+                  </h2>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">{ARTICLES[0].excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400 text-xs">{ARTICLES[0].date}</span>
+                    <span className="flex items-center gap-1.5 text-[#2348A8] text-sm font-semibold group-hover:gap-2.5 transition-all">
+                      Baca Selengkapnya <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
+
 
           {/* Article Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {ARTICLES.slice(1).map((article) => (
-              <div key={article.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
-                <div className="h-36 flex items-center justify-center"
+              <Link 
+                key={article.id} 
+                href={article.isExternal ? article.slug : `/blog/${article.slug}`}
+                target={article.isExternal ? "_blank" : "_self"}
+                className="block bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <div className="h-36 flex items-center justify-center relative overflow-hidden"
                   style={{ background: `linear-gradient(135deg, ${article.color}22, ${article.color}44)` }}>
-                  <div className="flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-3 py-1.5">
+                  <div className="flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-3 py-1.5 z-10 transition-transform group-hover:scale-105">
                     <Tag className="w-3.5 h-3.5" style={{ color: article.color }} />
                     <span className="text-xs font-semibold" style={{ color: article.color }}>{article.tag}</span>
                   </div>
@@ -150,12 +179,13 @@ export default function BlogPage() {
                   <p className="text-gray-500 text-xs line-clamp-2 mb-4">{article.excerpt}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-400 text-xs">{article.date}</span>
-                    <span className="text-[#2348A8] text-xs font-semibold cursor-pointer">Baca →</span>
+                    <span className="text-[#2348A8] text-xs font-semibold group-hover:underline">Baca →</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
+
 
           {/* Coming Soon */}
           <div className="mt-10 bg-white rounded-2xl border border-dashed border-gray-200 p-10 text-center">

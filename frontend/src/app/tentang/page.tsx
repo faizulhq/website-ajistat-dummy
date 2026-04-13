@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle, Target, Eye, MessageCircle } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import { CompanyStats } from './CompanyStats';
 
 export const metadata: Metadata = {
   title: 'Tentang Kami',
@@ -93,19 +94,7 @@ export default function TentangPage() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { value: '10.000+', label: '🤝 Klien Terbantu dari Konsultasi', color: 'bg-blue-50 border-blue-100' },
-              { value: '30+', label: '📚 Layanan Aktif', color: 'bg-amber-50 border-amber-100' },
-              { value: '10+', label: '🎓 Fasilitator Expert', color: 'bg-green-50 border-green-100' },
-              { value: '5', label: '🏛️ Program Unggulan', color: 'bg-purple-50 border-purple-100' },
-            ].map((stat) => (
-              <div key={stat.label} className={`${stat.color} border rounded-2xl p-6 text-center`}>
-                <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                <p className="text-gray-500 text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          <CompanyStats />
         </div>
       </section>
 
