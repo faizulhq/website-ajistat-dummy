@@ -7,10 +7,10 @@ import axios, { type InternalAxiosRequestConfig } from 'axios';
  * - SSR di server: langsung ke Django localhost
  */
 function getApiBase(): string {
-  // Selalu gunakan URL Django langsung baik di browser maupun server.
-  // Ini menghindari bug "ERR_TOO_MANY_REDIRECTS" dari Vercel saat Next.js dan Django
-  // bertabrakan soal masalah garis miring (trailing slashes).
-  // Karena CORS sudah diset True di backend, request silang domain ini aman.
+  // Gunakan backend lokal (Django) saat development agar perubahan lokal terbaca
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:8000/api';
+  }
   return 'https://api.aji-institute.com/api';
 }
 

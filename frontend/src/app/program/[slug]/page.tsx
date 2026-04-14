@@ -16,7 +16,8 @@ export async function generateMetadata(
   const { slug } = await params;
 
   try {
-    const res = await fetch(`https://api.aji-institute.com/api/programs/${slug}/`, {
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'https://api.aji-institute.com/api';
+    const res = await fetch(`${baseUrl}/programs/${slug}/`, {
       cache: 'no-store',
       signal: AbortSignal.timeout(5_000),
     });
@@ -62,7 +63,8 @@ const FALLBACK_SLUGS = [
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch('https://api.aji-institute.com/api/programs/slugs/', {
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'https://api.aji-institute.com/api';
+    const res = await fetch(`${baseUrl}/programs/slugs/`, {
       // Jangan cache: kita ingin data terbaru setiap kali build
       cache: 'no-store',
       // Timeout 10 detik agar build tidak hang jika server lambat
