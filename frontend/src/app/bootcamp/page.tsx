@@ -18,12 +18,7 @@ const KEUNGGULAN = [
     desc: 'Pembelajaran intensif langsung praktik dengan data nyata',
     detail: 'Durasi 3–5 hari dirancang agar Anda bisa belajar secara mendalam tanpa terburu-buru. Setiap sesi menggabungkan teori singkat dengan praktik langsung menggunakan dataset riil, bukan data simulasi.',
   },
-  {
-    icon: Star,
-    title: 'Bersertifikat',
-    desc: 'Sertifikat resmi Aji Institute yang diakui secara nasional',
-    detail: 'Setelah menyelesaikan bootcamp, peserta mendapatkan e-sertifikat resmi berlogo Aji Institute yang dapat digunakan untuk melengkapi CV, portofolio akademik, dan profil LinkedIn.',
-  },
+
   {
     icon: Award,
     title: 'Rekaman Tersedia',
@@ -111,7 +106,7 @@ export default function BootcampPage() {
         <div className="relative border-t border-white/10 bg-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-white/60">
-              {['Mulai dari Rp 250.000', 'Sesi Live via Zoom', 'Sertifikat resmi AJI'].map((text) => (
+              {['Mulai dari Rp 250.000', 'Sesi Live via Zoom'].map((text) => (
                 <span key={text} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F0A500]" />
                   {text}
