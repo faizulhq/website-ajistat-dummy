@@ -4,7 +4,12 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-ajistat-secret-key-change-in-production-2026')
+import warnings
+_secret = os.environ.get('SECRET_KEY', '')
+if not _secret:
+    warnings.warn('SECRET_KEY env var not set! Using insecure fallback. Set it in cPanel environment variables.', stacklevel=2)
+    _secret = 'django-ajistat-secret-key-change-in-production-2026'
+SECRET_KEY = _secret
 
 # Production: DEBUG=False by default, bisa di-override via env
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
@@ -87,7 +92,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICS_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -136,3 +141,14 @@ CORS_ALLOW_CREDENTIALS = True
 MIDTRANS_IS_PRODUCTION = os.environ.get('MIDTRANS_IS_PRODUCTION', 'False') == 'True'
 MIDTRANS_SERVER_KEY = os.environ.get('MIDTRANS_SERVER_KEY', 'SB-Mid-server-YOUR_SERVER_KEY')
 MIDTRANS_CLIENT_KEY = os.environ.get('MIDTRANS_CLIENT_KEY', 'SB-Mid-client-YOUR_CLIENT_KEY')
+
+# ─── HTTPS Security (Aktif hanya di Production) ───────────────
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000          # 1 tahun
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True              # Redirect HTTP → HTTPS
+    SESSION_COOKIE_SECURE = True            # Session cookie hanya via HTTPS
+    CSRF_COOKIE_SECURE = True               # CSRF cookie hanya via HTTPS
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'

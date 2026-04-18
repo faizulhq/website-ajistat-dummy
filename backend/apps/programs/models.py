@@ -13,6 +13,13 @@ class Program(models.Model):
         ('ongoing', 'Sedang Berlangsung'),
         ('recorded', 'Rekaman Tersedia'),
     ]
+    BRAND_CHOICES = [
+        ('ajistat',  'AjiStat — Statistika & Riset'),
+        ('ajibiz',   'AjiBiz — Bisnis & Kewirausahaan'),
+        ('ajipr',    'AjiPR — Public Relations & Komunikasi'),
+        ('ajidigi',  'AjiDigi — Digital Marketing'),
+        ('ajilangua','AjiLangua — Bahasa & Komunikasi'),
+    ]
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, max_length=255)
@@ -33,8 +40,13 @@ class Program(models.Model):
     facilitator_avatar = models.CharField(max_length=10, blank=True)  # initials
 
     # Media
-    demo_video_url = models.URLField(blank=True)  # YouTube embed URL
+    demo_video_url = models.CharField(max_length=500, blank=True)  # local path or YouTube URL
     thumbnail_color = models.CharField(max_length=7, default='#162660')  # hex color for placeholder
+
+    # Brand / Sub-program
+    brand = models.CharField(max_length=20, choices=BRAND_CHOICES, default='ajistat',
+                             verbose_name='Brand / Sub-program',
+                             help_text='Kategori brand program ini (AjiStat, AjiBiz, dll)')
 
     # Meta
     duration = models.CharField(max_length=50, blank=True)

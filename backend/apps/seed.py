@@ -45,6 +45,7 @@ programs = [
         "thumbnail_color": "#162660",
         "duration": "4 Hari (8 Sesi Live Zoom)",
         "schedule": "10 April 2026",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -73,6 +74,7 @@ programs = [
         "thumbnail_color": "#2568B5",
         "duration": "3 Hari (6 Sesi Live Zoom)",
         "schedule": "17 April 2026",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -101,6 +103,7 @@ programs = [
         "thumbnail_color": "#1a4a8a",
         "duration": "5 Hari (10 Sesi Live Zoom)",
         "schedule": "24 April 2026",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -129,6 +132,7 @@ programs = [
         "thumbnail_color": "#162660",
         "duration": "4 Hari Rekaman",
         "schedule": "Akses Seumur Hidup",
+        "brand": "ajistat",
         "is_featured": False,
     },
     {
@@ -157,6 +161,7 @@ programs = [
         "thumbnail_color": "#2568B5",
         "duration": "3 Hari (6 Sesi Live Zoom)",
         "schedule": "8 Mei 2026",
+        "brand": "ajistat",
         "is_featured": False,
     },
     {
@@ -184,6 +189,7 @@ programs = [
         "thumbnail_color": "#1E3A6E",
         "duration": "4 Hari (8 Sesi Live Zoom)",
         "schedule": "Akan Datang",
+        "brand": "ajipr",
         "is_featured": True,
     },
     # ─── SHORT CLASS AJISTAT ─────────────────────────────────
@@ -211,6 +217,7 @@ programs = [
         "thumbnail_color": "#4FA8D8",
         "duration": "2 Jam",
         "schedule": "5 April 2026",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -237,6 +244,7 @@ programs = [
         "thumbnail_color": "#2568B5",
         "duration": "3 Jam",
         "schedule": "19 April 2026",
+        "brand": "ajistat",
         "is_featured": False,
     },
     {
@@ -263,6 +271,7 @@ programs = [
         "thumbnail_color": "#1a4a8a",
         "duration": "2 Jam Rekaman",
         "schedule": "Akses Seumur Hidup",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -290,6 +299,7 @@ programs = [
         "thumbnail_color": "#4FA8D8",
         "duration": "4 Hari (8 Sesi Live Zoom)",
         "schedule": "Akan Datang",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -316,6 +326,7 @@ programs = [
         "thumbnail_color": "#162660",
         "duration": "1.5 Jam Rekaman",
         "schedule": "Akses Seumur Hidup",
+        "brand": "ajistat",
         "is_featured": False,
     },
     # ─── PRIVATE CLASS AJISTAT ───────────────────────────────
@@ -326,7 +337,7 @@ programs = [
         "description": "Sesi privat langsung bersama konsultan AjiStat untuk membantu pengolahan dan analisis data penelitian Anda. Materi disesuaikan 100% dengan kebutuhan riset.",
         "price": 200000,
         "original_price": None,
-        "status": "open",
+        "status": "upcoming",
         "tags": ["SPSS", "SmartPLS", "Skripsi", "Tesis", "Privat"],
         "curriculum": [
             "Konsultasi metode & alat analisis",
@@ -343,6 +354,7 @@ programs = [
         "thumbnail_color": "#162660",
         "duration": "60-90 Menit / Sesi",
         "schedule": "Jadwal menyesuaikan peserta",
+        "brand": "ajistat",
         "is_featured": True,
     },
     {
@@ -369,6 +381,7 @@ programs = [
         "thumbnail_color": "#2568B5",
         "duration": "60 Menit / Sesi",
         "schedule": "Jadwal menyesuaikan peserta",
+        "brand": "ajistat",
         "is_featured": False,
     },
 ]

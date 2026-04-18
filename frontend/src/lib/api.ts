@@ -51,7 +51,10 @@ api.interceptors.response.use(
       } catch {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        window.location.href = '/login';
+        // Redirect ke homepage — sesi habis, user perlu login ulang jika ingin akses fitur member
+        if (typeof window !== 'undefined') {
+          window.location.href = '/';
+        }
       }
     }
     return Promise.reject(err);
