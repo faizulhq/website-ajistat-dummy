@@ -3,8 +3,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.throttling import AnonRateThrottle
 from django.db.models import Q
-from .models import Program, Testimonial
-from .serializers import ProgramListSerializer, ProgramDetailSerializer, TestimonialSerializer
+from django.utils import timezone
+from .models import Program, Testimonial, BlogArticle, Announcement
+from .serializers import (
+    ProgramListSerializer, ProgramDetailSerializer,
+    TestimonialSerializer, BlogArticleSerializer, AnnouncementSerializer,
+)
 
 
 class ProgramListView(APIView):
@@ -75,3 +79,43 @@ class TestimonialListView(APIView):
     def get(self, request):
         qs = Testimonial.objects.all()[:10]
         return Response({'data': TestimonialSerializer(qs, many=True).data})
+
+
+class BlogArticleListView(APIView):
+    """
+    GET /api/blog/
+    Query params: category
+    Hanya mengembalikan artikel yang is_published=True, diurutkan terbaru.
+    """
+    permission_classes = [AllowAny]
+    throttle_classes = [AnonRateThrottle]
+
+    def get(self, request):
+        qs = BlogArticle.objects.filter(is_published=True)
+
+        category = request.query_params.get('category', '').strip()
+        if category:
+            qs = qs.filter(category=category)
+
+        serializer = BlogArticleSerializer(qs, many=True)
+        return Response({'total': qs.count(), 'data': serializer.data})
+
+
+class AnnouncementListView(APIView):
+    """
+    GET /api/announcements/
+    Hanya mengembalikan pengumuman yang aktif dan tanggalnya valid hari ini.
+    """
+    permission_classes = [AllowAny]
+    throttle_classes = [AnonRateThrottle]
+
+    def get(self, request):
+        today = timezone.now().date()
+        qs = Announcement.objects.filter(is_active=True).filter(
+            Q(start_date__isnull=True) | Q(start_date__lte=today)
+        ).filter(
+            Q(end_date__isnull=True) | Q(end_date__gte=today)
+        )
+        serializer = AnnouncementSerializer(qs, many=True)
+        return Response({'data': serializer.data})
+

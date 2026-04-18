@@ -7,3 +7,11 @@ urlpatterns = [
     path('testimonials/all/', views.TestimonialListView.as_view(), name='testimonials'),
     path('<slug:slug>/', views.ProgramDetailView.as_view(), name='program-detail'),
 ]
+
+blog_urlpatterns = [
+    path('', views.BlogArticleListView.as_view(), name='blog-list'),
+]
+
+announcement_urlpatterns = [
+    path('', views.AnnouncementListView.as_view(), name='announcements'),
+]

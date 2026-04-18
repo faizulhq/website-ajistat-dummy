@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { CheckCircle, Target, Eye, MessageCircle } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 import { CompanyStats } from './CompanyStats';
+import { TeamCards } from './TeamCards';
 
 export const metadata: Metadata = {
   title: 'Tentang Kami',
@@ -18,13 +19,7 @@ const MILESTONES = [
   { year: '2026', title: 'Resmi PT. Amanah Jñāna Insani', desc: 'Aji Institute resmi beroperasi di bawah PT. Amanah Jñāna Insani dengan struktur korporat, multi-program terintegrasi, dan ekosistem layanan profesional yang lengkap.' },
 ];
 
-const TEAM = [
-  { name: 'Tim Fasilitator AjiStat', role: 'Konsultan Statistik & Peneliti', initials: 'ST', desc: 'Berpengalaman dalam analisis data SPSS, SmartPLS, AMOS, R, dan Python untuk riset akademik dan industri.' },
-  { name: 'Tim Fasilitator AjiBiz', role: 'Business & Management Trainer', initials: 'BZ', desc: 'Praktisi bisnis dan manajemen dengan latar belakang MBA dan pengalaman korporat lebih dari 10 tahun.' },
-  { name: 'Tim Fasilitator AjiPR', role: 'PR & Communication Expert', initials: 'PR', desc: 'Trainer komunikasi publik, media relation, dan personal branding bersertifikat dengan jam terbang tinggi.' },
-  { name: 'Tim Fasilitator AjiDigi', role: 'Digital Marketing & Developer', initials: 'DG', desc: 'Expert praktisi industri dalam pengembangan strategi digital, konten kreatif, dan teknologi komputasi modern.' },
-  { name: 'Tim Fasilitator AjiLangua', role: 'English & Academic Instructor', initials: 'LG', desc: 'Pengajar bahasa Inggris setingkat ahli dengan spesialisasi persiapan tes akademik dan komunikasi bisnis global.' },
-];
+
 
 // ── Makna AJI (dipindahkan dari beranda) ──────────────────────────────────────
 const AJI_PILLARS = [
@@ -186,46 +181,39 @@ export default function TentangPage() {
         </div>
       </section>
 
-      {/* Tim */}
+      {/* Tim — Elegant Cards with Modal */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Tim Kami</p>
+          <div className="mb-10">
+            <p className="text-[#2348A8] text-xs font-bold uppercase tracking-[0.2em] mb-3">Tim Kami</p>
             <h2 className="text-3xl font-bold text-gray-900">Fasilitator Berpengalaman</h2>
+            <p className="text-gray-500 text-sm mt-2">Klik kartu untuk melihat detail keahlian masing-masing divisi.</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-6">
-            {TEAM.map((member) => (
-              <div key={member.name} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1B3A8C] to-[#2348A8] flex items-center justify-center text-white font-bold text-xl mb-5">
-                  {member.initials}
-                </div>
-                <h3 className="font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-[#2348A8] text-sm font-medium mb-3">{member.role}</p>
-                <p className="text-gray-500 text-sm leading-relaxed">{member.desc}</p>
-              </div>
-            ))}
-          </div>
+          <TeamCards />
         </div>
       </section>
 
-      {/* Milestone */}
+      {/* Milestone — Dot timeline with year pill */}
       <section className="py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Perjalanan Kami</p>
+        <div className="max-w-2xl mx-auto px-6 sm:px-8">
+          <div className="mb-12">
+            <p className="text-[#2348A8] text-xs font-bold uppercase tracking-[0.2em] mb-3">Perjalanan Kami</p>
             <h2 className="text-3xl font-bold text-gray-900">Milestone Aji Institute</h2>
           </div>
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gray-200" />
+            <div className="absolute left-[5px] top-2 bottom-2 w-px bg-gray-200" />
             <div className="space-y-8">
               {MILESTONES.map((m) => (
-                <div key={m.year} className="flex gap-6 relative">
-                  <div className="w-12 h-12 bg-[#1B3A8C] rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0 z-10">
-                    {m.year}
+                <div key={m.title} className="flex gap-5 relative items-start">
+                  <div className="relative shrink-0 flex items-center justify-center mt-[9px]">
+                    <div className="w-[11px] h-[11px] rounded-full bg-[#1B3A8C] ring-4 ring-white z-10" />
                   </div>
-                  <div className="pt-2">
-                    <p className="font-semibold text-gray-900">{m.title}</p>
-                    <p className="text-gray-500 text-sm mt-1">{m.desc}</p>
+                  <div className="pb-2">
+                    <span className="inline-block bg-[#1B3A8C] text-white text-[11px] font-bold tracking-widest px-3 py-0.5 rounded-full mb-2">
+                      {m.year}
+                    </span>
+                    <p className="font-semibold text-gray-900 text-sm mb-1">{m.title}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed">{m.desc}</p>
                   </div>
                 </div>
               ))}

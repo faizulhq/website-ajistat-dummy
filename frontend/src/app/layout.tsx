@@ -1,16 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { Open_Sans, Ubuntu } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { BRAND } from '@/lib/config';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const poppins = Poppins({
-  weight: ['500', '600', '700', '800'],
+const openSans = Open_Sans({
   subsets: ['latin'],
-  variable: '--font-poppins',
+  weight: ['300', '400', '600', '700'],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
+const ubuntu = Ubuntu({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-ubuntu',
+  display: 'swap',
+  style: ['normal', 'italic'],
 });
 
 export const metadata: Metadata = {
@@ -34,11 +42,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="id" className={`${openSans.variable} ${ubuntu.variable}`}>
       <body className="font-sans antialiased bg-white text-gray-900">
         <Providers>
+          <AnnouncementBar />
           <Navbar />
-          <main className="pt-16 min-h-screen">
+          <main
+            className="min-h-screen transition-[padding-top] duration-200"
+            style={{ paddingTop: 'calc(4.5rem + var(--ann-h, 0px))' }}
+          >
             {children}
           </main>
           <Footer />

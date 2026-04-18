@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Program, Testimonial
+from .models import Program, Testimonial, BlogArticle, Announcement
 
 
 class ProgramListSerializer(serializers.ModelSerializer):
@@ -31,3 +31,22 @@ class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonial
         fields = ('id', 'name', 'role', 'program_name', 'rating', 'comment', 'avatar')
+
+
+class BlogArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = BlogArticle
+        fields = (
+            'id', 'title', 'slug', 'excerpt', 'category',
+            'tag', 'date', 'image_url', 'color',
+            'source_name', 'is_external', 'external_url',
+        )
+
+
+class AnnouncementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Announcement
+        fields = (
+            'id', 'title', 'message', 'type',
+            'cta_label', 'cta_url',
+        )

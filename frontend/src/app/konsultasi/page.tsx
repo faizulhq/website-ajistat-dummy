@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle, MessageSquare, BarChart3, Database, FileText, PieChart, Users, Building, Laptop, Target } from 'lucide-react';
+import { CheckCircle, MessageSquare, BarChart3, Database, FileText, PieChart, Users, Building, Laptop, Target, Award, Building2 } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 
 const SERVICES = [
@@ -130,20 +130,20 @@ Detail / Topik Riset: ${form.desc}`;
         </div>
       </section>
 
-      {/* PAKET HARGA */}
+      {/* PAKET KONSULTASI — tanpa harga */}
       <section className="py-20 bg-[#162058]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[#4A72D4] text-sm font-bold uppercase tracking-widest mb-3">Estimasi Harga</p>
-            <h2 className="text-3xl font-black text-white mb-4">Paket Layanan Konsultasi</h2>
-            <p className="text-white/60 max-w-xl mx-auto">Harga disesuaikan dengan kompleksitas, kedalaman analisis, dan kebutuhan spesifik klien. Konsultasikan terlebih dahulu untuk penawaran terbaik.</p>
+            <p className="text-[#F0A500] text-xs font-bold uppercase tracking-widest mb-3">Paket Layanan</p>
+            <h2 className="text-3xl font-bold text-white mb-4">Pilih Paket Konsultasi Anda</h2>
+            <p className="text-white/50 max-w-xl mx-auto text-sm">Harga disesuaikan dengan kompleksitas dan kebutuhan spesifik Anda. Hubungi kami untuk penawaran terbaik.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 tier: 'Lite',
-                price: 'Rp 3 jt+',
-                tagline: 'Mulai dari',
+                badge: 'Perorangan',
+                Icon: Target,
                 desc: 'Untuk kebutuhan olah data sederhana, analisis deskriptif, atau konsultasi metodologi awal.',
                 features: ['Uji statistik dasar', 'Analisis deskriptif', 'Output & interpretasi singkat', 'Revisi 1x'],
                 cta: 'Konsultasi Sekarang',
@@ -151,42 +151,54 @@ Detail / Topik Riset: ${form.desc}`;
               },
               {
                 tier: 'Professional',
-                price: 'Rp 8 jt+',
-                tagline: 'Mulai dari',
-                desc: 'Untuk penelitian akademik skripsi, tesis, atau analisis SEM, mediasi, moderasi yang lebih kompleks.',
+                badge: 'Paling Diminati',
+                Icon: Award,
+                desc: 'Untuk skripsi, tesis, atau analisis SEM, mediasi, moderasi yang lebih kompleks.',
                 features: ['Analisis lanjutan (SEM, PLS, AMOS)', 'Interpretasi detail & laporan', 'Pendampingan revisi', 'Prioritas respons'],
                 cta: 'Pilih Paket Ini',
                 highlight: true,
               },
               {
                 tier: 'Enterprise',
-                price: 'Rp 15 jt+',
-                tagline: 'Mulai dari',
-                desc: 'Untuk disertasi, riset institusional, atau proyek analisis data skala besar dengan kebutuhan khusus.',
-                features: ['Analisis data kompleks multi-metode', 'Laporan lengkap berstandar jurnal', 'Pendampingan intensif penuh', 'Konsultasi tak terbatas'],
+                badge: 'Institusional',
+                Icon: Building2,
+                desc: 'Untuk disertasi, riset institusional, atau proyek analisis data skala besar.',
+                features: ['Analisis data kompleks multi-metode', 'Laporan berstandar jurnal', 'Pendampingan intensif penuh', 'Konsultasi tak terbatas'],
                 cta: 'Diskusikan Proyek',
                 highlight: false,
               },
             ].map((pkg) => (
               <div key={pkg.tier}
-                className={`rounded-3xl p-8 flex flex-col gap-5 ${pkg.highlight ? 'bg-[#F0A500] text-[#162058]' : 'bg-white/5 border border-white/10 text-white'}`}>
-                <div>
-                  <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${pkg.highlight ? 'text-[#162058]/60' : 'text-white/40'}`}>{pkg.tagline}</p>
-                  <p className="text-4xl font-black mb-1">{pkg.price}</p>
-                  <p className={`text-xs font-semibold uppercase tracking-widest ${pkg.highlight ? 'text-[#162058]/70' : 'text-white/50'}`}>{pkg.tier}</p>
+                className={`rounded-2xl p-7 flex flex-col gap-5 ${pkg.highlight ? 'bg-[#F0A500] text-[#162058]' : 'bg-white/5 border border-white/10 text-white'}`}>
+
+                {/* Header */}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className={`text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${pkg.highlight ? 'bg-[#162058]/15 text-[#162058]' : 'bg-white/10 text-white/70'}`}>
+                      {pkg.badge}
+                    </span>
+                    <h3 className="text-xl font-bold mt-3">{pkg.tier}</h3>
+                  </div>
+                  <pkg.Icon className={`w-8 h-8 mt-1 ${pkg.highlight ? 'text-[#162058]/40' : 'text-white/20'}`} />
                 </div>
+
+                {/* Desc */}
                 <p className={`text-sm leading-relaxed ${pkg.highlight ? 'text-[#162058]/75' : 'text-white/60'}`}>{pkg.desc}</p>
-                <ul className="space-y-2 flex-1">
+
+                {/* Features */}
+                <ul className="space-y-2.5 flex-1">
                   {pkg.features.map((f) => (
-                    <li key={f} className={`flex items-start gap-2 text-sm ${pkg.highlight ? 'text-[#162058]' : 'text-white/80'}`}>
-                      <span className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${pkg.highlight ? 'bg-[#162058]/20 text-[#162058]' : 'bg-white/10 text-white'}`}>✓</span>
+                    <li key={f} className={`flex items-start gap-2.5 text-sm ${pkg.highlight ? 'text-[#162058]' : 'text-white/80'}`}>
+                      <span className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${pkg.highlight ? 'bg-[#162058]/15 text-[#162058]' : 'bg-white/10 text-white'}`}>✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
-                <a href={`https://wa.me/6285892605592?text=Halo%20Tim%20AjiStat%2C%20saya%20tertarik%20dengan%20Paket%20${encodeURIComponent(pkg.tier)}`}
+
+                {/* CTA */}
+                <a href={`https://wa.me/6285892605592?text=Halo%20Tim%20AjiStat%2C%20saya%20tertarik%20dengan%20Paket%20Konsultasi%20${encodeURIComponent(pkg.tier)}`}
                   target="_blank" rel="noopener noreferrer"
-                  className={`w-full text-center py-3.5 rounded-xl font-bold text-sm transition-colors ${pkg.highlight ? 'bg-[#162058] text-white hover:bg-[#1B3A8C]' : 'bg-white/10 hover:bg-white/20 text-white'}`}>
+                  className={`w-full text-center py-3 rounded-xl font-bold text-sm transition-colors ${pkg.highlight ? 'bg-[#162058] text-white hover:bg-[#1B3A8C]' : 'bg-white/10 hover:bg-white/20 text-white'}`}>
                   {pkg.cta}
                 </a>
               </div>
@@ -194,6 +206,8 @@ Detail / Topik Riset: ${form.desc}`;
           </div>
         </div>
       </section>
+
+
 
       {/* FORM KONSULTASI KHUSUS */}
       <section className="py-20 bg-gray-50 border-t border-gray-100">

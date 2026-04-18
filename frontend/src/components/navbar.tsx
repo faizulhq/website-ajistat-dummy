@@ -57,7 +57,10 @@ export function Navbar() {
   const isLayananActive = LAYANAN_LINKS.some((l) => pathname === l.href);
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-[#162058] border-b border-white/10">
+    <nav
+      className="fixed inset-x-0 z-50 bg-[#162058] border-b border-white/10 transition-[top] duration-200"
+      style={{ top: 'var(--ann-h, 0px)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
 

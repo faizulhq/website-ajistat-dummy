@@ -67,12 +67,23 @@ export const authApi = {
   me: () => api.get('/auth/me/'),
 };
 
-// ─── Programs ─────────────────────────────────────────────────
+// ─── Programs ─────────────────────────────────────────────────────
 export const programsApi = {
   list: (params?: { type?: string; search?: string; featured?: boolean }) =>
     api.get('/programs/', { params }),
   detail: (slug: string) => api.get(`/programs/${slug}/`),
   testimonials: () => api.get('/programs/testimonials/all/'),
+};
+
+// ─── Blog ───────────────────────────────────────────────────────────
+export const blogApi = {
+  list: (params?: { category?: string }) =>
+    api.get('/blog/', { params }),
+};
+
+// ─── Announcements ──────────────────────────────────────────────
+export const announcementsApi = {
+  active: () => api.get('/announcements/'),
 };
 
 // ─── Cart ─────────────────────────────────────────────────────
