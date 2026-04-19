@@ -27,7 +27,8 @@ export const PROGRAMS = [
     target: 'Mahasiswa S1–S3, dosen, peneliti, analis',
     isFeatured: true,
     formats: ['Bootcamp', 'Short Class', 'Private Class', 'Workshop', 'Konsultasi Data', 'In-House Training'],
-    href: '/program-ajistat',
+    href: 'https://ajistat.aji-institute.com',
+    external: true,
     available: true,
   },
   {

@@ -98,24 +98,39 @@ export function Navbar() {
               {programOpen && (
                 <div className="absolute top-full left-0 mt-2 w-64 bg-[#0d1632] border border-white/15 rounded-2xl shadow-2xl py-2 z-50">
                   <p className="text-white/40 text-[10px] font-semibold uppercase tracking-widest px-4 py-2">Pilih Program</p>
-                  {PROGRAMS.map((prog) => (
-                    <Link key={prog.code} href={prog.href}
-                      onClick={() => setProgramOpen(false)}
-                      className={cn(
-                        'flex items-center gap-3 px-4 py-3 transition-colors group',
-                        pathname.startsWith(prog.href)
-                          ? 'bg-white/10 text-[#4A72D4]'
-                          : 'text-white/70 hover:text-white hover:bg-white/8'
-                      )}>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm group-hover:text-[#4A72D4] transition-colors">{prog.name}</p>
-                        <p className="text-white/40 text-[11px] truncate">{prog.desc}</p>
-                      </div>
-                      {prog.isFeatured && (
-                        <span className="text-[9px] bg-[#F0A500] text-[#162058] font-bold px-1.5 py-0.5 rounded-full shrink-0">⭐</span>
-                      )}
-                    </Link>
-                  ))}
+                  {PROGRAMS.map((prog) => {
+                    const cls = cn(
+                      'flex items-center gap-3 px-4 py-3 transition-colors group',
+                      pathname.startsWith(prog.href)
+                        ? 'bg-white/10 text-[#4A72D4]'
+                        : 'text-white/70 hover:text-white hover:bg-white/8'
+                    );
+                    const inner = (
+                      <>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm group-hover:text-[#4A72D4] transition-colors">{prog.name}</p>
+                          <p className="text-white/40 text-[11px] truncate">{prog.desc}</p>
+                        </div>
+                        {prog.isFeatured && (
+                          <span className="text-[9px] bg-[#F0A500] text-[#162058] font-bold px-1.5 py-0.5 rounded-full shrink-0">⭐</span>
+                        )}
+                        {prog.external && (
+                          <span className="text-[9px] text-white/30 ml-1">↗</span>
+                        )}
+                      </>
+                    );
+                    return prog.external ? (
+                      <a key={prog.code} href={prog.href} target="_blank" rel="noopener noreferrer"
+                        onClick={() => setProgramOpen(false)} className={cls}>
+                        {inner}
+                      </a>
+                    ) : (
+                      <Link key={prog.code} href={prog.href}
+                        onClick={() => setProgramOpen(false)} className={cls}>
+                        {inner}
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -188,13 +203,23 @@ export function Navbar() {
               </button>
               {mobileProgramOpen && (
                 <div className="ml-4 mt-1 space-y-0.5">
-                  {PROGRAMS.map((prog) => (
-                    <Link key={prog.code} href={prog.href} onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-3 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
-                      {prog.name}
-                      {prog.isFeatured && <span className="text-[9px] bg-[#F0A500] text-[#162058] font-bold px-1.5 py-0.5 rounded-full">Unggulan</span>}
-                    </Link>
-                  ))}
+                  {PROGRAMS.map((prog) =>
+                    prog.external ? (
+                      <a key={prog.code} href={prog.href} target="_blank" rel="noopener noreferrer"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
+                        {prog.name}
+                        {prog.isFeatured && <span className="text-[9px] bg-[#F0A500] text-[#162058] font-bold px-1.5 py-0.5 rounded-full">Unggulan</span>}
+                        <span className="text-[9px] text-white/30 ml-auto">↗</span>
+                      </a>
+                    ) : (
+                      <Link key={prog.code} href={prog.href} onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
+                        {prog.name}
+                        {prog.isFeatured && <span className="text-[9px] bg-[#F0A500] text-[#162058] font-bold px-1.5 py-0.5 rounded-full">Unggulan</span>}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
             </div>
