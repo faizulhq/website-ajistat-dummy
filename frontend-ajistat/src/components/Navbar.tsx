@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -24,13 +23,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="bg-white rounded-xl px-3 py-1.5 shadow-sm">
-            <Image src="/images/logo.png" alt="Aji Institute" width={140} height={42} className="h-9 w-auto" priority />
-          </div>
-          <div className="hidden sm:block">
-            <span className="text-white font-black text-lg tracking-tight">AjiStat</span>
-            <p className="text-white/40 text-[10px] leading-none">Divisi Statistik & Riset</p>
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5">
+            <div className="w-9 h-9 rounded-xl bg-[#F0A500] flex items-center justify-center shrink-0">
+              <span className="text-[#162058] font-black text-xs leading-none">AS</span>
+            </div>
+            <div>
+              <span className="text-white font-black text-lg tracking-tight leading-none block">AjiStat</span>
+              <span className="text-white/40 text-[10px] leading-none">by Aji Institute</span>
+            </div>
           </div>
         </Link>
 

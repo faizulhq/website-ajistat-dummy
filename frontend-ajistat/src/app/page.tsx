@@ -120,9 +120,9 @@ export default function AjiStatPage() {
               className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-8 py-4 rounded-2xl transition-colors text-sm shadow-xl">
               Konsultasi Sekarang
             </a>
-            <Link href="#program"
+            <Link href="#layanan"
               className="inline-flex items-center gap-2 bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold px-8 py-4 rounded-2xl transition-colors text-sm">
-              Lihat Program
+              Lihat Layanan
             </Link>
           </div>
         </div>

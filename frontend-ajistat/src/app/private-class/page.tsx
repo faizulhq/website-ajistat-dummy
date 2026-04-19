@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Clock, Star, Shield, X } from 'lucide-react';
-import { WA_LINK, API_BASE } from '@/lib/config';
+import { WA_LINK, PRIVATE_PROGRAMS } from '@/lib/config';
 
 const KEUNGGULAN = [
   {
@@ -24,8 +24,6 @@ const KEUNGGULAN = [
     detail: 'Materi disesuaikan 100% dengan kebutuhan dan latar belakang Anda. Tidak ada kurikulum kaku — belajar apa yang Anda butuhkan.',
   },
 ];
-
-interface Program { id: number; title: string; type: string; description: string; price: number; original_price: number; }
 
 function formatPrice(p: number) {
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(p);
@@ -55,16 +53,6 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0] | null;
 
 export default function PrivateClassPage() {
   const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`${API_BASE}/api/programs/?brand=ajistat&type=private-class`)
-      .then((r) => r.json())
-      .then((data) => setPrograms(Array.isArray(data) ? data : data.results ?? []))
-      .catch(() => setPrograms([]))
-      .finally(() => setLoading(false));
-  }, []);
 
   return (
     <>
@@ -121,41 +109,30 @@ export default function PrivateClassPage() {
             <h2 className="text-2xl font-black text-gray-900 mb-1">Pilih Topik Kelas Privat</h2>
             <p className="text-gray-500 text-sm">Klik kartu untuk mendaftar via WhatsApp.</p>
           </div>
-          {loading ? (
-            <div className="text-center py-12 text-gray-400">Memuat program...</div>
-          ) : programs.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-400 mb-4">Program kelas privat sedang diperbarui.</p>
-              <a href={WA_LINK('Halo AjiStat, saya ingin info Kelas Privat')} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#162058] text-white font-bold px-6 py-3 rounded-xl text-sm hover:bg-[#1B3A8C] transition-colors">
-                Tanya Kelas Privat
-              </a>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {programs.map((p) => (
-                <div key={p.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all">
-                  <div className="bg-gradient-to-r from-[#1B3A8C] to-[#2348A8] px-5 py-4">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/15 px-2 py-0.5 rounded-full">Kelas Privat</span>
-                    <h3 className="text-white font-black mt-2 text-sm leading-snug">{p.title}</h3>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">{p.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        {p.original_price > p.price && <p className="text-xs text-gray-400 line-through">{formatPrice(p.original_price)}</p>}
-                        <p className="font-black text-[#162058]">{formatPrice(p.price)}</p>
-                      </div>
-                      <a href={WA_LINK(`Halo AjiStat, saya ingin Kelas Privat: ${p.title}`)} target="_blank" rel="noopener noreferrer"
-                        className="bg-[#1B3A8C] hover:bg-[#2348A8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors">
-                        Daftar →
-                      </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {PRIVATE_PROGRAMS.map((p) => (
+              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all">
+                <div className="bg-gradient-to-r from-[#1B3A8C] to-[#2348A8] px-5 py-4">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/15 px-2 py-0.5 rounded-full">Kelas Privat</span>
+                  <h3 className="text-white font-black mt-2 text-sm leading-snug">{p.title}</h3>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-3">{p.description}</p>
+                  <p className="text-[#1B3A8C] text-xs font-medium mb-4">{p.duration} · {p.facilitator}</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-gray-400 line-through">{formatPrice(p.originalPrice)}</p>
+                      <p className="font-black text-[#162058]">{formatPrice(p.price)}</p>
                     </div>
+                    <a href={WA_LINK(`Halo AjiStat, saya ingin Kelas Privat: ${p.title}`)} target="_blank" rel="noopener noreferrer"
+                      className="bg-[#1B3A8C] hover:bg-[#2348A8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors">
+                      Daftar →
+                    </a>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

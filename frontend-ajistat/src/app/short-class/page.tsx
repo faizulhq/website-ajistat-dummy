@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Zap, Target, BookMarked, X } from 'lucide-react';
-import { WA_LINK, API_BASE } from '@/lib/config';
+import { WA_LINK, SHORT_CLASS_PROGRAMS } from '@/lib/config';
 
 const KEUNGGULAN = [
   {
@@ -24,42 +24,6 @@ const KEUNGGULAN = [
     detail: 'Bawa data Anda sendiri atau gunakan dataset latihan kami. Anda langsung praktik selama sesi berlangsung, bukan hanya menonton.',
   },
 ];
-
-// Static short class data (fallback jika API tidak ada data)
-const STATIC_SHORT_CLASSES = [
-  {
-    id: 1, title: 'Short Class SPSS: Regresi Linear untuk Skripsi', type: 'short-class',
-    description: 'Kuasai teknik regresi linear berganda menggunakan SPSS dalam 2 jam. Cocok untuk mahasiswa yang sedang mengerjakan BAB IV skripsi.',
-    price: 75000, original_price: 125000,
-  },
-  {
-    id: 2, title: 'Short Class SmartPLS: SEM-PLS dari Nol', type: 'short-class',
-    description: 'Pelajari dasar-dasar Structural Equation Modeling menggunakan SmartPLS dalam 3 jam. Meliputi outer model, inner model, dan interpretasi.',
-    price: 100000, original_price: 150000,
-  },
-  {
-    id: 3, title: 'Short Class: Validasi & Reliabilitas dengan SPSS', type: 'short-class',
-    description: 'Uji validitas (Pearson, CFA) dan reliabilitas (Cronbach Alpha) kuesioner menggunakan SPSS. Dilengkapi cara penulisan laporan.',
-    price: 75000, original_price: 100000,
-  },
-  {
-    id: 4, title: 'Short Class NVivo: Analisis Data Kualitatif', type: 'short-class',
-    description: 'Langkah-langkah analisis data kualitatif menggunakan NVivo: import data, coding, theme analysis, dan visualisasi.',
-    price: 100000, original_price: 150000,
-  },
-  {
-    id: 5, title: 'Short Class: Penulisan BAB IV & V Skripsi/Tesis', type: 'short-class',
-    description: 'Panduan praktis menulis bab hasil penelitian dan pembahasan yang sistematis, logis, dan sesuai kaidah akademik.',
-    price: 75000, original_price: 100000,
-  },
-  {
-    id: 6, title: 'Short Class EViews: Regresi Panel Data', type: 'short-class',
-    description: 'Pengolahan data panel (FEM, REM, CEM) menggunakan EViews lengkap dengan uji Hausman dan interpretasi hasil.',
-    price: 100000, original_price: 150000,
-  },
-];
-
-interface Program { id: number; title: string; type: string; description: string; price: number; original_price: number; }
 
 function formatPrice(p: number) {
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(p);
@@ -89,19 +53,6 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0] | null;
 
 export default function ShortClassPage() {
   const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`${API_BASE}/api/programs/?brand=ajistat&type=short-class`)
-      .then((r) => r.json())
-      .then((data) => {
-        const list = Array.isArray(data) ? data : data.results ?? [];
-        setPrograms(list.length > 0 ? list : STATIC_SHORT_CLASSES);
-      })
-      .catch(() => setPrograms(STATIC_SHORT_CLASSES))
-      .finally(() => setLoading(false));
-  }, []);
 
   return (
     <>
@@ -164,35 +115,30 @@ export default function ShortClassPage() {
             <h2 className="text-2xl font-black text-gray-900 mb-1">Pilih Topik Short Class</h2>
             <p className="text-gray-500 text-sm">Klik kartu untuk mendaftar via WhatsApp.</p>
           </div>
-          {loading ? (
-            <div className="text-center py-12 text-gray-400">Memuat program...</div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {programs.map((p) => (
-                <div key={p.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all">
-                  <div className="bg-gradient-to-r from-[#162058] to-[#2348A8] px-5 py-4">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/15 px-2 py-0.5 rounded-full">Short Class</span>
-                    <h3 className="text-white font-black mt-2 text-sm leading-snug">{p.title}</h3>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">{p.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        {p.original_price > p.price && (
-                          <p className="text-xs text-gray-400 line-through">{formatPrice(p.original_price)}</p>
-                        )}
-                        <p className="font-black text-[#162058]">{formatPrice(p.price)}</p>
-                      </div>
-                      <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar Short Class: ${p.title}`)} target="_blank" rel="noopener noreferrer"
-                        className="bg-[#162058] hover:bg-[#1B3A8C] text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors">
-                        Daftar →
-                      </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {SHORT_CLASS_PROGRAMS.map((p) => (
+              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all">
+                <div className="bg-gradient-to-r from-[#162058] to-[#2348A8] px-5 py-4">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/15 px-2 py-0.5 rounded-full">Short Class</span>
+                  <h3 className="text-white font-black mt-2 text-sm leading-snug">{p.title}</h3>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-3">{p.description}</p>
+                  <p className="text-[#162058] text-xs font-medium mb-4">{p.duration} · {p.facilitator}</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-gray-400 line-through">{formatPrice(p.originalPrice)}</p>
+                      <p className="font-black text-[#162058]">{formatPrice(p.price)}</p>
                     </div>
+                    <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar Short Class: ${p.title}`)} target="_blank" rel="noopener noreferrer"
+                      className="bg-[#162058] hover:bg-[#1B3A8C] text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors">
+                      Daftar →
+                    </a>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

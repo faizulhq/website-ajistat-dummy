@@ -94,6 +94,112 @@ export const TOOLS = [
   },
 ];
 
+export interface Program {
+  id: number;
+  type: string;
+  title: string;
+  slug: string;
+  description: string;
+  duration: string;
+  price: number;
+  originalPrice: number;
+  tags: string[];
+  facilitator: string;
+}
+
+export const BOOTCAMP_PROGRAMS: Program[] = [
+  {
+    id: 1, type: 'bootcamp', slug: 'bootcamp-analisis-spss',
+    title: 'Bootcamp Analisis Data dengan SPSS: Dari Dasar hingga Mahir',
+    description: 'Program bootcamp intensif yang membekali peserta dengan kemampuan analisis data menggunakan SPSS secara komprehensif. Cocok untuk mahasiswa S1, S2, maupun peneliti yang ingin menguasai statistik kuantitatif.',
+    duration: '4 Hari (8 Sesi Live Zoom)', price: 350000, originalPrice: 700000,
+    tags: ['SPSS', 'Kuantitatif', 'Olah Data'], facilitator: 'Dr. Ahmad Fauzan, M.Si.',
+  },
+  {
+    id: 2, type: 'bootcamp', slug: 'bootcamp-smartpls',
+    title: 'Bootcamp SmartPLS: Structural Equation Modeling untuk Riset',
+    description: 'Pelajari teknik PLS-SEM menggunakan SmartPLS. Ideal untuk peneliti manajemen, ekonomi, dan ilmu sosial yang ingin membuktikan hubungan antar variabel laten dalam penelitiannya.',
+    duration: '3 Hari (6 Sesi Live Zoom)', price: 400000, originalPrice: 800000,
+    tags: ['SmartPLS', 'SEM', 'Kuantitatif'], facilitator: 'Rizka Amalia, M.M.',
+  },
+  {
+    id: 3, type: 'bootcamp', slug: 'bootcamp-rstudio',
+    title: 'Bootcamp R Studio: Analisis Statistika Lanjutan untuk Peneliti',
+    description: 'Kuasai R dan R Studio untuk analisis statistik lanjutan: dari eksplorasi data, regresi, hingga visualisasi publikasi. Dirancang untuk peneliti dan akademisi yang ingin beralih ke software statistik open-source.',
+    duration: '5 Hari (10 Sesi Live Zoom)', price: 450000, originalPrice: 900000,
+    tags: ['R', 'R Studio', 'Data Science'], facilitator: 'Budi Santoso, M.Si.',
+  },
+];
+
+export const PRIVATE_PROGRAMS: Program[] = [
+  {
+    id: 4, type: 'private-class', slug: 'private-analisis-spss',
+    title: 'Private Class Analisis Data dengan SPSS: Dari Dasar hingga Mahir',
+    description: 'Pendampingan intensif 1-on-1 untuk menguasai analisis data menggunakan SPSS secara komprehensif. Jadwal fleksibel disesuaikan kebutuhan mahasiswa S1, S2, dan peneliti.',
+    duration: '4 Sesi (Sesuai Perjanjian)', price: 350000, originalPrice: 700000,
+    tags: ['SPSS', 'Kuantitatif', 'Olah Data'], facilitator: 'Dr. Ahmad Fauzan, M.Si.',
+  },
+  {
+    id: 5, type: 'private-class', slug: 'private-smartpls',
+    title: 'Private Class SmartPLS: Structural Equation Modeling untuk Riset',
+    description: 'Belajar PLS-SEM menggunakan SmartPLS secara privat 1-on-1. Ideal untuk peneliti manajemen, ekonomi, dan ilmu sosial yang membutuhkan pendampingan intensif.',
+    duration: '3 Sesi (Sesuai Perjanjian)', price: 400000, originalPrice: 800000,
+    tags: ['SmartPLS', 'SEM', 'Kuantitatif'], facilitator: 'Rizka Amalia, M.M.',
+  },
+  {
+    id: 6, type: 'private-class', slug: 'private-rstudio',
+    title: 'Private Class R Studio: Analisis Statistika Lanjutan',
+    description: 'Kuasai R dan R Studio untuk analisis statistik lanjutan secara privat. Materi disesuaikan penuh dengan kebutuhan dan dataset penelitian Anda.',
+    duration: '5 Sesi (Sesuai Perjanjian)', price: 450000, originalPrice: 900000,
+    tags: ['R', 'R Studio', 'Data Science'], facilitator: 'Budi Santoso, M.Si.',
+  },
+  {
+    id: 7, type: 'private-class', slug: 'private-python-data',
+    title: 'Private Class Python for Data Analysis: Pandas, NumPy & Visualisasi',
+    description: 'Pelajari Python sebagai alat analisis data modern: dari manipulasi data dengan Pandas, analisis statistik dengan NumPy, hingga visualisasi interaktif. Cocok untuk peneliti dan profesional data.',
+    duration: '4 Sesi (Sesuai Perjanjian)', price: 475000, originalPrice: 950000,
+    tags: ['Python', 'Data Science', 'Visualisasi'], facilitator: 'Siti Nurhayati, S.T., M.Kom.',
+  },
+];
+
+export const SHORT_CLASS_PROGRAMS: Program[] = [
+  {
+    id: 8, type: 'short-class', slug: 'short-uji-instrumen-spss',
+    title: 'Short Class: Uji Instrumen Penelitian (Validitas & Reliabilitas) dengan SPSS',
+    description: 'Pelajari cara menguji validitas dan reliabilitas instrumen kuesioner menggunakan SPSS dalam satu sesi praktis. Sangat cocok untuk mahasiswa yang sedang menyusun bab metodologi penelitian.',
+    duration: '1 Hari (2 Jam Live Zoom)', price: 99000, originalPrice: 250000,
+    tags: ['SPSS', 'Validitas', 'Reliabilitas'], facilitator: 'Rina Kusumawati, M.Si.',
+  },
+  {
+    id: 9, type: 'short-class', slug: 'short-regresi-spss',
+    title: 'Short Class: Regresi Linear Berganda dengan SPSS — Cepat & Tepat',
+    description: 'Kuasai analisis regresi linear berganda menggunakan SPSS dalam satu sesi singkat. Dari input data hingga interpretasi output dan penulisan hasil ke laporan penelitian.',
+    duration: '1 Hari (3 Jam Live Zoom)', price: 125000, originalPrice: 300000,
+    tags: ['SPSS', 'Regresi', 'Kuantitatif'], facilitator: 'Drs. Hendra Wijaya, M.Si.',
+  },
+  {
+    id: 10, type: 'short-class', slug: 'short-visualisasi-python',
+    title: 'Short Class: Visualisasi Data Penelitian dengan Python (Matplotlib & Seaborn)',
+    description: 'Buat visualisasi data yang menarik dan publication-ready menggunakan Python. Cocok untuk peneliti dan mahasiswa yang ingin mempercantik tampilan data di jurnal atau laporan.',
+    duration: '1 Hari (2 Jam Live Zoom)', price: 99000, originalPrice: 250000,
+    tags: ['Python', 'Visualisasi', 'Data Science'], facilitator: 'Siti Nurhayati, S.T., M.Kom.',
+  },
+  {
+    id: 11, type: 'short-class', slug: 'short-penulisan-artikel',
+    title: 'Short Class: Teknik Penulisan Artikel Ilmiah Terindeks Scopus & Sinta',
+    description: 'Pelajari strategi dan teknik penulisan artikel ilmiah yang berpeluang besar diterima di jurnal terindeks Scopus dan Sinta. Dari struktur IMRaD hingga cover letter dan submission.',
+    duration: '1 Hari (3 Jam Live Zoom)', price: 150000, originalPrice: 350000,
+    tags: ['Penulisan Ilmiah', 'Scopus', 'Sinta'], facilitator: 'Dr. Faridah Baroroh, M.Hum.',
+  },
+  {
+    id: 12, type: 'short-class', slug: 'short-statistika-dasar',
+    title: 'Short Class: Statistika Dasar untuk Pemula — Mahir dalam 1 Hari',
+    description: 'Program satu hari yang dirancang khusus bagi pemula yang ingin memahami konsep-konsep dasar statistika: dari mean, median, modus, distribusi data, hingga interpretasi hasil yang benar.',
+    duration: '1 Hari (2 Jam Live Zoom)', price: 99000, originalPrice: 250000,
+    tags: ['Statistika Dasar', 'Pemula'], facilitator: 'Rina Kusumawati, M.Si.',
+  },
+];
+
 export const TOPICS = [
   'Validasi & Reliabilitas', 'MSI (Method of Successive Intervals)', 'Analisis Regresi',
   'Korelasi', 'Design Experiment', 'SEM (Structural Equation Modeling)',
