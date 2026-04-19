@@ -5,19 +5,30 @@ import Link from 'next/link';
 import {
   Clock, Calendar, CheckCircle, ChevronDown, ChevronUp,
   FileText, Database, Video, FileSpreadsheet, FileCode, Lock,
-  MessageCircle, ArrowLeft, GraduationCap,
+  MessageCircle, GraduationCap,
 } from 'lucide-react';
-import type { Program } from '@/lib/config';
+import type { ApiProgram } from '@/lib/types';
+import { STATUS_LABEL, STATUS_COLOR } from '@/lib/types';
 import { WA_LINK } from '@/lib/config';
 
 function formatPrice(p: number) {
-  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(p);
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency', currency: 'IDR', maximumFractionDigits: 0,
+  }).format(p);
 }
 
 const TYPE_LABEL: Record<string, string> = {
   bootcamp: 'Bootcamp Intensif',
   'short-class': 'Short Class',
   'private-class': 'Kelas Privat',
+  'in-house-training': 'In-House Training',
+};
+
+const VIDEO_LABEL: Record<string, string> = {
+  bootcamp: 'Cuplikan Sesi Bootcamp',
+  'short-class': 'Cuplikan Sesi Pembelajaran',
+  'private-class': 'Cuplikan Sesi Latihan Privat',
+  'in-house-training': 'Cuplikan Sesi Pelatihan',
 };
 
 const TYPE_HREF: Record<string, string> = {
@@ -65,7 +76,13 @@ const WHAT_YOU_GET = [
   'Konsultasi lanjutan via WA',
 ];
 
-function MaterialModal({ item, program, onClose }: { item: typeof LEARNING_MATERIALS[0] | null; program: Program; onClose: () => void }) {
+function MaterialModal({
+  item, program, onClose,
+}: {
+  item: typeof LEARNING_MATERIALS[0] | null;
+  program: ApiProgram;
+  onClose: () => void;
+}) {
   if (!item) return null;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
@@ -88,7 +105,8 @@ function MaterialModal({ item, program, onClose }: { item: typeof LEARNING_MATER
           <p className="text-gray-500 text-sm leading-relaxed mb-5">
             File <strong>{item.label}</strong> hanya tersedia untuk peserta terdaftar di kelas <strong>{program.title}</strong>.
           </p>
-          <a href={WA_LINK(`Halo AjiStat, saya ingin daftar kelas ${program.title} dan mendapatkan ${item.label}`)} target="_blank" rel="noopener noreferrer"
+          <a href={WA_LINK(`Halo AjiStat, saya ingin daftar kelas ${program.title} dan mendapatkan ${item.label}`)}
+            target="_blank" rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3 rounded-xl transition-colors text-sm">
             Daftar Sekarang via WhatsApp
           </a>
@@ -99,97 +117,142 @@ function MaterialModal({ item, program, onClose }: { item: typeof LEARNING_MATER
   );
 }
 
-export default function ProgramDetailClient({ program }: { program: Program }) {
+export default function ProgramDetailClient({ program }: { program: ApiProgram }) {
   const [showFullCurriculum, setShowFullCurriculum] = useState(false);
   const [activeMaterial, setActiveMaterial] = useState<typeof LEARNING_MATERIALS[0] | null>(null);
 
   const curriculum = program.curriculum ?? [];
-  const visibleCurriculum = showFullCurriculum ? curriculum : curriculum.slice(0, 5);
-  const discount = Math.round((1 - program.price / program.originalPrice) * 100);
-  const schedule = SCHEDULE[program.type] ?? SCHEDULE['bootcamp'];
+  const visibleCurriculum = showFullCurriculum ? curriculum : curriculum.slice(0, 6);
+
+  const discount = program.original_price
+    ? Math.round((1 - program.price / program.original_price) * 100)
+    : null;
+
+  const scheduleItems = SCHEDULE[program.type] ?? SCHEDULE['bootcamp'];
+  const videoLabel = VIDEO_LABEL[program.type] ?? 'Cuplikan Pembelajaran';
 
   return (
     <>
-      {/* HERO */}
+      {/* ─── HERO ─── */}
       <div className="bg-[#162058] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F0A500] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#2348A8] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+            style={{ backgroundColor: program.thumbnail_color || '#F0A500' }} />
         </div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <nav className="flex gap-2 text-white/40 text-xs mb-6 flex-wrap items-center">
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          {/* Breadcrumb */}
+          <nav className="flex gap-2 text-white/40 text-sm mb-8 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Beranda</Link>
             <span>/</span>
-            <Link href={TYPE_HREF[program.type] ?? '/'} className="hover:text-white transition-colors">{TYPE_LABEL[program.type]}</Link>
+            <Link href={TYPE_HREF[program.type] ?? '/bootcamp'} className="hover:text-white transition-colors">
+              {TYPE_LABEL[program.type]}
+            </Link>
             <span>/</span>
             <span className="text-white/70 line-clamp-1">{program.title}</span>
           </nav>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left */}
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {/* Left: Info */}
             <div className="lg:col-span-2">
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="text-xs font-bold bg-[#F0A500]/20 border border-[#F0A500]/40 text-[#F0A500] px-3 py-1 rounded-full">
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                <span className="text-xs font-bold bg-[#2348A8]/40 border border-[#2348A8]/50 text-white px-3 py-1 rounded-full">
                   {TYPE_LABEL[program.type]}
                 </span>
-                {program.status && (
-                  <span className="text-xs font-semibold bg-green-500/20 border border-green-400/40 text-green-300 px-3 py-1 rounded-full">
-                    {program.status}
-                  </span>
-                )}
-                {program.tags.map(tag => (
-                  <span key={tag} className="text-xs bg-white/10 text-white/60 px-2.5 py-1 rounded-full">{tag}</span>
+                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${STATUS_COLOR[program.status]}`}>
+                  {STATUS_LABEL[program.status]}
+                </span>
+                {program.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className="text-xs bg-white/10 text-white/75 px-2.5 py-1 rounded-full">{tag}</span>
                 ))}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-white mb-4 leading-snug">{program.title}</h1>
-              <p className="text-white/65 text-sm leading-relaxed mb-8">{program.description}</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="bg-white/8 border border-white/12 rounded-xl p-3.5 flex items-center gap-2.5">
-                  <Clock className="w-4 h-4 text-[#F0A500] shrink-0" />
-                  <div>
-                    <p className="text-white/40 text-[10px] uppercase tracking-wider">Durasi</p>
-                    <p className="text-white text-xs font-medium">{program.duration}</p>
+
+              <h1 className="text-3xl sm:text-4xl font-black text-white mb-5 leading-snug">
+                {program.title}
+              </h1>
+
+              {program.description && (
+                <p className="text-white/70 text-base leading-relaxed mb-7">{program.description}</p>
+              )}
+
+              {/* ─── VIDEO INLINE 16:9 (seperti web utama) ─── */}
+              {program.demo_video_url && (
+                <div className="mb-10 mt-2 bg-black/40 rounded-2xl overflow-hidden border border-white/15 shadow-2xl relative group">
+                  <div className="absolute top-0 left-0 w-full p-4 bg-gradient-to-b from-black/60 to-transparent pointer-events-none z-10 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <p className="text-white/90 text-xs font-semibold tracking-wide uppercase">{videoLabel}</p>
                   </div>
+                  <video
+                    src={program.demo_video_url}
+                    controls
+                    playsInline
+                    className="w-full aspect-video object-cover"
+                    preload="metadata"
+                    controlsList="nodownload"
+                  >
+                    Browser Anda tidak mendukung pemutar video HTML5.
+                  </video>
                 </div>
-                <div className="bg-white/8 border border-white/12 rounded-xl p-3.5 flex items-center gap-2.5">
-                  <Calendar className="w-4 h-4 text-[#F0A500] shrink-0" />
-                  <div>
-                    <p className="text-white/40 text-[10px] uppercase tracking-wider">Jadwal</p>
-                    <p className="text-white text-xs font-medium">Segera</p>
+              )}
+
+              {/* Meta */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {program.duration && (
+                  <div className="bg-white/8 border border-white/12 rounded-xl p-4 flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-[#4A72D4] shrink-0" />
+                    <div>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider">Durasi</p>
+                      <p className="text-white text-sm font-medium">{program.duration}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="bg-white/8 border border-white/12 rounded-xl p-3.5 flex items-center gap-2.5">
-                  <GraduationCap className="w-4 h-4 text-[#F0A500] shrink-0" />
-                  <div>
-                    <p className="text-white/40 text-[10px] uppercase tracking-wider">Fasilitator</p>
-                    <p className="text-white text-xs font-medium truncate">{program.facilitator.split(',')[0]}</p>
+                )}
+                {program.schedule && (
+                  <div className="bg-white/8 border border-white/12 rounded-xl p-4 flex items-center gap-3">
+                    <Calendar className="w-5 h-5 text-[#4A72D4] shrink-0" />
+                    <div>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider">Jadwal</p>
+                      <p className="text-white text-sm font-medium">{program.schedule}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
-            {/* Right: Purchase Card Desktop */}
+
+            {/* Right: Sidebar Price (desktop) */}
             <div className="hidden lg:block">
-              <div className="bg-white rounded-2xl p-5 shadow-2xl sticky top-20">
-                <p className="text-gray-400 text-sm line-through mb-0.5">{formatPrice(program.originalPrice)}</p>
-                <div className="flex items-baseline gap-2 mb-4">
-                  <p className="text-2xl font-black text-[#162058]">{formatPrice(program.price)}</p>
-                  <span className="bg-red-50 text-red-500 text-xs font-bold px-2 py-0.5 rounded">-{discount}%</span>
+              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden sticky top-24">
+                <div className="p-6">
+                  <div className="mb-4">
+                    <div className="flex items-baseline gap-3 mb-1">
+                      <p className="text-3xl font-black text-[#162058]">{formatPrice(program.price)}</p>
+                      {discount && (
+                        <span className="text-xs font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded-full">-{discount}%</span>
+                      )}
+                    </div>
+                    {program.original_price && (
+                      <p className="text-gray-400 text-sm line-through">{formatPrice(program.original_price)}</p>
+                    )}
+                  </div>
+                  <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar: ${program.title}`)}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black py-3.5 rounded-xl transition-colors text-sm mb-3">
+                    Daftar Sekarang via WhatsApp
+                  </a>
+                  <a href={WA_LINK(`Halo AjiStat, saya ingin bertanya tentang: ${program.title}`)}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 border border-green-200 bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-3.5 rounded-xl transition-colors text-sm mb-5">
+                    <MessageCircle className="w-4 h-4" /> Tanya via WhatsApp
+                  </a>
+                  <ul className="space-y-2.5">
+                    {WHAT_YOU_GET.map((item) => (
+                      <li key={item} className="flex items-center gap-2.5 text-gray-600 text-xs">
+                        <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar program: ${program.title}`)} target="_blank" rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3 rounded-xl transition-colors mb-2 text-sm">
-                  Daftar Sekarang via WhatsApp
-                </a>
-                <a href={WA_LINK(`Halo AjiStat, saya tertarik program ${program.title}. Bisa info lebih lanjut?`)} target="_blank" rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 border border-green-200 text-green-700 font-semibold py-2.5 rounded-xl transition-colors text-sm">
-                  <MessageCircle className="w-4 h-4" /> Tanya via WhatsApp
-                </a>
-                <ul className="mt-4 space-y-2">
-                  {WHAT_YOU_GET.map(item => (
-                    <li key={item} className="flex items-center gap-2 text-xs text-gray-600">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -200,204 +263,145 @@ export default function ProgramDetailClient({ program }: { program: Program }) {
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-100 shadow-2xl px-4 py-3 flex items-center gap-3">
         <div className="flex-1">
           <p className="text-[#162058] font-black text-base leading-none">{formatPrice(program.price)}</p>
-          <p className="text-gray-400 text-xs line-through">{formatPrice(program.originalPrice)}</p>
+          {program.original_price && (
+            <p className="text-gray-400 text-xs line-through">{formatPrice(program.original_price)}</p>
+          )}
         </div>
-        <a href={WA_LINK(`Halo AjiStat, saya tertarik: ${program.title}`)} target="_blank" rel="noopener noreferrer"
+        <a href={WA_LINK(`Halo AjiStat, saya tertarik: ${program.title}`)}
+          target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 font-semibold px-3 py-2.5 rounded-xl text-sm">
           <MessageCircle className="w-4 h-4" />
         </a>
-        <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar: ${program.title}`)} target="_blank" rel="noopener noreferrer"
+        <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar: ${program.title}`)}
+          target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold px-5 py-2.5 rounded-xl text-sm">
           Daftar
         </a>
       </div>
 
-      {/* VIDEO PREVIEW */}
-      {program.previewVideo && (
-        <section className="bg-[#0d1632] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.04]"
-            style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div>
-                <span className="inline-block text-xs font-bold text-[#F0A500] bg-[#F0A500]/10 border border-[#F0A500]/30 px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-                  Cuplikan Sesi
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
-                  Lihat Bagaimana Kami Mengajar
-                </h2>
-                <p className="text-white/65 leading-relaxed mb-6 text-sm">
-                  Intip cuplikan sesi langsung {program.title} — bagaimana materi yang kompleks kami sajikan dengan jelas, terstruktur, dan langsung bisa dipraktikkan.
-                </p>
-                <a href={WA_LINK(`Halo AjiStat, saya tertarik bergabung program ${program.title} setelah melihat cuplikan`)}
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-6 py-3 rounded-xl transition-colors text-sm">
-                  Daftar Sekarang via WhatsApp
-                </a>
-              </div>
-              <div className="flex justify-center">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black w-full max-w-sm" style={{ aspectRatio: '9/16' }}>
-                  <video src={program.previewVideo} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                  <div className="absolute bottom-4 left-4 bg-[#F0A500] text-[#162058] rounded-xl px-3 py-2 shadow-xl">
-                    <p className="text-[10px] font-bold uppercase tracking-wide">{TYPE_LABEL[program.type] ?? 'Program'}</p>
-                    <p className="text-sm font-black leading-tight">AjiStat</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-
+      {/* ─── CONTENT ─── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-28 lg:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
 
             {/* Fasilitator */}
             <section>
-              <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-[#F0A500] inline-block" />
-                Pemateri / Fasilitator
+              <h2 className="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+                <GraduationCap className="w-5 h-5 text-[#2348A8]" /> Pemateri / Pengajar
               </h2>
-              <div className="flex items-start gap-4 bg-gradient-to-br from-[#162058]/5 to-[#2348A8]/5 border border-[#2348A8]/15 rounded-2xl p-5">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#162058] to-[#2348A8] flex items-center justify-center text-white text-sm font-black shrink-0">
-                  {program.facilitator.split(' ').slice(-2).map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+              <div className="flex items-start gap-5 bg-gradient-to-br from-[#162058]/5 to-[#2348A8]/5 border border-[#2348A8]/15 rounded-2xl p-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#162058] to-[#2348A8] flex items-center justify-center text-white text-xl font-black shrink-0 shadow-lg">
+                  AP
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <p className="font-black text-gray-900 text-sm">{program.facilitator}</p>
-                    <span className="text-[10px] font-bold bg-[#F0A500]/20 text-[#C8870A] px-2 py-0.5 rounded-full border border-[#F0A500]/30">Terverifikasi</span>
+                    <p className="font-black text-gray-900 text-base">
+                      {program.facilitator_name || 'Aji Pamoso, S.Si, M.T'}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#F0A500]/20 text-[#C8870A] px-2 py-0.5 rounded-full border border-[#F0A500]/30">
+                      <GraduationCap className="w-3 h-3" /> Fasilitator Terverifikasi
+                    </span>
                   </div>
-                  <p className="text-[#2348A8] text-xs font-semibold mb-1">Fasilitator AjiStat</p>
-                  {program.facilitatorBio && <p className="text-gray-600 text-xs leading-relaxed">{program.facilitatorBio}</p>}
+                  <p className="text-[#2348A8] text-xs font-semibold mb-2">
+                    {program.facilitator_title || 'Fasilitator & Instruktur AjiStat'}
+                  </p>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {program.facilitator_bio || 'Praktisi aktif dan pengajar berpengalaman di bidang statistik, riset kuantitatif, dan analisis data. Telah membantu ribuan mahasiswa dan peneliti dari berbagai universitas di seluruh Indonesia.'}
+                  </p>
                 </div>
               </div>
-            </section>
-
-            {/* Materi & File */}
-            <section>
-              <h2 className="text-lg font-black text-gray-900 mb-1 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-[#F0A500] inline-block" />
-                Materi & File Pembelajaran
-                <span className="text-xs bg-[#F0A500]/20 text-[#C8870A] font-semibold px-2.5 py-0.5 rounded-full border border-[#F0A500]/30 ml-1">Klik untuk info</span>
-              </h2>
-              <p className="text-gray-400 text-xs mb-4">Klik salah satu untuk mengetahui cara mendapatkan file tersebut.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {LEARNING_MATERIALS.map(item => (
-                  <button key={item.label} onClick={() => setActiveMaterial(item)}
-                    className="flex items-start gap-3 bg-gray-50 hover:bg-white border border-gray-100 hover:border-[#2348A8]/25 hover:shadow-md rounded-xl p-4 transition-all text-left group cursor-pointer w-full">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110" style={{ backgroundColor: item.iconBg }}>
-                      <item.icon className="w-4 h-4" style={{ color: item.iconColor }} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                        <p className="font-semibold text-gray-800 text-xs">{item.label}</p>
-                        <span className="text-[10px] font-bold bg-[#162058]/10 text-[#162058] px-1.5 py-0.5 rounded-full">{item.badge}</span>
-                      </div>
-                      <p className="text-gray-400 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
-                    <Lock className="w-3.5 h-3.5 text-gray-300 shrink-0 mt-0.5 group-hover:text-[#F0A500] transition-colors" />
-                  </button>
-                ))}
-              </div>
-            </section>
-
-            {/* Jadwal */}
-            <section>
-              <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-[#F0A500] inline-block" />
-                Jadwal & Rundown Program
-              </h2>
-              <div className="rounded-2xl overflow-hidden border border-gray-100">
-                <div className="bg-[#162058] px-5 py-3">
-                  <p className="text-white font-semibold text-sm">Rundown Harian</p>
-                </div>
-                {schedule.map((row, i) => (
-                  <div key={i} className={`grid grid-cols-[70px_110px_1fr] gap-3 px-5 py-3.5 items-start ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
-                    <span className="text-xs font-bold text-[#2348A8] bg-blue-50 px-2 py-1 rounded-lg text-center whitespace-nowrap">{row.day}</span>
-                    <span className="text-xs text-gray-500 flex items-center gap-1"><Clock className="w-3 h-3" />{row.time}</span>
-                    <div>
-                      <p className="text-xs font-semibold text-gray-800">{row.label}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{row.note}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-gray-400 text-xs mt-2 text-center">* Jadwal bersifat panduan. Info detail tanyakan via WhatsApp.</p>
             </section>
 
             {/* Kurikulum */}
             {curriculum.length > 0 && (
               <section>
-                <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="w-1 h-5 rounded-full bg-[#F0A500] inline-block" />
-                  Kurikulum Program
-                </h2>
-                <div className="rounded-2xl overflow-hidden border border-gray-100">
+                <h2 className="text-xl font-bold text-gray-900 mb-5">Kurikulum & Materi</h2>
+                <div className="space-y-3">
                   {visibleCurriculum.map((item, i) => (
-                    <div key={i} className={`flex items-start gap-4 px-5 py-4 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} ${i > 0 ? 'border-t border-gray-100' : ''}`}>
-                      <div className="w-6 h-6 bg-[#162058] rounded-lg text-white text-xs font-black flex items-center justify-center shrink-0">{i + 1}</div>
-                      <p className="text-gray-700 text-sm pt-0.5">{item}</p>
+                    <div key={i} className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-[#162058]/20 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#162058] text-white text-xs font-black flex items-center justify-center shrink-0">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <p className="text-gray-700 text-sm leading-relaxed">{item}</p>
                     </div>
                   ))}
                 </div>
-                {curriculum.length > 5 && (
-                  <button onClick={() => setShowFullCurriculum(!showFullCurriculum)}
-                    className="mt-3 flex items-center gap-1.5 text-[#2348A8] text-sm font-semibold hover:underline">
-                    {showFullCurriculum
-                      ? <><ChevronUp className="w-4 h-4" /> Tampilkan lebih sedikit</>
-                      : <><ChevronDown className="w-4 h-4" /> Lihat {curriculum.length - 5} materi lainnya</>}
+                {curriculum.length > 6 && (
+                  <button
+                    onClick={() => setShowFullCurriculum(!showFullCurriculum)}
+                    className="mt-4 w-full flex items-center justify-center gap-2 text-[#162058] font-semibold text-sm hover:text-[#2348A8] border border-[#162058]/20 rounded-xl py-3 hover:bg-[#162058]/5 transition-all">
+                    {showFullCurriculum ? (
+                      <><ChevronUp className="w-4 h-4" /> Sembunyikan</>
+                    ) : (
+                      <><ChevronDown className="w-4 h-4" /> Tampilkan semua {curriculum.length} sesi</>
+                    )}
                   </button>
                 )}
               </section>
             )}
 
-            {/* Untuk Siapa */}
+            {/* Materi & File */}
             <section>
-              <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-[#F0A500] inline-block" />
-                Untuk Siapa Program Ini?
-              </h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-5">Materi & File yang Didapatkan</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  'Mahasiswa S1, S2, dan S3 yang sedang mengerjakan skripsi/tesis/disertasi',
-                  'Dosen dan peneliti yang ingin meningkatkan kompetensi analisis data',
-                  'Praktisi dan profesional yang membutuhkan keterampilan riset berbasis data',
-                  'Pemula yang ingin mulai belajar statistik dari nol hingga mahir',
-                ].map(item => (
-                  <div key={item} className="flex items-start gap-3 bg-blue-50/60 border border-blue-100 rounded-xl p-4">
-                    <CheckCircle className="w-4 h-4 text-[#2348A8] shrink-0 mt-0.5" />
-                    <p className="text-gray-700 text-sm">{item}</p>
+                {LEARNING_MATERIALS.map((item) => (
+                  <button key={item.label} onClick={() => setActiveMaterial(item)}
+                    className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-xl hover:border-[#162058]/30 hover:shadow-md transition-all text-left group cursor-pointer">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: item.iconBg }}>
+                      <item.icon className="w-5 h-5" style={{ color: item.iconColor }} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-gray-800 text-sm">{item.label}</p>
+                      <span className="text-[10px] font-bold bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">{item.badge}</span>
+                    </div>
+                    <Lock className="w-4 h-4 text-gray-300 group-hover:text-[#162058] transition-colors shrink-0" />
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            {/* Jadwal Kelas */}
+            <section>
+              <h2 className="text-xl font-bold text-gray-900 mb-5">Jadwal & Struktur Sesi</h2>
+              <div className="space-y-3">
+                {scheduleItems.map((item, i) => (
+                  <div key={i} className="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl hover:border-[#162058]/20 transition-all">
+                    <div className="shrink-0 text-right w-24">
+                      <p className="text-xs font-bold text-[#2348A8]">{item.day}</p>
+                      <p className="text-[11px] text-gray-400 font-mono">{item.time}</p>
+                    </div>
+                    <div className="flex-1 border-l border-gray-200 pl-4">
+                      <p className="font-semibold text-gray-800 text-sm">{item.label}</p>
+                      <p className="text-gray-400 text-xs mt-0.5">{item.note}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </section>
+
           </div>
 
-          {/* Sidebar */}
-          <div className="hidden lg:block space-y-4">
-            <div className="bg-gradient-to-br from-[#162058]/5 to-[#2348A8]/5 border border-[#162058]/10 rounded-2xl p-5">
-              <h3 className="font-black text-gray-900 mb-4 text-sm">Yang Akan Anda Dapatkan</h3>
-              <ul className="space-y-3">
-                {WHAT_YOU_GET.map(item => (
-                  <li key={item} className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-emerald-50 rounded-lg flex items-center justify-center shrink-0">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    </div>
-                    <span className="text-gray-700 text-xs">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link href={TYPE_HREF[program.type] ?? '/'}
-              className="flex items-center gap-2 text-gray-400 hover:text-[#2348A8] text-sm transition-colors">
-              <ArrowLeft className="w-4 h-4" /> Kembali ke daftar program
-            </Link>
-          </div>
+          {/* ─── Sidebar kanan (sama persis desktop) ─── */}
+          <div className="hidden lg:block" />
         </div>
       </div>
 
+      {/* CTA BOTTOM */}
+      <section className="bg-gradient-to-r from-[#162058] to-[#2348A8] py-12">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-black text-white mb-3">Siap Bergabung?</h2>
+          <p className="text-white/70 mb-6 text-sm">Daftar sekarang dan mulai perjalanan belajar Anda bersama AjiStat.</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a href={WA_LINK(`Halo AjiStat, saya ingin mendaftar kelas ${program.title}`)}
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-8 py-4 rounded-2xl transition-all hover:scale-105 shadow-xl">
+              Daftar Sekarang via WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Modal File */}
       <MaterialModal item={activeMaterial} program={program} onClose={() => setActiveMaterial(null)} />
     </>
   );
