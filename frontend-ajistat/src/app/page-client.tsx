@@ -86,6 +86,50 @@ function ToolModal({ tool, onClose }: { tool: ToolItem; onClose: () => void }) {
   );
 }
 
+/* ─── Field Modal ─── */
+type FieldItem = typeof FIELDS[0];
+
+function FieldModal({ field, onClose }: { field: FieldItem; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-7 z-10" onClick={(e) => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors">
+          <X className="w-4 h-4" />
+        </button>
+        <div className="flex items-center gap-4 mb-5">
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg" style={{ backgroundColor: field.color }}>
+            {field.name[0]}
+          </div>
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider opacity-60" style={{ color: field.color }}>Rumpun Ilmu</span>
+            <h3 className="text-2xl font-black text-gray-900">{field.name}</h3>
+          </div>
+        </div>
+        <div className="bg-gray-50 rounded-2xl p-5 mb-5 border border-gray-100">
+          <p className="text-gray-700 text-sm leading-relaxed font-medium mb-4">{field.desc}</p>
+          <div>
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Contoh Riset:</p>
+            <ul className="space-y-2">
+              {field.examples.map((ex, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                  <span className="shrink-0 text-xl leading-none mt-0.5" style={{ color: field.color }}>•</span>
+                  <span>{ex}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <a href={WA_LINK(`Halo AjiStat, saya ingin konsultasi pengolahan data untuk jurusan ${field.name}`)}
+          target="_blank" rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 text-white font-bold py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg text-sm"
+          style={{ backgroundColor: field.color }}>
+          Konsultasi Riset {field.name}
+        </a>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Service Modal (Bootcamp / Private / Short Class) ─── */
 interface ServiceModalProps {
   title: string;
@@ -178,6 +222,7 @@ export default function AjiStatClient({ allPrograms }: { allPrograms: ApiProgram
   const [activeTarget, setActiveTarget] = useState<TargetItem | null>(null);
   const [activeTool, setActiveTool] = useState<ToolItem | null>(null);
   const [activeService, setActiveService] = useState<ServiceKey | null>(null);
+  const [activeField, setActiveField] = useState<FieldItem | null>(null);
 
   // Filter programs per type directly from API data
   const apiBootcamp = allPrograms.filter((p) => p.type === 'bootcamp');
@@ -349,16 +394,21 @@ export default function AjiStatClient({ allPrograms }: { allPrograms: ApiProgram
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
             {FIELDS.map((f) => (
-              <div key={f.name} className="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-[#162058]/20 hover:shadow-md transition-all flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full mb-3 flex items-center justify-center text-white font-black text-xl shadow-sm" style={{ backgroundColor: f.color }}>
+              <button key={f.name} onClick={() => setActiveField(f)} className="group text-left bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-[#162058]/30 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center text-center cursor-pointer">
+                <div className="w-12 h-12 rounded-full mb-3 flex items-center justify-center text-white font-black text-xl shadow-sm transition-transform group-hover:scale-110" style={{ backgroundColor: f.color }}>
                   {f.name[0]}
                 </div>
-                <h3 className="font-black text-gray-900 text-base mb-1">{f.name}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{f.sub}</p>
-              </div>
+                <h3 className="font-black text-gray-900 text-base mb-1 group-hover:text-[#162058] transition-colors">{f.name}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed mb-3">{f.sub}</p>
+                <div className="mt-auto flex items-center gap-1.5 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: f.color }}>
+                  <span>Lihat Detail</span>
+                  <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </button>
             ))}
           </div>
         </div>
+        {activeField && <FieldModal field={activeField} onClose={() => setActiveField(null)} />}
       </section>
 
       {/* ─── TOPIK ─── */}

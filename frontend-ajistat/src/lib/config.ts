@@ -223,12 +223,36 @@ export const TOPICS = [
 ];
 
 export const FIELDS = [
-  { name: 'Manajemen', sub: 'SDM, Pemasaran, Keuangan, Produksi', color: '#1B3A8C' },
-  { name: 'Kesehatan', sub: 'Kedokteran, Keperawatan, Kebidanan', color: '#059669' },
-  { name: 'MIPA', sub: 'Matematika, Biologi, Kimia, Fisika', color: '#0284C7' },
-  { name: 'Pertanian', sub: 'Agribisnis, Peternakan, Kehutanan', color: '#65A30D' },
-  { name: 'Komunikasi', sub: 'Media, Humas, Jurnalistik', color: '#D97706' },
-  { name: 'Psikologi', sub: 'Klinis, Industri, Pendidikan', color: '#7C3AED' },
+  {
+    name: 'Manajemen', sub: 'SDM, Pemasaran, Keuangan, Produksi', color: '#1B3A8C',
+    desc: 'Analisis data untuk penelitian bisnis dan manajemen dengan berbagai model terapan.',
+    examples: ['Analisis Kinerja Karyawan (SDM)', 'Pengaruh Promosi terhadap Penjualan (Pemasaran)', 'Analisis Laporan Keuangan', 'Structural Equation Modeling (SEM) untuk Perilaku Konsumen']
+  },
+  {
+    name: 'Kesehatan', sub: 'Kedokteran, Keperawatan, Kebidanan', color: '#059669',
+    desc: 'Pengolahan data medis, uji klinis, dan survei kesehatan masyarakat dengan standar bio-statistik.',
+    examples: ['Uji Efektivitas Obat/Terapi', 'Analisis Faktor Risiko Penyakit', 'Uji Validitas Instrumen Kuesioner Medis', 'Analisis Survival & Epidemiologi']
+  },
+  {
+    name: 'MIPA', sub: 'Matematika, Biologi, Kimia, Fisika', color: '#0284C7',
+    desc: 'Analisis statistik presisi tinggi untuk eksperimen laboratorium dan pemodelan matematis.',
+    examples: ['Design of Experiments (DOE)', 'Analisis Varians (ANOVA) Multivariat', 'Time Series & Peramalan', 'Uji Asumsi Klasik Ekstensif']
+  },
+  {
+    name: 'Pertanian', sub: 'Agribisnis, Peternakan, Kehutanan', color: '#65A30D',
+    desc: 'Pendampingan olah data untuk percobaan lapangan (Rancangan Acak Lengkap/Kelompok) dan studi sosial ekonomi pertanian.',
+    examples: ['Rancangan Percobaan (RAL, RAK)', 'Analisis Rantai Pasok Agribisnis', 'Kelayakan Usaha Tani', 'Uji Lanjut (Duncan, BNT, Tukey)']
+  },
+  {
+    name: 'Komunikasi', sub: 'Media, Humas, Jurnalistik', color: '#D97706',
+    desc: 'Analisis riset media, opini publik, dan efektivitas komunikasi massa atau korporat.',
+    examples: ['Analisis Isi (Content Analysis)', 'Uji Efektivitas Kampanye PR', 'Analisis Jaringan Komunikasi', 'Survei Kepuasan Audiens']
+  },
+  {
+    name: 'Psikologi', sub: 'Klinis, Industri, Pendidikan', color: '#7C3AED',
+    desc: 'Uji psikometri dan analisis multivariat kompleks untuk mengukur konstruk psikologis.',
+    examples: ['Validitas & Reliabilitas Alat Ukur', 'Analisis Faktor (CFA & EFA)', 'Uji Mediasi & Moderasi', 'Path Analysis & SEM']
+  },
 ];
 
 export const TARGET_MARKET = [
