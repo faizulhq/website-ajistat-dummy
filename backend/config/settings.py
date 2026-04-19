@@ -132,9 +132,12 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'https://aji-institute.com',
     'https://www.aji-institute.com',
-    'http://localhost:3000',  # development
+    'https://ajistat.aji-institute.com',
+    'http://localhost:3000',   # development
+    'http://localhost:3001',   # development alt
 ]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False  # Jaga keamanan — gunakan allowlist di atas
 
 
 # --- Midtrans Payment Gateway ---
