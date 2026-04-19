@@ -196,7 +196,7 @@ Detail / Topik Riset: ${form.desc}`;
                 </ul>
 
                 {/* CTA */}
-                <a href={`https://wa.me/6285892605592?text=Halo%20Tim%20AjiStat%2C%20saya%20tertarik%20dengan%20Paket%20Konsultasi%20${encodeURIComponent(pkg.tier)}`}
+                <a href={WA_LINK(`Halo Tim AjiStat, saya tertarik dengan Paket Konsultasi ${pkg.tier}`)}
                   target="_blank" rel="noopener noreferrer"
                   className={`w-full text-center py-3 rounded-xl font-bold text-sm transition-colors ${pkg.highlight ? 'bg-[#162058] text-white hover:bg-[#1B3A8C]' : 'bg-white/10 hover:bg-white/20 text-white'}`}>
                   {pkg.cta}
