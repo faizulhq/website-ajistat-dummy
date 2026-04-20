@@ -38,11 +38,11 @@ const FORMAT_TABS = [
 ];
 
 const PROGRAM_TABS = [
-  { key: 'ajistat', label: 'AjiStat', filter: (p: Program) => !p.tags.some((t) => ['ajibiz','ajicomm','ajiai','ajilingua'].includes(t.toLowerCase())) },
+  { key: 'ajistat', label: 'AjiStat', filter: (p: Program) => !p.tags.some((t) => ['ajibiz','ajicomm','ajipr','ajiai','ajidigi','ajilingua','ajilangua'].includes(t.toLowerCase())) },
   { key: 'ajibiz', label: 'AjiBiz', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajibiz') },
-  { key: 'ajicomm', label: 'AjiComm', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajicomm') },
-  { key: 'ajiai', label: 'AjiAI', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajiai') },
-  { key: 'ajilingua', label: 'AjiLingua', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajilingua') },
+  { key: 'ajicomm', label: 'AjiComm', filter: (p: Program) => p.tags.some((t) => ['ajicomm', 'ajipr'].includes(t.toLowerCase())) },
+  { key: 'ajiai', label: 'AjiAI', filter: (p: Program) => p.tags.some((t) => ['ajiai', 'ajidigi'].includes(t.toLowerCase())) },
+  { key: 'ajilingua', label: 'AjiLingua', filter: (p: Program) => p.tags.some((t) => ['ajilingua', 'ajilangua'].includes(t.toLowerCase())) },
 ];
 
 function EmptyState({ type, waMsg }: { type: string; waMsg: string }) {

@@ -56,7 +56,7 @@ export default function AjiLinguaPage() {
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const ajiLanguaFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajilingua');
+  const ajiLinguaFilter = (p: Program) => p.tags.some((t) => ['ajilingua', 'ajilangua'].includes(t.toLowerCase()));
 
   return (
     <>
@@ -103,7 +103,7 @@ export default function AjiLinguaPage() {
             <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiLingua</h2>
             <p className="text-gray-500 text-sm mt-2">Klik tab untuk melihat kelas yang tersedia per format. Klik kartu untuk mendaftar.</p>
           </div>
-          <ProgramTabsByFormat programFilter={ajiLanguaFilter} queryKey="programs-ajilingua-tabs" />
+          <ProgramTabsByFormat programFilter={ajiLinguaFilter} queryKey="programs-ajilingua-tabs" />
         </div>
       </section>
 

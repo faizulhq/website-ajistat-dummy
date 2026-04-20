@@ -56,7 +56,7 @@ export default function AjiAIPage() {
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const ajiDigiFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajiai');
+  const ajiAIFilter = (p: Program) => p.tags.some((t) => ['ajiai', 'ajidigi'].includes(t.toLowerCase()));
 
   return (
     <>
@@ -103,7 +103,7 @@ export default function AjiAIPage() {
             <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiAI</h2>
             <p className="text-gray-500 text-sm mt-2">Klik tab untuk melihat kelas yang tersedia per format. Klik kartu untuk mendaftar.</p>
           </div>
-          <ProgramTabsByFormat programFilter={ajiDigiFilter} queryKey="programs-ajiai-tabs" />
+          <ProgramTabsByFormat programFilter={ajiAIFilter} queryKey="programs-ajiai-tabs" />
         </div>
       </section>
 

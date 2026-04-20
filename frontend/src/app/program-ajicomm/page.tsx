@@ -55,7 +55,7 @@ export default function AjiCommPage() {
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const ajiPRFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajicomm');
+  const ajiPRFilter = (p: Program) => p.tags.some((t) => ['ajicomm', 'ajipr'].includes(t.toLowerCase()));
 
   return (
     <>
