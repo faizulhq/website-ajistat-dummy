@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, X, Globe, BookOpen, Award, Users, CheckCircle } from 'lucide-react';
+import { ArrowRight, X, Monitor, BookOpen, Award, Users, CheckCircle } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { programsApi } from '@/lib/api';
 import { TagProgramModal } from '@/components/TagProgramModal';
@@ -11,21 +11,21 @@ import { WA_LINK } from '@/lib/config';
 import type { Program } from '@/lib/types';
 
 const TOPICS = [
-  'Academic Writing & Research Paper', 'English for Research & Publication (Scopus)',
-  'IELTS & TOEFL Preparation', 'Business English & Professional Email',
-  'Speaking Practice & Conversation', 'Pronunciation & Intonation',
-  'Grammar Intensif (TOEIC Ready)', 'Bahasa Inggris untuk Presentasi',
-  'Cross-Cultural Communication', 'Abstract & Literature Review Writing',
-  'English for Job Interview', 'Bahasa Inggris untuk Beasiswa',
+  'Digital Marketing Strategy', 'Social Media Marketing (IG, TikTok, LinkedIn)',
+  'Content Planning & Calendar', 'Copy Writing & Caption Kreatif',
+  'Google Ads & Meta Ads', 'SEO Dasar & Intermediate',
+  'Canva untuk Konten Bisnis', 'Email Marketing',
+  'Analytics & Reporting Digital', 'Personal Branding Online',
+  'E-Commerce & Marketplace', 'Video Marketing Dasar',
 ];
 
 const KEUNGGULAN = [
-  { icon: Globe, text: 'Dibimbing tutor berpengalaman dengan sertifikat internasional', detail: 'Semua fasilitator memiliki sertifikasi internasional dan pengalaman mengajar bahasa Inggris di level akademik dan profesional.', badge: 'Tutor Bersertifikat' },
-  { icon: BookOpen, text: 'Fokus bahasa Inggris akademik dan profesional, bukan sekadar grammar', detail: 'Kurikulum dirancang untuk kebutuhan nyata: academic writing, presentasi, interview, dan komunikasi profesional global.', badge: 'Akademik & Profesional' },
-  { icon: Users, text: 'Cocok untuk mahasiswa S1–S3, peneliti, dosen, dan profesional', detail: 'Program tersedia untuk semua level dan kebutuhan — dari persiapan IELTS hingga English for Academic Publication.', badge: 'Semua Level' },
-  { icon: Award, text: 'Materi khusus persiapan IELTS, TOEFL, TOEIC, dan beasiswa luar negeri', detail: 'Kurikulum mencakup strategi khusus untuk meningkatkan skor IELTS, TOEFL, dan TOEIC secara efisien dan terstruktur.', badge: 'Test Prep' },
-  { icon: CheckCircle, text: 'Sesi speaking dan writing langsung dengan feedback mentor', detail: 'Setiap sesi speaking dan writing dikoreksi langsung oleh mentor untuk perkembangan yang lebih cepat dan efektif.', badge: 'Feedback Langsung' },
-  { icon: Globe, text: 'Bisa mulai dari level pemula hingga advanced', detail: 'Tersedia jalur belajar yang disesuaikan dengan level bahasa Inggris Anda saat ini, dari pemula hingga advanced.', badge: 'Multi-Level' },
+  { icon: Monitor, text: 'Kurikulum terkini mengikuti tren digital 2024–2025', detail: 'Materi selalu diperbarui mengikuti perkembangan algoritma, platform, dan tren digital marketing terbaru.', badge: 'Up-to-date' },
+  { icon: Users, text: 'Dibimbing praktisi digital marketing aktif dari agensi dan korporat', detail: 'Fasilitator adalah pelaku digital marketing aktif dari agensi digital dan perusahaan korporat terkemuka.', badge: 'Praktisi Aktif' },
+  { icon: BookOpen, text: 'Langsung praktik buat konten, ads, dan strategi digital', detail: 'Setiap sesi mencakup praktik langsung membuat konten, menjalankan iklan, dan merancang strategi digital.', badge: 'Hands-on Practice' },
+  { icon: Award, text: 'Portfolio digital siap pakai untuk karier atau bisnis', detail: 'Keluar dari program dengan portfolio digital yang langsung bisa digunakan untuk melamar kerja atau mengembangkan bisnis.', badge: 'Portfolio Siap' },
+  { icon: CheckCircle, text: 'Cocok pemula hingga pelaku bisnis yang ingin scale up', detail: 'Program tersedia untuk berbagai level — dari yang baru mengenal digital marketing hingga yang ingin scale up bisnis.', badge: 'Semua Level' },
+  { icon: Monitor, text: 'Akses tools premium dan template konten eksklusif', detail: 'Peserta mendapatkan akses ke tools premium dan template konten eksklusif yang bisa langsung digunakan.', badge: 'Tools & Template' },
 ];
 
 function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClose: () => void }) {
@@ -38,7 +38,7 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClos
         <span className="text-xs font-bold text-[#2348A8] bg-[#EBF4FF] px-3 py-1 rounded-full">{item.badge}</span>
         <h3 className="text-xl font-black text-gray-900 mt-3 mb-3">{item.text}</h3>
         <p className="text-gray-600 text-sm leading-relaxed mb-6">{item.detail}</p>
-        <a href={WA_LINK('Halo, saya ingin tanya lebih lanjut tentang program AjiLangua')} target="_blank" rel="noopener noreferrer"
+        <a href={WA_LINK('Halo, saya ingin tanya lebih lanjut tentang program AjiAI')} target="_blank" rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 bg-[#1B3A8C] hover:bg-[#2348A8] text-white font-bold py-3 rounded-xl transition-colors text-sm">
           💬 Tanya via WhatsApp
         </a>
@@ -47,16 +47,16 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClos
   );
 }
 
-export default function AjiLanguaPage() {
+export default function AjiAIPage() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
 
   const { data } = useQuery({
-    queryKey: ['programs', 'ajilangua-all'],
+    queryKey: ['programs', 'ajiai-all'],
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const ajiLanguaFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajilangua');
+  const ajiDigiFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajiai');
 
   return (
     <>
@@ -68,21 +68,21 @@ export default function AjiLanguaPage() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
               <div>
-                <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Aji Institute — Bahasa Asing & Akademik</span>
-                <h1 className="text-5xl sm:text-6xl font-black text-white">AjiLangua</h1>
+                <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Aji Institute — Digital Marketing & IT</span>
+                <h1 className="text-5xl sm:text-6xl font-black text-white">AjiAI</h1>
               </div>
             </div>
             <p className="text-white/75 text-xl leading-relaxed mb-6">
-              Program pelatihan <strong className="text-white">bahasa Inggris akademik, profesional, dan persiapan ujian internasional</strong> untuk mahasiswa, peneliti, dosen, dan profesional global.
+              Program pelatihan <strong className="text-white">digital marketing, content creation, dan teknologi digital</strong> untuk profesional dan pelaku bisnis yang ingin masuk ke era digital.
             </p>
             <div className="flex flex-wrap gap-2 mb-8">
-              {['IELTS', 'TOEFL', 'Academic Writing', 'Speaking', 'Business English'].map((t) => (
+              {['Digital Marketing', 'SEO', 'Content', 'Ads', 'Social Media'].map((t) => (
                 <button key={t} onClick={() => setActiveTag(t)}
                   className="text-xs bg-white/15 hover:bg-white/30 text-white px-3 py-1.5 rounded-full font-semibold border border-white/20 transition-colors cursor-pointer">{t}</button>
               ))}
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <a href={WA_LINK('Halo, saya ingin mendaftar program AjiLangua')} target="_blank" rel="noopener noreferrer"
+              <a href={WA_LINK('Halo, saya ingin mendaftar program AjiAI')} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105">
                 Daftar via WhatsApp <ArrowRight className="w-5 h-5" />
               </a>
@@ -100,10 +100,10 @@ export default function AjiLanguaPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-2">Kelas & Program Tersedia</p>
-            <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiLangua</h2>
+            <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiAI</h2>
             <p className="text-gray-500 text-sm mt-2">Klik tab untuk melihat kelas yang tersedia per format. Klik kartu untuk mendaftar.</p>
           </div>
-          <ProgramTabsByFormat programFilter={ajiLanguaFilter} queryKey="programs-ajilangua-tabs" />
+          <ProgramTabsByFormat programFilter={ajiDigiFilter} queryKey="programs-ajiai-tabs" />
         </div>
       </section>
 
@@ -112,7 +112,7 @@ export default function AjiLanguaPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Apa yang Dipelajari</p>
-            <h2 className="text-3xl font-black text-gray-900">Topik Program AjiLangua</h2>
+            <h2 className="text-3xl font-black text-gray-900">Topik Program AjiAI</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
             {TOPICS.map((t) => (
@@ -127,7 +127,7 @@ export default function AjiLanguaPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Kenapa AjiLangua?</p>
+            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Kenapa AjiAI?</p>
             <h2 className="text-3xl font-black text-gray-900">Keunggulan Program</h2>
             <p className="text-gray-500 text-sm mt-2">Klik kartu untuk detail informasi</p>
           </div>
@@ -149,9 +149,9 @@ export default function AjiLanguaPage() {
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[#162058] to-[#2348A8]">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-black text-white mb-4">Siap Bergabung dengan AjiLangua?</h2>
-          <p className="text-white/70 mb-8">Tingkatkan kemampuan bahasa Inggris akademik dan profesional Anda bersama tutor berpengalaman.</p>
-          <a href={WA_LINK('Halo, saya ingin mendaftar program AjiLangua. Bisa dibantu?')}
+          <h2 className="text-3xl font-black text-white mb-4">Siap Bergabung dengan AjiAI?</h2>
+          <p className="text-white/70 mb-8">Kuasai skill digital marketing dan teknologi bersama praktisi terbaik Indonesia.</p>
+          <a href={WA_LINK('Halo, saya ingin mendaftar program AjiAI. Bisa dibantu?')}
             target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
             Daftar via WhatsApp Sekarang

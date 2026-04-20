@@ -19,7 +19,7 @@ const STATS = [
 const WORKSHOP_INFO = [
   { title: 'Workshop AjiStat', desc: 'Hands-on analisis data dengan SPSS, SmartPLS, NVivo, R, Python. Pakai dataset riset nyata.', prog: 'AjiStat' },
   { title: 'Workshop AjiBiz', desc: 'Praktik langsung business model canvas, analisis pasar, dan strategi pemasaran bisnis.', prog: 'AjiBiz' },
-  { title: 'Workshop AjiPR', desc: 'Latihan public speaking, presentasi profesional, dan media relation langsung dengan feedback.', prog: 'AjiPR' },
+  { title: 'Workshop AjiComm', desc: 'Latihan public speaking, presentasi profesional, dan media relation langsung dengan feedback.', prog: 'AjiComm' },
 ];
 
 export default function WorkshopPage() {
@@ -56,7 +56,7 @@ export default function WorkshopPage() {
               <span className="text-white/80">Langsung Berdampak</span>
             </h1>
             <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-2xl">
-              Hands-on workshop dari semua program Aji Institute — AjiStat, AjiBiz, AjiPR, dan lebih banyak lagi.
+              Hands-on workshop dari semua program Aji Institute — AjiStat, AjiBiz, AjiComm, dan lebih banyak lagi.
               Praktik langsung, langsung berdampak.
             </p>
             {/* Stats cards */}

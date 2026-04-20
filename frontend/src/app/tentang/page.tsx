@@ -14,7 +14,7 @@ const MILESTONES = [
   { year: '2015', title: 'Berawal sebagai Konsultan', desc: 'Berawal sebagai konsultan statistik dan riset personal — mendampingi mahasiswa dan peneliti secara langsung.' },
   { year: '2022', title: 'Ekspansi Digital', desc: 'Melakukan ekspansi digital dan menyelenggarakan kelas secara online untuk peserta dari berbagai wilayah Indonesia.' },
   { year: '2023', title: 'Pertumbuhan Komunitas', desc: 'Memperluas jangkauan layanan dengan pertumbuhan komunitas alumni dari berbagai universitas dan institusi.' },
-  { year: '2024', title: 'Lima Divisi Program', desc: 'Mengembangkan lima divisi program: AjiStat, AjiBiz, AjiPR, AjiDigi, dan AjiLangua — memperkuat posisi sebagai pusat pengembangan kompetensi lintas bidang.' },
+  { year: '2024', title: 'Lima Divisi Program', desc: 'Mengembangkan lima divisi program: AjiStat, AjiBiz, AjiComm, AjiAI, dan AjiLingua — memperkuat posisi sebagai pusat pengembangan kompetensi lintas bidang.' },
   { year: '2025', title: 'Identitas Korporat Baru', desc: 'Memperkuat identitas korporat sebagai Aji Institute di bawah PT. Amanah Jñāna Insani — dengan logo, website, dan ekosistem layanan profesional yang terintegrasi.' },
 ];
 

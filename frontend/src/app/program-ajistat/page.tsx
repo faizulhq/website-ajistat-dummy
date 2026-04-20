@@ -95,7 +95,7 @@ export default function AjiStatPage() {
   });
 
   const ajiStatFilter = (p: Program) =>
-    !p.tags.some((t) => ['ajibiz', 'ajipr', 'ajidigi', 'ajilangua'].includes(t.toLowerCase()));
+    !p.tags.some((t) => ['ajibiz', 'ajicomm', 'ajiai', 'ajilingua'].includes(t.toLowerCase()));
 
   return (
     <>

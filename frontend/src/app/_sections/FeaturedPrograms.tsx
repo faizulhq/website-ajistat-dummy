@@ -21,6 +21,7 @@ export function ProgramGridSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {PROGRAMS.map((prog) => (
             <Link key={prog.code} href={prog.href}
+              {...(prog.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={cn(
                 'group relative rounded-2xl p-6 text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl',
                 prog.isFeatured && 'ring-2 ring-[#F0A500]/60'

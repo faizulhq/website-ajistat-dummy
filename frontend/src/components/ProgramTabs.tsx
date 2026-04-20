@@ -7,7 +7,7 @@
  * Mode "byFormat": tab = Bootcamp | Short Class | Private Class | In-House Training
  *   → cards di-filter per format layanan
  *
- * Mode "byProgram": tab = AjiStat | AjiBiz | AjiPR | AjiDigi | AjiLangua
+ * Mode "byProgram": tab = AjiStat | AjiBiz | AjiComm | AjiAI | AjiLingua
  *   → cards di-filter per program divisi
  */
 
@@ -38,11 +38,11 @@ const FORMAT_TABS = [
 ];
 
 const PROGRAM_TABS = [
-  { key: 'ajistat', label: 'AjiStat', filter: (p: Program) => !p.tags.some((t) => ['ajibiz','ajipr','ajidigi','ajilangua'].includes(t.toLowerCase())) },
+  { key: 'ajistat', label: 'AjiStat', filter: (p: Program) => !p.tags.some((t) => ['ajibiz','ajicomm','ajiai','ajilingua'].includes(t.toLowerCase())) },
   { key: 'ajibiz', label: 'AjiBiz', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajibiz') },
-  { key: 'ajipr', label: 'AjiPR', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajipr') },
-  { key: 'ajidigi', label: 'AjiDigi', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajidigi') },
-  { key: 'ajilangua', label: 'AjiLangua', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajilangua') },
+  { key: 'ajicomm', label: 'AjiComm', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajicomm') },
+  { key: 'ajiai', label: 'AjiAI', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajiai') },
+  { key: 'ajilingua', label: 'AjiLingua', filter: (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajilingua') },
 ];
 
 function EmptyState({ type, waMsg }: { type: string; waMsg: string }) {

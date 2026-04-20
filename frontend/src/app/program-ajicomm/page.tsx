@@ -37,7 +37,7 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClos
         <span className="text-xs font-bold text-[#2348A8] bg-[#EBF4FF] px-3 py-1 rounded-full">{item.badge}</span>
         <h3 className="text-xl font-black text-gray-900 mt-3 mb-3">{item.text}</h3>
         <p className="text-gray-600 text-sm leading-relaxed mb-6">{item.detail}</p>
-        <a href={WA_LINK('Halo, saya ingin tanya lebih lanjut tentang program AjiPR')} target="_blank" rel="noopener noreferrer"
+        <a href={WA_LINK('Halo, saya ingin tanya lebih lanjut tentang program AjiComm')} target="_blank" rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 bg-[#1B3A8C] hover:bg-[#2348A8] text-white font-bold py-3 rounded-xl transition-colors text-sm">
           💬 Tanya via WhatsApp
         </a>
@@ -46,16 +46,16 @@ function KeunggulanModal({ item, onClose }: { item: typeof KEUNGGULAN[0]; onClos
   );
 }
 
-export default function AjiPRPage() {
+export default function AjiCommPage() {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [activeKeunggulan, setActiveKeunggulan] = useState<typeof KEUNGGULAN[0] | null>(null);
 
   const { data } = useQuery({
-    queryKey: ['programs', 'ajipr-all'],
+    queryKey: ['programs', 'ajicomm-all'],
     queryFn: () => programsApi.list().then((r) => r.data),
   });
 
-  const ajiPRFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajipr');
+  const ajiPRFilter = (p: Program) => p.tags.some((t) => t.toLowerCase() === 'ajicomm');
 
   return (
     <>
@@ -68,7 +68,7 @@ export default function AjiPRPage() {
             <div className="flex items-center gap-3 mb-5">
               <div>
                 <span className="text-[#F0A500] text-xs font-bold uppercase tracking-widest">Aji Institute — Public Relation & Komunikasi</span>
-                <h1 className="text-5xl sm:text-6xl font-black text-white">AjiPR</h1>
+                <h1 className="text-5xl sm:text-6xl font-black text-white">AjiComm</h1>
               </div>
             </div>
             <p className="text-white/75 text-xl leading-relaxed mb-6">
@@ -81,7 +81,7 @@ export default function AjiPRPage() {
               ))}
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <a href={WA_LINK('Halo, saya ingin mendaftar program AjiPR')} target="_blank" rel="noopener noreferrer"
+              <a href={WA_LINK('Halo, saya ingin mendaftar program AjiComm')} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-8 py-4 rounded-2xl text-base transition-all hover:scale-105">
                 Daftar via WhatsApp <ArrowRight className="w-5 h-5" />
               </a>
@@ -99,10 +99,10 @@ export default function AjiPRPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-2">Kelas & Program Tersedia</p>
-            <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiPR</h2>
+            <h2 className="text-3xl font-black text-gray-900">Pilih Format Belajar AjiComm</h2>
             <p className="text-gray-500 text-sm mt-2">Klik tab untuk melihat kelas yang tersedia per format. Klik kartu untuk mendaftar.</p>
           </div>
-          <ProgramTabsByFormat programFilter={ajiPRFilter} queryKey="programs-ajipr-tabs" />
+          <ProgramTabsByFormat programFilter={ajiPRFilter} queryKey="programs-ajicomm-tabs" />
         </div>
       </section>
 
@@ -111,7 +111,7 @@ export default function AjiPRPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Apa yang Dipelajari</p>
-            <h2 className="text-3xl font-black text-gray-900">Topik Program AjiPR</h2>
+            <h2 className="text-3xl font-black text-gray-900">Topik Program AjiComm</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
             {TOPICS.map((t) => (
@@ -126,7 +126,7 @@ export default function AjiPRPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Kenapa AjiPR?</p>
+            <p className="text-[#2348A8] text-sm font-semibold uppercase tracking-widest mb-3">Kenapa AjiComm?</p>
             <h2 className="text-3xl font-black text-gray-900">Keunggulan Program</h2>
             <p className="text-gray-500 text-sm mt-2">Klik kartu untuk detail informasi</p>
           </div>
@@ -148,9 +148,9 @@ export default function AjiPRPage() {
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[#162058] to-[#2348A8]">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-black text-white mb-4">Siap Bergabung dengan AjiPR?</h2>
+          <h2 className="text-3xl font-black text-white mb-4">Siap Bergabung dengan AjiComm?</h2>
           <p className="text-white/70 mb-8">Tingkatkan kemampuan komunikasi dan personal branding Anda bersama praktisi terbaik.</p>
-          <a href={WA_LINK('Halo, saya ingin mendaftar program AjiPR. Bisa dibantu?')}
+          <a href={WA_LINK('Halo, saya ingin mendaftar program AjiComm. Bisa dibantu?')}
             target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-2xl">
             Daftar via WhatsApp Sekarang

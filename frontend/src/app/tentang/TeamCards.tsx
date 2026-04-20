@@ -38,7 +38,7 @@ const TEAM: TeamMember[] = [
       'Tim AjiBiz menghadirkan pelatihan bisnis dan manajemen yang berorientasi pada praktik nyata. Diperkuat oleh praktisi korporat dan konsultan bisnis berpengalaman, kami menyentuh topik dari perencanaan strategis, pengembangan SDM, analisis keuangan, hingga transformasi digital organisasi.',
   },
   {
-    name: 'Tim Fasilitator AjiPR',
+    name: 'Tim Fasilitator AjiComm',
     role: 'PR & Communication Expert',
     initials: 'PR',
     accent: '#1B3A8C',
@@ -46,10 +46,10 @@ const TEAM: TeamMember[] = [
     desc: 'Trainer komunikasi publik, media relation, dan personal branding bersertifikat dengan jam terbang tinggi.',
     tags: ['Public Speaking', 'Media Relations', 'Personal Branding', 'Crisis Comm.', 'LinkedIn'],
     detail:
-      'Tim AjiPR adalah para ahli komunikasi yang berpengalaman di bidang public relations, jurnalistik, dan media. Kami membantu individu dan organisasi membangun citra profesional, mengelola hubungan media, serta menguasai komunikasi krisis dan personal branding di era digital.',
+      'Tim AjiComm adalah para ahli komunikasi yang berpengalaman di bidang public relations, jurnalistik, dan media. Kami membantu individu dan organisasi membangun citra profesional, mengelola hubungan media, serta menguasai komunikasi krisis dan personal branding di era digital.',
   },
   {
-    name: 'Tim Fasilitator AjiDigi',
+    name: 'Tim Fasilitator AjiAI',
     role: 'Digital Marketing & Developer',
     initials: 'DG',
     accent: '#1B3A8C',
@@ -57,10 +57,10 @@ const TEAM: TeamMember[] = [
     desc: 'Expert praktisi industri dalam pengembangan strategi digital, konten kreatif, dan teknologi komputasi modern.',
     tags: ['Digital Marketing', 'SEO/SEM', 'Content Strategy', 'Web Dev', 'Data Analytics'],
     detail:
-      'Tim AjiDigi adalah gabungan praktisi pemasaran digital dan pengembang teknologi yang aktif di industri. Dari strategi media sosial, SEO, iklan berbayar, hingga pengembangan aplikasi — kami mengajarkan apa yang benar-benar dibutuhkan dunia kerja digital saat ini.',
+      'Tim AjiAI adalah gabungan praktisi pemasaran digital dan pengembang teknologi yang aktif di industri. Dari strategi media sosial, SEO, iklan berbayar, hingga pengembangan aplikasi — kami mengajarkan apa yang benar-benar dibutuhkan dunia kerja digital saat ini.',
   },
   {
-    name: 'Tim Fasilitator AjiLangua',
+    name: 'Tim Fasilitator AjiLingua',
     role: 'English & Academic Instructor',
     initials: 'LG',
     accent: '#1B3A8C',
@@ -68,7 +68,7 @@ const TEAM: TeamMember[] = [
     desc: 'Pengajar bahasa Inggris setingkat ahli dengan spesialisasi persiapan tes akademik dan komunikasi bisnis global.',
     tags: ['IELTS/TOEFL', 'Academic Writing', 'Business English', 'Conversation', 'Grammar'],
     detail:
-      'Tim AjiLangua mengkhususkan diri dalam pengajaran bahasa Inggris untuk keperluan akademik dan profesional. Dengan pendekatan komunikatif dan kontekstual, kami membantu peserta meningkatkan kemampuan berbicara, menulis akademis, serta mempersiapkan diri untuk ujian IELTS, TOEFL, dan seleksi beasiswa internasional.',
+      'Tim AjiLingua mengkhususkan diri dalam pengajaran bahasa Inggris untuk keperluan akademik dan profesional. Dengan pendekatan komunikatif dan kontekstual, kami membantu peserta meningkatkan kemampuan berbicara, menulis akademis, serta mempersiapkan diri untuk ujian IELTS, TOEFL, dan seleksi beasiswa internasional.',
   },
 ];
 

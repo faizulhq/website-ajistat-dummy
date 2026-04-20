@@ -192,7 +192,7 @@ const STAT_DETAILS = [
     target: 5, suffix: '', label: 'Divisi Program Unggulan',
     icon: Star, accent: '#a78bfa',
     title: '5 Divisi Program',
-    detail: 'Aji Institute menghadirkan 5 program divisi yang komprehensif: AjiStat (Statistik & Riset), AjiBiz (Bisnis & Manajemen), AjiPR (Komunikasi & PR), AjiDigi (Digital Marketing), dan AjiLangua (Bahasa Asing & Akademik).',
+    detail: 'Aji Institute menghadirkan 5 program divisi yang komprehensif: AjiStat (Statistik & Riset), AjiBiz (Bisnis & Manajemen), AjiComm (Komunikasi & PR), AjiAI (Digital Marketing), dan AjiLingua (Bahasa Asing & Akademik).',
     isPhoto: false,
   },
 ];

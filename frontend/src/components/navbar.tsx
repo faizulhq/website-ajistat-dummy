@@ -242,12 +242,20 @@ export function Navbar() {
               </button>
               {mobileLayananOpen && (
                 <div className="ml-4 mt-1 space-y-0.5">
-                  {LAYANAN_LINKS.map((item) => (
-                    <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
-                      {item.label}
-                    </Link>
-                  ))}
+                  {LAYANAN_LINKS.map((item) => 
+                    'external' in item && item.external ? (
+                      <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
+                        {item.label} <span className="text-[9px] text-white/30 ml-auto">↗</span>
+                      </a>
+                    ) : (
+                      <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 text-white/65 hover:text-white text-sm rounded-lg">
+                        {item.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
             </div>

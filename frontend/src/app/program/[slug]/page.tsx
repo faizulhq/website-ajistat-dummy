@@ -56,9 +56,9 @@ const FALLBACK_SLUGS = [
   'private-analisis-spss', 'private-smartpls', 'private-rstudio', 'private-python-data',
   'short-uji-instrumen-spss', 'short-regresi-spss', 'short-visualisasi-python',
   'short-penulisan-artikel', 'short-statistika-dasar', 'bootcamp-ajibiz-business-plan',
-  'short-ajibiz-digital-marketing', 'bootcamp-ajipr-corpcomm', 'short-ajipr-press-release',
-  'bootcamp-ajidigi-mern', 'short-ajidigi-uiux', 'bootcamp-ajilanguage-toefl',
-  'private-ajilanguage-academic',
+  'short-ajibiz-digital-marketing', 'bootcamp-ajicomm-corpcomm', 'short-ajicomm-press-release',
+  'bootcamp-ajiai-mern', 'short-ajiai-uiux', 'bootcamp-ajilinguage-toefl',
+  'private-ajilinguage-academic',
 ];
 
 export async function generateStaticParams() {
