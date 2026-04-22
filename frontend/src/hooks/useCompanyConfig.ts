@@ -24,11 +24,22 @@ export function useCompanyConfig() {
 
   // Global override for WA links
   useEffect(() => {
-    if (query.data && query.data.whatsapp !== CONTACT.whatsapp) {
-      document.querySelectorAll(`a[href^="https://wa.me/${CONTACT.whatsapp}"]`).forEach(el => {
+    if (query.data && (query.data.whatsapp !== CONTACT.whatsapp || query.data.whatsapp_template)) {
+      document.querySelectorAll(`a[href^="https://wa.me/"]`).forEach(el => {
         const anchor = el as HTMLAnchorElement;
         const url = new URL(anchor.href);
-        url.pathname = `/${query.data.whatsapp}`;
+        
+        // Update number if different
+        if (query.data.whatsapp !== CONTACT.whatsapp) {
+          url.pathname = `/${query.data.whatsapp}`;
+        }
+
+        // Apply template if exists
+        if (query.data.whatsapp_template) {
+          const finalMessage = query.data.whatsapp_template.replace(/{divisi}/g, 'Aji Institute');
+          url.searchParams.set('text', finalMessage);
+        }
+
         anchor.href = url.toString();
       });
     }

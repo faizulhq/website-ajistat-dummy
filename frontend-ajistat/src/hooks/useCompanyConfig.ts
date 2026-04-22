@@ -10,6 +10,7 @@ type ConfigData = {
   instagram: string;
   address: string;
   operational_hours: string;
+  whatsapp_template?: string;
 };
 
 export function useCompanyConfig() {
@@ -46,15 +47,26 @@ export function useCompanyConfig() {
 
   // Global override for WA links
   useEffect(() => {
-    if (config.whatsapp !== CONTACT.whatsapp) {
-      document.querySelectorAll(`a[href^="https://wa.me/${CONTACT.whatsapp}"]`).forEach(el => {
+    if (config.whatsapp !== CONTACT.whatsapp || config.whatsapp_template) {
+      document.querySelectorAll(`a[href^="https://wa.me/"]`).forEach(el => {
         const anchor = el as HTMLAnchorElement;
         const url = new URL(anchor.href);
-        url.pathname = `/${config.whatsapp}`;
+        
+        // Update number if different
+        if (config.whatsapp !== CONTACT.whatsapp) {
+          url.pathname = `/${config.whatsapp}`;
+        }
+
+        // Apply template if exists
+        if (config.whatsapp_template) {
+          const finalMessage = config.whatsapp_template.replace(/{divisi}/g, 'AjiStat by Aji Institute');
+          url.searchParams.set('text', finalMessage);
+        }
+
         anchor.href = url.toString();
       });
     }
-  }, [config.whatsapp]);
+  }, [config.whatsapp, config.whatsapp_template]);
 
   return { config, isLoading };
 }

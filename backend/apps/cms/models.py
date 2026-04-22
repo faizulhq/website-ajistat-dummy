@@ -7,6 +7,12 @@ class CompanyConfig(models.Model):
     instagram = models.CharField(max_length=50, default='@ajiinstitute.id')
     address = models.TextField(default='Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung')
     operational_hours = models.CharField(max_length=100, default='24 Jam / 7 Hari')
+    whatsapp_template = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Gunakan {divisi} untuk nama divisi otomatis. Kosongkan untuk format default.",
+        default="Halo Tim *{divisi}*,\n\nSaya tertarik untuk mendapatkan informasi lebih lanjut terkait layanan yang tersedia.\n\nBerikut data saya:\nNama:\nJurusan/Fakultas/Universitas:\nLembaga/Instansi:\nKebutuhan (konsultasi/bootcamp/kelas private/dll):\n\nMohon informasinya. Terima kasih."
+    )
     
     class Meta:
         verbose_name = 'Company Setting'
