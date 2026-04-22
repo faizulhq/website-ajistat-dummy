@@ -13,15 +13,34 @@ const TYPE_CONFIG = {
   'private-class': { label: 'Private Class', color: 'bg-[#0d1632] text-white' },
 };
 
+/**
+ * Deteksi apakah program ini milik AjiStat.
+ * Program AjiStat = punya tag 'ajistat' ATAU tidak punya tag divisi lain sama sekali.
+ */
+function isAjiStatProgram(tags: string[]): boolean {
+  const t = tags.map((s) => s.toLowerCase());
+  const otherDivisions = ['ajibiz', 'ajicomm', 'ajiai', 'ajilingua'];
+  return t.includes('ajistat') || !t.some((tag) => otherDivisions.includes(tag));
+}
+
 export function ProgramCard({ program }: Props) {
   const typeConf = TYPE_CONFIG[program.type as keyof typeof TYPE_CONFIG] ?? TYPE_CONFIG['bootcamp'];
   const discount = program.original_price
     ? Math.round((1 - program.price / program.original_price) * 100)
     : null;
 
+  // AjiStat → redirect ke ajistat.aji-institute.com; lainnya → internal
+  const isAjiStat = isAjiStatProgram(program.tags);
+  const cardHref = isAjiStat
+    ? `https://ajistat.aji-institute.com/program/${program.slug}`
+    : `/program/${program.slug}`;
+  const isExternal = isAjiStat;
+
   return (
     <a
-      href={`/program/${program.slug}`}
+      href={cardHref}
+      target={isExternal ? '_blank' : '_self'}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
       className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
     >
       {/* Color Banner */}
@@ -104,7 +123,7 @@ export function ProgramCard({ program }: Props) {
             </div>
           </div>
           <div className="flex items-center gap-1 text-sm font-semibold text-[#2348A8] group-hover:gap-2 transition-all">
-            Lihat <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            {isAjiStat ? 'Lihat di AjiStat' : 'Lihat'} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>
       </div>

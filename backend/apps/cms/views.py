@@ -24,7 +24,8 @@ class CMSViewSet(viewsets.ViewSet):
                 'email': 'info@aji-institute.id',
                 'instagram': '@ajiinstitute.id',
                 'address': 'Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung',
-                'operational_hours': '24 Jam / 7 Hari'
+                'operational_hours': '24 Jam / 7 Hari',
+                'whatsapp_template': 'Halo Tim *{divisi}*,\n\nSaya tertarik untuk mendapatkan informasi lebih lanjut terkait layanan yang tersedia.\n\nBerikut data saya:\nNama:\nJurusan/Fakultas/Universitas:\nLembaga/Instansi:\nKebutuhan (konsultasi/bootcamp/kelas private/dll):\n\nMohon informasinya. Terima kasih.',
             })
         serializer = CompanyConfigSerializer(config, context={'request': request})
         return Response(serializer.data)

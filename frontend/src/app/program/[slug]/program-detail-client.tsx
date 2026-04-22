@@ -14,6 +14,20 @@ import { formatPrice, STATUS_LABELS, STATUS_COLORS, cn } from '@/lib/utils';
 import { WA_LINK } from '@/lib/config';
 import type { Program } from '@/lib/types';
 
+/**
+ * Deteksi divisi dari tags program agar pesan WA mencantumkan nama divisi
+ * sehingga smart detection di useCompanyConfig bisa menemukan divisi yang tepat.
+ */
+function getDivisionLabel(tags: string[]): string {
+  const t = tags.map((s) => s.toLowerCase());
+  if (t.includes('ajibiz')) return 'AjiBiz';
+  if (t.includes('ajicomm')) return 'AjiComm';
+  if (t.includes('ajiai')) return 'AjiAI';
+  if (t.includes('ajilingua')) return 'AjiLingua';
+  // AjiStat = default jika tidak ada divisi lain
+  return 'AjiStat';
+}
+
 const TYPE_LABEL: Record<string, string> = {
   'bootcamp': 'Bootcamp Intensif',
   'short-class': 'Short Class',
@@ -170,7 +184,7 @@ function MaterialModal({
 
           <div className="flex flex-col gap-3">
             <a
-              href={WA_LINK(`Halo, saya ingin mendaftar kelas ${program.title} dan mendapatkan file ${material.label}`)}
+              href={WA_LINK(`Halo, saya ingin mendaftar kelas ${getDivisionLabel(program.tags)} ${program.title} dan mendapatkan file ${material.label}`)}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3.5 rounded-xl transition-colors text-sm shadow-md"
@@ -335,7 +349,7 @@ export default function ProgramDetailPage() {
                 </div>
 
                 <a
-                  href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
+                  href={WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program.tags)}: ${program.title}`)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3.5 rounded-xl transition-all mb-3 text-sm"
                 >
@@ -343,7 +357,7 @@ export default function ProgramDetailPage() {
                 </a>
 
                 <a
-                  href={WA_LINK(`Halo, saya tertarik dengan program: ${program.title}. Bisa info lebih lanjut?`)}
+                  href={WA_LINK(`Halo, saya tertarik dengan program ${getDivisionLabel(program.tags)}: ${program.title}. Bisa info lebih lanjut?`)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 border border-green-200 text-green-700 font-semibold py-3 rounded-xl transition-colors text-sm"
                 >
@@ -370,12 +384,12 @@ export default function ProgramDetailPage() {
           <p className="text-[#1B3A8C] font-bold text-lg leading-none">{formatPrice(program.price)}</p>
           {discount && <p className="text-gray-400 text-xs line-through">{formatPrice(program.original_price!)}</p>}
         </div>
-        <a href={WA_LINK(`Halo, saya tertarik dengan: ${program.title}`)}
+        <a href={WA_LINK(`Halo, saya tertarik dengan program ${getDivisionLabel(program.tags)}: ${program.title}`)}
           target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 font-semibold px-4 py-2.5 rounded-xl text-sm">
           <MessageCircle className="w-4 h-4" /> Tanya
         </a>
-        <a href={WA_LINK(`Halo, saya ingin mendaftar program: ${program.title}`)}
+        <a href={WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program.tags)}: ${program.title}`)}
           target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
           💬 Daftar
