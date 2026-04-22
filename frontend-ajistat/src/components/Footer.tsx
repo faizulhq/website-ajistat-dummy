@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { WA_LINK, CONTACT, BRAND } from '@/lib/config';
+import { useCompanyConfigContext } from '@/components/CompanyConfigProvider';
 
 const LAYANAN_LINKS = [
   { label: 'Bootcamp Intensif', href: '/bootcamp' },
@@ -18,6 +21,8 @@ const COMPANY_LINKS = [
 ];
 
 export function Footer() {
+  const { config } = useCompanyConfigContext();
+
   return (
     <footer className="bg-gradient-to-b from-[#162058] to-[#0d1632] border-t-4 border-[#4A72D4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -73,17 +78,17 @@ export function Footer() {
             <p className="text-white font-semibold text-sm mb-4">Kontak</p>
             <ul className="space-y-3 text-sm text-white/50">
               <li>
-                <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                <a href={`https://wa.me/${config.whatsapp}`} target="_blank" rel="noopener noreferrer"
                   className="hover:text-white transition-colors">
-                  {CONTACT.whatsappDisplay}
+                  {config.whatsapp_display}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-white transition-colors">
-                  {CONTACT.email}
+                <a href={`mailto:${config.email}`} className="hover:text-white transition-colors">
+                  {config.email}
                 </a>
               </li>
-              <li className="leading-snug">{CONTACT.address}</li>
+              <li className="leading-snug whitespace-pre-line">{config.address}</li>
             </ul>
             <a href={WA_LINK('Halo AjiStat, saya ingin tanya layanan')} target="_blank" rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors">

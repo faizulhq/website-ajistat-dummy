@@ -3,6 +3,7 @@ import { Open_Sans, Ubuntu } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { CompanyConfigProvider } from '@/components/CompanyConfigProvider';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -43,11 +44,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" className={`${openSans.variable} ${ubuntu.variable}`}>
       <body className="font-sans antialiased bg-white text-gray-900">
-        <Navbar />
-        <main className="min-h-screen" style={{ paddingTop: '72px' }}>
-          {children}
-        </main>
-        <Footer />
+        <CompanyConfigProvider>
+          <Navbar />
+          <main className="min-h-screen" style={{ paddingTop: '72px' }}>
+            {children}
+          </main>
+          <Footer />
+        </CompanyConfigProvider>
       </body>
     </html>
   );
