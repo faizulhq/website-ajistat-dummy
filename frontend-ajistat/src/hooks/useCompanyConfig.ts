@@ -45,15 +45,21 @@ export function useCompanyConfig() {
     fetchConfig();
   }, []);
 
-  // Global override for WA links
+  // Global override for WA links using event delegation
   useEffect(() => {
-    if (config.whatsapp !== CONTACT.whatsapp || config.whatsapp_template) {
-      document.querySelectorAll(`a[href^="https://wa.me/"]`).forEach(el => {
-        const anchor = el as HTMLAnchorElement;
-        const url = new URL(anchor.href);
+    if (!config) return;
+
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element).closest('a');
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('https://wa.me/')) {
+        e.preventDefault();
+        const url = new URL(href);
         
         // Update number if different
-        if (config.whatsapp !== CONTACT.whatsapp) {
+        if (config.whatsapp && config.whatsapp !== CONTACT.whatsapp) {
           url.pathname = `/${config.whatsapp}`;
         }
 
@@ -63,9 +69,12 @@ export function useCompanyConfig() {
           url.searchParams.set('text', finalMessage);
         }
 
-        anchor.href = url.toString();
-      });
-    }
+        window.open(url.toString(), anchor.getAttribute('target') || '_self');
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, [config.whatsapp, config.whatsapp_template]);
 
   return { config, isLoading };
