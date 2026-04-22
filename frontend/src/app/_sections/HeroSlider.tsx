@@ -6,7 +6,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { TOOLS, WA_LINK } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
-import { programsApi } from '@/lib/api';
+import { programsApi, cmsApi } from '@/lib/api';
 import { TagProgramModal } from '@/components/TagProgramModal';
 import type { Program } from '@/lib/types';
 
