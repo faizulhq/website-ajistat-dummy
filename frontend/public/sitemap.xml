@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aji-institute.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aji-institute.com/tentang</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/blog</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aji-institute.com/konsultasi</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/program-ajistat</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aji-institute.com/program-ajibiz</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/program-ajicomm</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/program-ajiai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/program-ajilingua</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aji-institute.com/bootcamp</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aji-institute.com/short-class</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aji-institute.com/private-class</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aji-institute.com/workshop</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aji-institute.com/in-house-training</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>
