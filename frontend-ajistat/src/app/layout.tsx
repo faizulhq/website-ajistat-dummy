@@ -29,14 +29,41 @@ export const metadata: Metadata = {
   keywords: [
     'konsultasi statistik', 'olah data', 'SPSS', 'SmartPLS', 'NVivo', 'SEM',
     'skripsi', 'tesis', 'disertasi', 'AjiStat', 'Aji Institute',
+    'analisis data', 'metodologi penelitian', 'R Studio', 'Python', 'EViews', 'STATA',
   ],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', rel: 'shortcut icon' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'AjiStat',
+  },
   openGraph: {
-    title: 'AjiStat — Konsultasi & Olah Data Statistik',
-    description: 'Mitra riset terpercaya untuk 5.000+ klien akademik dan profesional.',
+    title: 'AjiStat — Konsultasi & Olah Data Statistik Profesional',
+    description: 'Mitra riset terpercaya untuk 5.000+ klien akademik dan profesional. SPSS, SmartPLS, NVivo, R, Python.',
     url: 'https://ajistat.aji-institute.com',
     siteName: 'AjiStat',
     locale: 'id_ID',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'AjiStat — Konsultasi & Olah Data Statistik Profesional',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AjiStat — Konsultasi & Olah Data Statistik Profesional',
+    description: 'Mitra riset terpercaya untuk 5.000+ klien akademik dan profesional.',
+    images: ['/og-image.png'],
   },
 };
 

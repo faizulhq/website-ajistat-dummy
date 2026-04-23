@@ -31,13 +31,41 @@ export const metadata: Metadata = {
   keywords: [
     'aji institute', 'ajistat', 'statistika', 'analisis data', 'SPSS', 'SmartPLS',
     'pelatihan profesional', 'pengembangan kompetensi', 'AjiBiz', 'AjiComm', 'AjiAI', 'AjiLingua',
-    'metodologi penelitian', 'konsultasi riset', 'skripsi', 'tesis'
+    'metodologi penelitian', 'konsultasi riset', 'skripsi', 'tesis',
   ],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', rel: 'shortcut icon' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'Aji Institute',
+  },
   openGraph: {
-    title: BRAND.name,
-    description: BRAND.tagline,
-    type: 'website',
+    title: `${BRAND.name} — ${BRAND.tagline}`,
+    description: 'Platform pelatihan, pengembangan kompetensi, dan konsultasi profesional — AjiStat, AjiBiz, AjiComm, AjiAI, AjiLingua.',
+    url: 'https://aji-institute.com',
+    siteName: 'Aji Institute',
     locale: 'id_ID',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Aji Institute — Platform Pelatihan & Konsultasi Profesional',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${BRAND.name} — ${BRAND.tagline}`,
+    description: 'Platform pelatihan, pengembangan kompetensi, dan konsultasi profesional.',
+    images: ['/og-image.png'],
   },
 };
 
