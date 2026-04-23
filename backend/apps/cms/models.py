@@ -13,6 +13,13 @@ class CompanyConfig(models.Model):
         help_text="Gunakan {divisi} untuk nama divisi otomatis. Kosongkan untuk format default.",
         default="Halo Tim *{divisi}*,\n\nSaya tertarik untuk mendapatkan informasi lebih lanjut terkait layanan yang tersedia.\n\nBerikut data saya:\nNama:\nJurusan/Fakultas/Universitas:\nLembaga/Instansi:\nKebutuhan (konsultasi/bootcamp/kelas private/dll):\n\nMohon informasinya. Terima kasih."
     )
+    footer_description = models.TextField(
+        default="Aji Institute adalah lembaga pelatihan dan konsultasi riset, metodologi, dan manajemen terpadu yang membantu individu dan korporasi.",
+        help_text="Teks singkat perkenalan di bagian footer web."
+    )
+    social_tiktok = models.CharField(max_length=100, blank=True, null=True, help_text="Link akun TikTok (misal: https://tiktok.com/@ajiinstitute)")
+    social_linkedin = models.CharField(max_length=100, blank=True, null=True, help_text="Link akun LinkedIn (opsional)")
+    
     
     class Meta:
         verbose_name = 'Company Setting'
@@ -92,3 +99,21 @@ class ToolLogo(models.Model):
         
     def __str__(self):
         return self.name
+
+# ==========================================
+# Proxy Models untuk merapikan Admin Panel
+# ==========================================
+from apps.programs.models import BlogArticle as OriginalBlogArticle
+from apps.programs.models import Announcement as OriginalAnnouncement
+
+class CmsBlogArticle(OriginalBlogArticle):
+    class Meta:
+        proxy = True
+        verbose_name = 'Artikel Blog'
+        verbose_name_plural = 'Artikel Blog'
+
+class CmsAnnouncement(OriginalAnnouncement):
+    class Meta:
+        proxy = True
+        verbose_name = 'Pengumuman / Banner'
+        verbose_name_plural = 'Pengumuman / Banner'

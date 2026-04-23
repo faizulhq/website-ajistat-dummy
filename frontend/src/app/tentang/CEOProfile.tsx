@@ -19,8 +19,19 @@ export function CEOProfile() {
   const ceo = dbTeams || {
     name: 'Aji Pamoso, S.Si, M.T',
     role: 'Founder & CEO Aji Institute | Lead Expert AjiStat',
-    image: '/images/team/foto-aji-pamoso.jpeg'
+    image: '/images/team/foto-aji-pamoso.jpeg',
+    detail: 'PhD Candidate|Department of Social and Behavioural Science, Faculty of Applied Social Sciences.\nPraktisi|Praktisi bidang marketing riset, metodologi, statistik, kewirausahaan dan penelitian operasional.'
   };
+
+  // Parse credentials from detail field (format: "Title|Description" per line)
+  const rawDetail = ceo.detail || 'PhD Candidate|Department of Social and Behavioural Science, Faculty of Applied Social Sciences.\nPraktisi|Praktisi bidang marketing riset, metodologi, statistik, kewirausahaan dan penelitian operasional.';
+  const credentials = rawDetail.split('\n').filter((line: string) => line.trim() !== '').map((line: string) => {
+    const parts = line.split('|');
+    return {
+      title: parts[0]?.trim() || '',
+      desc: parts.slice(1).join('|').trim() || '' // join the rest just in case there are multiple |
+    };
+  });
 
   return (
     <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
@@ -42,7 +53,7 @@ export function CEOProfile() {
               <div className="relative aspect-square lg:aspect-[4/5] xl:aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
                 <Image
                   src={ceo.image || '/images/team/foto-aji-pamoso.jpeg'}
-                  alt="Aji Pamoso, S.Si, M.T"
+                  alt={ceo.name || "CEO"}
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -73,33 +84,23 @@ export function CEOProfile() {
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-2">{ceo.name.split(',')[0]}, <span className="font-bold text-3xl text-gray-600">{ceo.name.includes(',') ? ceo.name.substring(ceo.name.indexOf(',') + 1) : ''}</span></h2>
             <p className="text-xl text-[#1B3A8C] font-semibold mb-8">{ceo.role}</p>
 
-
-
-            {/* Credentials */}
+            {/* Credentials - DYNAMICALLY RENDERED */}
             <div className="space-y-5">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#F0A500]/10 flex items-center justify-center shrink-0 mt-1">
-                  <span className="text-[#F0A500] font-bold text-sm">01</span>
+              {credentials.map((cred: {title: string, desc: string}, index: number) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-1 ${index % 2 === 0 ? 'bg-[#F0A500]/10' : 'bg-[#1B3A8C]/10'}`}>
+                    <span className={`font-bold text-sm ${index % 2 === 0 ? 'text-[#F0A500]' : 'text-[#1B3A8C]'}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="text-gray-900 font-bold mb-1">{cred.title}</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {cred.desc || cred.title}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-gray-900 font-bold mb-1">PhD Candidate</h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Department of Social and Behavioural Science, Faculty of Applied Social Sciences.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#1B3A8C]/10 flex items-center justify-center shrink-0 mt-1">
-                  <span className="text-[#1B3A8C] font-bold text-sm">02</span>
-                </div>
-                <div>
-                  <h4 className="text-gray-900 font-bold mb-1">Praktisi</h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Praktisi bidang marketing riset, metodologi, statistik, kewirausahaan dan penelitian operasional.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
             
           </div>
