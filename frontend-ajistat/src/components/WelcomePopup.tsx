@@ -18,7 +18,9 @@ interface PopupData {
   show_on_ajistat: boolean;
 }
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+const API = process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL !== '/api' 
+  ? process.env.NEXT_PUBLIC_API_URL 
+  : 'https://api.aji-institute.com';
 
 export function WelcomePopup({ site }: { site: 'main' | 'ajistat' }) {
   const [data, setData] = useState<PopupData | null>(null);
