@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CompanyConfig, TeamMember, HeroBanner, Testimonial, ToolLogo
+from .models import CompanyConfig, TeamMember, HeroBanner, Testimonial, ToolLogo, Popup
 
 @admin.register(CompanyConfig)
 class CompanyConfigAdmin(admin.ModelAdmin):
@@ -83,5 +83,41 @@ class CmsAnnouncementAdmin(admin.ModelAdmin):
         ('Metadata', {
             'fields': ('created_at',),
             'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(Popup)
+class PopupAdmin(admin.ModelAdmin):
+    list_display  = ('title', 'badge', 'is_active', 'show_on_main_site', 'show_on_ajistat', 'updated_at')
+    list_editable = ('is_active', 'show_on_main_site', 'show_on_ajistat')
+    list_filter   = ('is_active', 'show_on_main_site', 'show_on_ajistat')
+    readonly_fields = ('created_at', 'updated_at')
+
+    fieldsets = (
+        ('📋 Konten Popup', {
+            'description': 'Isi informasi yang akan ditampilkan di popup.',
+            'fields': ('title', 'subtitle', 'image'),
+        }),
+        ('🏷️ Badge (Opsional)', {
+            'description': 'Badge kecil di atas judul. Kosongkan jika tidak perlu.',
+            'fields': ('badge', 'badge_color'),
+            'classes': ('collapse',),
+        }),
+        ('📝 Poin Highlight (Opsional)', {
+            'description': 'Tulis satu poin per baris. Tampil sebagai bullet list.',
+            'fields': ('highlights',),
+            'classes': ('collapse',),
+        }),
+        ('🔗 Tombol CTA', {
+            'fields': ('cta_text', 'cta_url'),
+        }),
+        ('⚙️ Pengaturan Tampil', {
+            'description': '⚠️ Hanya satu popup yang bisa aktif sekaligus.',
+            'fields': ('is_active', 'show_on_main_site', 'show_on_ajistat'),
+        }),
+        ('📅 Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
         }),
     )

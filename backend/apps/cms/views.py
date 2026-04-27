@@ -53,3 +53,25 @@ class CMSViewSet(viewsets.ViewSet):
         tools = ToolLogo.objects.all()
         serializer = ToolLogoSerializer(tools, many=True, context={'request': request})
         return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def popup_active(self, request):
+        """Mengembalikan popup yang sedang aktif, atau 404 jika tidak ada."""
+        from .models import Popup
+        popup = Popup.objects.filter(is_active=True).first()
+        if not popup:
+            return Response(None, status=204)  # No Content
+        data = {
+            'id': popup.pk,
+            'title': popup.title,
+            'subtitle': popup.subtitle or '',
+            'image': request.build_absolute_uri(popup.image.url) if popup.image else '',
+            'badge': popup.badge or '',
+            'badge_color': popup.badge_color,
+            'highlights': popup.get_highlights_list(),
+            'cta_text': popup.cta_text,
+            'cta_url': popup.cta_url,
+            'show_on_main_site': popup.show_on_main_site,
+            'show_on_ajistat': popup.show_on_ajistat,
+        }
+        return Response(data)

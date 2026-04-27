@@ -8,8 +8,8 @@ export const BRAND = {
 };
 
 export const CONTACT = {
-  whatsapp: '6285195564668',
-  whatsappDisplay: '+62 851-9556-4668',
+  whatsapp: '6282319341735',
+  whatsappDisplay: '+62 823-1934-1735',
   email: 'info@aji-institute.id',
   address: 'Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung',
 };
@@ -17,8 +17,21 @@ export const CONTACT = {
 export const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? 'https://api.aji-institute.com';
 
+const DEFAULT_WA_MESSAGE = `Halo Tim *AjiStat by Aji Institute*,
+
+Saya tertarik untuk mendapatkan informasi lebih lanjut terkait layanan yang tersedia.
+
+Berikut data saya:
+Nama:
+Jurusan/Fakultas/Universitas:
+Lembaga/Instansi:
+Kebutuhan (konsultasi/bootcamp/kelas private/dll):
+
+Mohon informasinya. Terima kasih.`;
+
 export function WA_LINK(message?: string) {
-  return `https://wa.me/${CONTACT.whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
+  const text = message ?? DEFAULT_WA_MESSAGE;
+  return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
 export const TOOLS = [

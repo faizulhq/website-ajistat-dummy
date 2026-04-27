@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { WA_LINK, CONTACT, BRAND } from '@/lib/config';
 import { useCompanyConfigContext } from '@/components/CompanyConfigProvider';
 
@@ -30,13 +31,15 @@ export function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-[#F0A500] flex items-center justify-center shrink-0">
-                <span className="text-[#162058] font-black text-xs">AS</span>
-              </div>
-              <div>
-                <span className="text-white font-black text-lg leading-none block">AjiStat</span>
-                <span className="text-white/40 text-[10px] leading-none">by Aji Institute</span>
+            <div className="mb-5">
+              <div className="rounded-xl overflow-hidden bg-white inline-block">
+                <Image
+                  src="/images/Logo-AjiStat.jpeg"
+                  alt="AjiStat by Aji Institute"
+                  width={1600}
+                  height={900}
+                  className="h-14 w-auto block"
+                />
               </div>
             </div>
             <p className="text-white/50 text-sm leading-relaxed">

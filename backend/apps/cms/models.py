@@ -117,3 +117,81 @@ class CmsAnnouncement(OriginalAnnouncement):
         proxy = True
         verbose_name = 'Pengumuman / Banner'
         verbose_name_plural = 'Pengumuman / Banner'
+
+
+import json
+
+class Popup(models.Model):
+    """Welcome popup yang muncul saat pengunjung pertama kali membuka website."""
+
+    title = models.CharField(max_length=200, verbose_name='Judul Popup')
+    subtitle = models.TextField(
+        blank=True, null=True,
+        verbose_name='Subjudul / Deskripsi',
+        help_text='Teks pendek di bawah judul (opsional).'
+    )
+    image = models.ImageField(
+        upload_to='popup/',
+        verbose_name='Gambar / Flyer',
+        help_text='Upload gambar flyer (JPG/PNG). Rasio potret lebih baik.'
+    )
+    badge = models.CharField(
+        max_length=60, blank=True, null=True,
+        verbose_name='Badge / Label',
+        help_text='Teks badge kecil di atas judul, misal: "Info Terbaru". Kosongkan jika tidak perlu.'
+    )
+    badge_color = models.CharField(
+        max_length=7, default='#F0A500',
+        verbose_name='Warna Badge',
+        help_text='Kode warna hex, misal: #F0A500 (emas) atau #2563EB (biru).'
+    )
+    highlights = models.TextField(
+        blank=True, null=True,
+        verbose_name='Poin Highlight',
+        help_text='Satu poin per baris. Akan ditampilkan sebagai bullet list di popup.'
+    )
+    cta_text = models.CharField(
+        max_length=100, default='Hubungi Kami via WhatsApp',
+        verbose_name='Teks Tombol CTA'
+    )
+    cta_url = models.URLField(
+        verbose_name='URL Tombol CTA',
+        help_text='Link tujuan tombol, misal: link WhatsApp atau halaman program.'
+    )
+    show_on_main_site = models.BooleanField(
+        default=True,
+        verbose_name='Tampilkan di Aji Institute',
+        help_text='Centang untuk menampilkan popup di aji-institute.com'
+    )
+    show_on_ajistat = models.BooleanField(
+        default=True,
+        verbose_name='Tampilkan di AjiStat',
+        help_text='Centang untuk menampilkan popup di ajistat.aji-institute.com'
+    )
+    is_active = models.BooleanField(
+        default=False,
+        verbose_name='Aktif',
+        help_text='Hanya SATU popup yang boleh aktif sekaligus. Aktifkan ini untuk menampilkannya.'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Welcome Popup'
+        verbose_name_plural = 'Welcome Popup'
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        status = '✅ Aktif' if self.is_active else '⏸ Nonaktif'
+        return f'{status} — {self.title}'
+
+    def get_highlights_list(self):
+        if not self.highlights:
+            return []
+        return [line.strip() for line in self.highlights.splitlines() if line.strip()]
+
+    def save(self, *args, **kwargs):
+        # Pastikan hanya satu popup yang aktif sekaligus
+        if self.is_active:
+            Popup.objects.exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)

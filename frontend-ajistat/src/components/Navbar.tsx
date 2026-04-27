@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import Image from 'next/image';
 
 const LAYANAN_LINKS = [
   { label: 'Bootcamp Intensif', href: '/bootcamp' },
@@ -23,15 +24,16 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5">
-            <div className="w-9 h-9 rounded-xl bg-[#F0A500] flex items-center justify-center shrink-0">
-              <span className="text-[#162058] font-black text-xs leading-none">AS</span>
-            </div>
-            <div>
-              <span className="text-white font-black text-lg tracking-tight leading-none block">AjiStat</span>
-              <span className="text-white/40 text-[10px] leading-none">by Aji Institute</span>
-            </div>
+        <Link href="/" className="flex items-center shrink-0">
+          <div className="rounded-xl overflow-hidden bg-white">
+            <Image
+              src="/images/Logo-AjiStat.jpeg"
+              alt="AjiStat by Aji Institute"
+              width={1600}
+              height={900}
+              className="h-14 w-auto block"
+              priority
+            />
           </div>
         </Link>
 

@@ -6,6 +6,7 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { CompanyConfigProvider } from '@/components/CompanyConfigProvider';
+import { WelcomePopup } from '@/components/WelcomePopup';
 import { BRAND } from '@/lib/config';
 
 const openSans = Open_Sans({
@@ -107,6 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased bg-white text-gray-900">
         <Providers>
           <CompanyConfigProvider>
+            <WelcomePopup site="main" />
             <AnnouncementBar />
             <Navbar />
             <main

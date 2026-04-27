@@ -4,6 +4,7 @@ import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CompanyConfigProvider } from '@/components/CompanyConfigProvider';
+import { WelcomePopup } from '@/components/WelcomePopup';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         <CompanyConfigProvider>
+          <WelcomePopup site="ajistat" />
           <Navbar />
           <main className="min-h-screen" style={{ paddingTop: '72px' }}>
             {children}
