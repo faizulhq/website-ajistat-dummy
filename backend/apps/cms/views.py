@@ -19,8 +19,8 @@ class CMSViewSet(viewsets.ViewSet):
         if not config:
             # Fallback default jika belum ada di database
             return Response({
-                'whatsapp': '6285195564668',
-                'whatsapp_display': '+62 851-9556-4668',
+                'whatsapp': '6282319341735',
+                'whatsapp_display': '+62 823-1934-1735',
                 'email': 'info@aji-institute.id',
                 'instagram': '@ajiinstitute.id',
                 'address': 'Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung',
@@ -56,22 +56,26 @@ class CMSViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=['get'])
     def popup_active(self, request):
-        """Mengembalikan popup yang sedang aktif, atau 404 jika tidak ada."""
+        """Mengembalikan list semua popup aktif (untuk slider), diurutkan by order."""
         from .models import Popup
-        popup = Popup.objects.filter(is_active=True).first()
-        if not popup:
-            return Response(None, status=204)  # No Content
-        data = {
-            'id': popup.pk,
-            'title': popup.title,
-            'subtitle': popup.subtitle or '',
-            'image': request.build_absolute_uri(popup.image.url) if popup.image else '',
-            'badge': popup.badge or '',
-            'badge_color': popup.badge_color,
-            'highlights': popup.get_highlights_list(),
-            'cta_text': popup.cta_text,
-            'cta_url': popup.cta_url,
-            'show_on_main_site': popup.show_on_main_site,
-            'show_on_ajistat': popup.show_on_ajistat,
-        }
+        popups = Popup.objects.filter(is_active=True)
+        if not popups.exists():
+            return Response([], status=200)  # empty list
+        data = []
+        for popup in popups:
+            data.append({
+                'id': popup.pk,
+                'title': popup.title,
+                'subtitle': popup.subtitle or '',
+                'image': request.build_absolute_uri(popup.image.url) if popup.image else '',
+                'badge': popup.badge or '',
+                'badge_color': popup.badge_color,
+                'highlights': popup.get_highlights_list(),
+                'cta_text': popup.cta_text,
+                'cta_url': popup.cta_url,
+                'show_on_main_site': popup.show_on_main_site,
+                'show_on_ajistat': popup.show_on_ajistat,
+                'order': popup.order,
+                'slide_duration': popup.slide_duration,
+            })
         return Response(data)

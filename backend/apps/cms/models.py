@@ -1,8 +1,8 @@
 from django.db import models
 
 class CompanyConfig(models.Model):
-    whatsapp = models.CharField(max_length=20, default='6285195564668', help_text="Format: 628xxx (tanpa + atau 0)")
-    whatsapp_display = models.CharField(max_length=50, default='+62 851-9556-4668')
+    whatsapp = models.CharField(max_length=20, default='6282319341735', help_text="Format: 628xxx (tanpa + atau 0)")
+    whatsapp_display = models.CharField(max_length=50, default='+62 823-1934-1735')
     email = models.EmailField(default='info@aji-institute.id')
     instagram = models.CharField(max_length=50, default='@ajiinstitute.id')
     address = models.TextField(default='Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung')
@@ -171,7 +171,17 @@ class Popup(models.Model):
     is_active = models.BooleanField(
         default=False,
         verbose_name='Aktif',
-        help_text='Hanya SATU popup yang boleh aktif sekaligus. Aktifkan ini untuk menampilkannya.'
+        help_text='Aktifkan untuk menampilkan popup ini di slider.'
+    )
+    order = models.IntegerField(
+        default=0,
+        verbose_name='Urutan Slider',
+        help_text='Urutan tampil di slider (makin kecil makin awal).'
+    )
+    slide_duration = models.IntegerField(
+        default=5,
+        verbose_name='Durasi Slide (detik)',
+        help_text='Berapa detik slide ini tampil sebelum otomatis pindah ke slide berikutnya. Default: 5 detik.'
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -179,7 +189,7 @@ class Popup(models.Model):
     class Meta:
         verbose_name = 'Welcome Popup'
         verbose_name_plural = 'Welcome Popup'
-        ordering = ['-updated_at']
+        ordering = ['order', '-updated_at']
 
     def __str__(self):
         status = '✅ Aktif' if self.is_active else '⏸ Nonaktif'
@@ -191,7 +201,4 @@ class Popup(models.Model):
         return [line.strip() for line in self.highlights.splitlines() if line.strip()]
 
     def save(self, *args, **kwargs):
-        # Pastikan hanya satu popup yang aktif sekaligus
-        if self.is_active:
-            Popup.objects.exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)

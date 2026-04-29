@@ -86,7 +86,7 @@ const jsonLd = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+62-851-9556-4668',
+    telephone: '+62-823-1934-1735',
     contactType: 'customer service',
     availableLanguage: 'Indonesian',
   },

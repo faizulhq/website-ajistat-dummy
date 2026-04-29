@@ -11,8 +11,8 @@ def seed():
     CompanyConfig.objects.get_or_create(
         id=1,
         defaults={
-            'whatsapp': '6285195564668',
-            'whatsapp_display': '+62 851-9556-4668',
+            'whatsapp': '6282319341735',
+            'whatsapp_display': '+62 823-1934-1735',
             'email': 'info@aji-institute.id',
             'instagram': '@ajiinstitute.id',
             'address': 'Kompleks Bandung Indah Raya Blok C7 No.1, Kel. Mekarjaya, Kec. Rancasari, Bandung',

@@ -8,8 +8,8 @@ export const BRAND = {
 }
 
 export const CONTACT = {
-  whatsapp: '6285195564668',
-  whatsappDisplay: '+62 851-9556-4668',
+  whatsapp: '6282319341735',
+  whatsappDisplay: '+62 823-1934-1735',
   email: 'info@aji-institute.id',
   instagram: '@ajiinstitute.id',
   operationalHours: '24 Jam / 7 Hari',

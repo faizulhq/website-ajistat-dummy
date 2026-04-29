@@ -89,8 +89,8 @@ class CmsAnnouncementAdmin(admin.ModelAdmin):
 
 @admin.register(Popup)
 class PopupAdmin(admin.ModelAdmin):
-    list_display  = ('title', 'badge', 'is_active', 'show_on_main_site', 'show_on_ajistat', 'updated_at')
-    list_editable = ('is_active', 'show_on_main_site', 'show_on_ajistat')
+    list_display  = ('title', 'badge', 'is_active', 'show_on_main_site', 'show_on_ajistat', 'order', 'slide_duration', 'updated_at')
+    list_editable = ('is_active', 'show_on_main_site', 'show_on_ajistat', 'order', 'slide_duration')
     list_filter   = ('is_active', 'show_on_main_site', 'show_on_ajistat')
     readonly_fields = ('created_at', 'updated_at')
 
@@ -113,8 +113,12 @@ class PopupAdmin(admin.ModelAdmin):
             'fields': ('cta_text', 'cta_url'),
         }),
         ('⚙️ Pengaturan Tampil', {
-            'description': '⚠️ Hanya satu popup yang bisa aktif sekaligus.',
+            'description': 'Aktifkan popup untuk menampilkannya di slider. Boleh lebih dari 1 aktif sekaligus.',
             'fields': ('is_active', 'show_on_main_site', 'show_on_ajistat'),
+        }),
+        ('🔢 Urutan & Durasi Slider', {
+            'description': 'Atur urutan tampil dan berapa detik slide ini ditampilkan sebelum otomatis pindah.',
+            'fields': ('order', 'slide_duration'),
         }),
         ('📅 Metadata', {
             'fields': ('created_at', 'updated_at'),
