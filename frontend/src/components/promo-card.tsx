@@ -15,7 +15,10 @@ function isAjiStatProgram(tags: string[], brand?: string): boolean {
 }
 
 // Base API URL
-const API = process.env.NEXT_PUBLIC_API_URL || 'https://api.aji-institute.com';
+const API =
+  typeof window !== 'undefined' && process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8000'
+    : (process.env.NEXT_PUBLIC_API_URL || 'https://api.aji-institute.com');
 
 interface Props {
   program: Program;

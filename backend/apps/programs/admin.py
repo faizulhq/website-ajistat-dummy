@@ -20,10 +20,10 @@ class ProgramAdmin(admin.ModelAdmin):
     # ── Kolom yang tampil di halaman daftar program ──────────────
     list_display = (
         'title', 'brand', 'type', 'status', 'price_display',
-        'is_published', 'is_featured', 'show_documentation', 'order', 'facilitator_name', 'created_at'
+        'is_published', 'is_featured', 'show_documentation', 'show_rundown', 'order', 'facilitator_name', 'created_at'
     )
-    list_editable = ('is_published', 'is_featured', 'show_documentation', 'order')
-    list_filter = ('brand', 'type', 'status', 'is_published', 'is_featured', 'show_documentation')
+    list_editable = ('is_published', 'is_featured', 'show_documentation', 'show_rundown', 'order')
+    list_filter = ('brand', 'type', 'status', 'is_published', 'is_featured', 'show_documentation', 'show_rundown')
     search_fields = ('title', 'facilitator_name', 'tags', 'slug')
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('created_at',)
@@ -51,6 +51,10 @@ class ProgramAdmin(admin.ModelAdmin):
                 'Aktifkan toggle di bawah, lalu upload foto-foto sesi pelatihan '
                 'di bagian "Foto-foto Dokumentasi Pelatihan" yang ada di bawah halaman ini.'
             ),
+        }),
+        ('Rundown Harian', {
+            'fields': ('show_rundown',),
+            'description': 'Aktifkan untuk menampilkan tabel rundown jadwal harian di halaman program. Biarkan nonaktif jika rundown belum siap.',
         }),
         ('Metadata', {
             'fields': ('created_at',),

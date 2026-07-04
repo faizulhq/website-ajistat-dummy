@@ -27,6 +27,8 @@ export interface Program {
   is_featured: boolean;
   brand?: 'aji-institute' | 'ajistat' | 'ajibiz' | 'ajicomm' | 'ajiai' | 'ajilingua';
   show_documentation?: boolean;
+  show_rundown?: boolean;
+
   documentation_images?: ProgramDocumentationImage[];
   // Detail only
   description?: string;

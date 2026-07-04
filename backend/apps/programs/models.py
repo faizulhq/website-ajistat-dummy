@@ -66,6 +66,11 @@ class Program(models.Model):
         verbose_name='Tampilkan Dokumentasi Pelatihan?',
         help_text='Aktifkan untuk menampilkan section foto dokumentasi di halaman program'
     )
+    show_rundown = models.BooleanField(
+        default=False,
+        verbose_name='Tampilkan Rundown Harian?',
+        help_text='Aktifkan untuk menampilkan tabel rundown jadwal harian di halaman program'
+    )
     youtube_url = models.URLField(
         blank=True,
         null=True,

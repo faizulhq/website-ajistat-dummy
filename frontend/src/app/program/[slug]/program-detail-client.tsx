@@ -543,7 +543,8 @@ export default function ProgramDetailPage() {
                   </div>
                 </div>
               ) : null}
-              {/* Jadwal harian default berdasarkan type program */}
+              {/* Rundown Harian — hanya tampil jika show_rundown aktif di admin */}
+              {program.show_rundown && (
               <div className="border border-gray-100 rounded-2xl overflow-hidden">
                 <div className="bg-[#162058] px-5 py-3">
                   <p className="text-white font-semibold text-sm">Rundown Harian</p>
@@ -587,9 +588,12 @@ export default function ProgramDetailPage() {
                   </div>
                 ))}
               </div>
+              )}
+              {program.show_rundown && (
               <p className="text-gray-400 text-xs mt-3 text-center">
                 * Jadwal bersifat panduan, dapat disesuaikan. Info detail tanyakan via WhatsApp.
               </p>
+              )}
             </section>
 
             {curriculum.length > 0 && (
