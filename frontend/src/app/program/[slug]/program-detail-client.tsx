@@ -200,12 +200,12 @@ function MaterialModal({
 
           <div className="flex flex-col gap-3">
             <a
-              href={WA_LINK(`Halo, saya ingin mendaftar kelas ${getDivisionLabel(program)} ${program.title} dan mendapatkan file ${material.label}`)}
+              href={program.registration_link || WA_LINK(`Halo, saya ingin mendaftar kelas ${getDivisionLabel(program)} ${program.title} dan mendapatkan file ${material.label}`)}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3.5 rounded-xl transition-colors text-sm shadow-md"
             >
-              Daftar Sekarang via WhatsApp
+              {program.registration_link ? 'Daftar Sekarang' : 'Daftar Sekarang via WhatsApp'}
             </a>
             <button
               onClick={onClose}
@@ -326,11 +326,11 @@ export default function ProgramDetailPage() {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
-                      href={WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
+                      href={program.registration_link || WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
                       target="_blank" rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-black py-4 px-6 rounded-xl transition-all shadow-lg shadow-[#F0A500]/20 text-sm hover:-translate-y-1"
                     >
-                      Daftar Sekarang via WhatsApp
+                      {program.registration_link ? 'Daftar Sekarang' : 'Daftar Sekarang via WhatsApp'}
                     </a>
                     <a
                       href={WA_LINK(`Halo, saya tertarik dengan program ${getDivisionLabel(program)}: ${program.title}. Bisa info lebih lanjut?`)}
@@ -425,11 +425,11 @@ export default function ProgramDetailPage() {
                   </div>
 
                   <a
-                    href={WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
+                    href={program.registration_link || WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
                     target="_blank" rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold py-3.5 rounded-xl transition-all mb-3 text-sm"
                   >
-                    Daftar Sekarang via WhatsApp
+                    {program.registration_link ? 'Daftar Sekarang' : 'Daftar Sekarang via WhatsApp'}
                   </a>
 
                   <a
@@ -469,7 +469,7 @@ export default function ProgramDetailPage() {
           className="flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 font-semibold px-4 py-2.5 rounded-xl text-sm">
           <MessageCircle className="w-4 h-4" /> Tanya
         </a>
-        <a href={WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
+        <a href={program.registration_link || WA_LINK(`Halo, saya ingin mendaftar program ${getDivisionLabel(program)}: ${program.title}`)}
           target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 bg-[#F0A500] hover:bg-[#C8870A] text-[#162058] font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
           Daftar

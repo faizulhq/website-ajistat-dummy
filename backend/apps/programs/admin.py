@@ -37,7 +37,7 @@ class ProgramAdmin(admin.ModelAdmin):
             'fields': ('price', 'original_price')
         }),
         ('Detail Program', {
-            'fields': ('description', 'duration', 'schedule', 'tags', 'curriculum')
+            'fields': ('description', 'duration', 'schedule', 'registration_link', 'tags', 'curriculum')
         }),
         ('Fasilitator', {
             'fields': ('facilitator_name', 'facilitator_title', 'facilitator_bio', 'facilitator_avatar')

@@ -54,6 +54,12 @@ class Program(models.Model):
     # Meta
     duration = models.CharField(max_length=50, blank=True)
     schedule = models.CharField(max_length=100, blank=True)
+    registration_link = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name='Link Pendaftaran (Opsional)',
+        help_text='Isi dengan link eksternal (misal Google Form). Jika kosong, otomatis diarahkan ke WhatsApp.'
+    )
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(
         default=True,
