@@ -61,6 +61,11 @@ class Program(models.Model):
         help_text='Isi dengan link eksternal (misal Google Form). Jika kosong, otomatis diarahkan ke WhatsApp.'
     )
     is_featured = models.BooleanField(default=False)
+    is_video_hero = models.BooleanField(
+        default=False,
+        verbose_name='⭐ Jadikan Hero di Halaman Video?',
+        help_text='Centang untuk menampilkan video program ini sebagai video utama (autoplay) di halaman Video. Pastikan hanya 1 program yang dicentang.'
+    )
     is_published = models.BooleanField(
         default=True,
         verbose_name='Tampilkan di Website?',

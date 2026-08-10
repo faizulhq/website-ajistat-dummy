@@ -746,15 +746,6 @@ export default function ProgramDetailPage() {
                     </button>
                   ))}
                 </div>
-                <a
-                  href="https://drive.google.com/drive/folders/1LKSNpd7as7V0VCoxaVfH_3i1JqWAIIEH"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-[#1B3A8C] hover:bg-[#2348A8] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-colors duration-200"
-                >
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.28 3l5.72 9.9L17.72 3H6.28zM2 17l3.09-5.35L2 17zm15.72-8.65L21.91 17 18.82 11.35l-1.1-1.9zM12 13.1L8.18 20h7.64L12 13.1z"/></svg>
-                  Tonton Rekaman via Google Drive
-                </a>
               </div>
             )}
 

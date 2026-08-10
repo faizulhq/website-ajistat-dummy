@@ -20,10 +20,10 @@ class ProgramAdmin(admin.ModelAdmin):
     # ── Kolom yang tampil di halaman daftar program ──────────────
     list_display = (
         'title', 'brand', 'type', 'status', 'price_display',
-        'is_published', 'is_featured', 'show_documentation', 'show_rundown', 'order', 'facilitator_name', 'created_at'
+        'is_published', 'is_featured', 'is_video_hero', 'show_documentation', 'show_rundown', 'order', 'facilitator_name', 'created_at'
     )
-    list_editable = ('is_published', 'is_featured', 'show_documentation', 'show_rundown', 'order')
-    list_filter = ('brand', 'type', 'status', 'is_published', 'is_featured', 'show_documentation', 'show_rundown')
+    list_editable = ('is_published', 'is_featured', 'is_video_hero', 'show_documentation', 'show_rundown', 'order')
+    list_filter = ('brand', 'type', 'status', 'is_published', 'is_featured', 'is_video_hero', 'show_documentation', 'show_rundown')
     search_fields = ('title', 'facilitator_name', 'tags', 'slug')
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('created_at',)
@@ -31,7 +31,7 @@ class ProgramAdmin(admin.ModelAdmin):
     # ── Urutan kolom di form edit ────────────────────────────────
     fieldsets = (
         ('Informasi Utama', {
-            'fields': ('title', 'slug', 'brand', 'type', 'status', 'is_published', 'is_featured', 'order')
+            'fields': ('title', 'slug', 'brand', 'type', 'status', 'is_published', 'is_featured', 'is_video_hero', 'order')
         }),
         ('Harga', {
             'fields': ('price', 'original_price')

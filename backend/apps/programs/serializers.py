@@ -26,7 +26,8 @@ class ProgramListSerializer(serializers.ModelSerializer):
             'id', 'title', 'slug', 'type', 'status',
             'price', 'original_price', 'tags', 'brand',
             'duration', 'schedule', 'facilitator_name',
-            'thumbnail_color', 'is_featured', 'image',
+            'thumbnail_color', 'is_featured', 'is_video_hero', 'image',
+            'youtube_url', 'youtube_url_2', 'demo_video_url',
         )
 
 

@@ -25,6 +25,7 @@ const LAYANAN_LINKS = [
 ];
 
 const MAIN_LINKS = [
+  { href: '/video',   label: 'Video' },
   { href: '/blog',    label: 'Blog' },
   { href: '/tentang', label: 'Tentang' },
 ];

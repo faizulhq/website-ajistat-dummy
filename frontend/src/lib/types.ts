@@ -25,6 +25,7 @@ export interface Program {
   thumbnail_color: string;
   image?: string | null;
   is_featured: boolean;
+  is_video_hero?: boolean;
   brand?: 'aji-institute' | 'ajistat' | 'ajibiz' | 'ajicomm' | 'ajiai' | 'ajilingua';
   show_documentation?: boolean;
   show_rundown?: boolean;
@@ -36,6 +37,8 @@ export interface Program {
   curriculum?: string[];
   rundown?: { day: string; time: string; label: string; note: string }[];
   demo_video_url?: string;
+  youtube_url?: string | null;
+  youtube_url_2?: string | null;
   testimonials?: Testimonial[];
 }
 
